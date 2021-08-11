@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static System.Console;
 using static Lesson.Common.Helpers.AppHelper;
 
@@ -52,7 +53,10 @@ namespace Practice
 
             WriteLine("-------------------------------------------------------(Tham số là object -> Tham chiếu)-------------------------------------------------------");
             // Tham số là một đối tượng sẽ được gọi là tham chiếu
-            var person = new Person();
+            var person = new Person
+            {
+                Age = 25
+            };
             WriteLine($@"Before, Person's age: {person.Age}");
 
             SquareAge(person);
@@ -160,6 +164,37 @@ namespace Practice
 
             #endregion [For]
 
+            #region [Foreach]
+
+            //foreach (<datatype> <name> in <list>)
+            //{
+            //    Expression
+            //}
+
+            var persons = new List<Person>
+            {
+                new Person
+                {
+                    Age = 10
+                },
+                new Person
+                {
+                    Age = 20
+                },
+                new Person
+                {
+                    Age = 30
+                }
+            };
+
+            var index = 0;
+            foreach (var person in persons)
+            {
+                index++;
+                WriteLine($@"Person's age {index}:" + person.Age);
+            }
+            #endregion [Foreach]
+
             #region [While]
 
             //while (condition)
@@ -201,11 +236,11 @@ namespace Practice
                 eventNumber += string.IsNullOrEmpty(eventNumber) ? $@"{i}" : $@" {i}";
             }
             WriteLine("Even number from 1-20 " + eventNumber);
-            
+
             while (true)
             {
-                Write(" " + ++number);
-                if (number == 20)
+                WriteLine(" " + ++number);
+                if (number == 100)
                     break;  // exit
             }
             #endregion [Continue - Break]
