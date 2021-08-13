@@ -3,6 +3,7 @@ using System.Text;
 using static System.Console;
 using static Lesson.Common.Helpers.AppHelper;
 using static Practice.Lesson2;
+using static Practice.Lesson3;
 
 namespace Practice
 {
@@ -11,7 +12,7 @@ namespace Practice
         // Biến toàn cục - Global variable
         public const string Actor = "YONG";
 
-        public const int Lesson = 3;
+        public const int Lesson = 4;
 
         public static void Main(string[] args)
         {
@@ -68,6 +69,11 @@ namespace Practice
                                     goto EnterSubLesson;
                             }
                         }
+
+                        DoEndLesson(value);
+                        goto EnterLesson;
+
+                    case 3:
 
                         DoEndLesson(value);
                         goto EnterLesson;
@@ -156,6 +162,7 @@ namespace Practice
                 {
                     1 => "Git - Variable, Constant, Operation - Console Application",
                     2 => "DATA TYPE – Reference Type - Value Type – Condition Statement – Loop",
+                    3 => "Array – Handle STRING - Handle Exception",
                     _ => string.Empty
                 };
                 WriteLine($@"{i}: Lesson {RomanNumeralFrom(i)} - {nameOfLesson}");
