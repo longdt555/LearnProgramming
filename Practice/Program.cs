@@ -74,7 +74,7 @@ namespace Practice
                         goto EnterLesson;
 
                     case 3:
-
+                        Array();
                         DoEndLesson(value);
                         goto EnterLesson;
 
