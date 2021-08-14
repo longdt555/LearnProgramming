@@ -32,8 +32,10 @@ namespace Practice
 
             var studentsInt = new int[4]
             {
-                1,2,1,3
+                1,2,3,4
             };
+
+            Console.WriteLine(studentsInt.Length);
 
             var studentsFloat = new float[4];
 
@@ -142,6 +144,51 @@ namespace Practice
                     },
                     {
                         "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
+                    }
+                }
+            };
+
+            var array5 = new string[1, 2, 2, 5]
+            {
+                {
+                    {
+                        {
+                            "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
+                        },
+                        {
+                            "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
+                        }
+                    },
+                    {
+                        {
+                            "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
+                        },
+                        {
+                            "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
+                        }
+                    }
+                }
+            };
+            var array6 = new string[1, 1, 2, 2, 5]
+            {
+                {
+                    {
+                        {
+                            {
+                                "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
+                            },
+                            {
+                                "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
+                            }
+                        },
+                        {
+                            {
+                                "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
+                            },
+                            {
+                                "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
+                            }
+                        }
                     }
                 }
             };
