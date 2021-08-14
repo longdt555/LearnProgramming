@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Bai1.cs" />
+    <Compile Remove="Bai2.cs" />
+    <Compile Remove="Bai3.cs" />
+    <Compile Remove="Bai4.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Bai1.cs" />
+    <None Include="Bai2.cs" />
+    <None Include="Bai3.cs" />
+    <None Include="Bai4.cs" />
+  </ItemGroup>
+
+</Project>
