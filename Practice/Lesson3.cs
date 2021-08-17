@@ -240,14 +240,11 @@ namespace Practice
 
 
         #region [Private functions helper]
-
         private static int GetValueFromKeyBoard(string msg)
         {
             Write($@"{msg}");
             return ConvertStringToInt(ReadLine());
         }
-
-
         #endregion
     }
 }

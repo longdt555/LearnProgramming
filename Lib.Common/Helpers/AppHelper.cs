@@ -1,4 +1,5 @@
-﻿using static System.Int32;
+﻿using static System.Console;
+using static System.Int32;
 
 namespace Lesson.Common.Helpers
 {
@@ -25,6 +26,12 @@ namespace Lesson.Common.Helpers
                     .Replace(new string('I', 9), "IX")
                     .Replace(new string('I', 5), "V")
                     .Replace(new string('I', 4), "IV");
+        }
+
+        public static string GetValueFromKeyBoard(string msg)
+        {
+            Write($@"{msg}");
+            return ReadLine();
         }
     }
 }
