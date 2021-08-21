@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Lesson.Common.Enums;
+using Lesson.Common.Helpers;
 using static System.Console;
 using static Lesson.Common.Helpers.AppHelper;
 using static Practice.Lesson2;
 using static Practice.Lesson3;
 using static Practice.Lesson4;
+using static Practice.ListInCSharp;
+using IdentityLesson = Lesson.Common.Enums.IdentityLesson;
 
 namespace Practice
 {
@@ -17,85 +24,133 @@ namespace Practice
 
         public static void Main(string[] args)
         {
-            //Vietnamese character in .NET Console Application (UTF-8)
-            OutputEncoding = Encoding.UTF8;
-            ForegroundColor = ConsoleColor.DarkGreen;
+            ////Vietnamese character in .NET Console Application (UTF-8)
+            //OutputEncoding = Encoding.UTF8;
+            //ForegroundColor = ConsoleColor.DarkGreen;
 
-            PrintLesson();
+            //PrintLesson();
 
-            EnterLesson: var value = GetOptionFromKeyBoard("Enter the lesson you wanna see: ");
-            while (value > 0)
+            //EnterLesson: var value = GetOptionFromKeyBoard("Enter the lesson you wanna see: ");
+            //while (value > 0)
+            //{
+            //    Clear();
+            //    switch (value)
+            //    {
+            //        case (int)IdentityLesson.Lesson1: // Lesson 1
+            //            WriteLine("Hello, this is lesson 1");
+
+            //            DoEndLesson(value);
+            //            goto EnterLesson;
+
+            //        case 2:
+            //            PrintSubLesson(value);
+            //            EnterSubLesson: var subOption = GetOptionFromKeyBoard("Enter the sub-lesson you wanna see: ");
+            //            while (subOption > 0)
+            //            {
+            //                Clear();
+            //                switch (subOption)
+            //                {
+            //                    case 1:
+            //                        Parameter();
+
+            //                        DoEndSubLesson(value, subOption);
+            //                        goto EnterSubLesson;
+
+            //                    case 2:
+            //                        ReferenceType();
+
+            //                        DoEndSubLesson(value, subOption);
+            //                        goto EnterSubLesson;
+
+            //                    case 3:
+            //                        ValueType();
+
+            //                        DoEndSubLesson(value, subOption);
+            //                        goto EnterSubLesson;
+            //                    case 4:
+            //                        ConditionStatement();
+
+            //                        DoEndSubLesson(value, subOption);
+            //                        goto EnterSubLesson;
+            //                    default:
+            //                        DoEndSubLesson(value, subOption, false);
+            //                        goto EnterSubLesson;
+            //                }
+            //            }
+
+            //            DoEndLesson(value);
+            //            goto EnterLesson;
+
+            //        case 3:
+            //            Array();
+            //            DoEndLesson(value);
+            //            goto EnterLesson;
+
+            //        case 4:
+
+            //            List<Student1> students = new List<Student1>();
+
+            //            var student = new Student1()
+            //            {
+            //                Name = "Long"
+            //            };
+
+            //            students.Add(student);
+
+            //            foreach (var student1 in students)
+            //            {
+            //                WriteLine(student1.Name);
+            //            }
+
+            //            //ShowEnum();
+            //            //WriteLine((int)Color1.RED);
+            //            //var student = AddStudentIntoClass();
+            //            //WriteLine(student);
+            //            DoEndLesson(value);
+            //            goto EnterLesson;
+
+            //        default:
+            //            DoEndLesson(value, false);
+            //            goto EnterLesson;
+
+            //    }
+            //}
+
+            //Beep();
+            //WriteLine("-------------------------------------------------------END-------------------------------------------------------");
+            //ReadKey();
+
+
+            List<Student1> students = new List<Student1>(); // class
+
+            //// _ nhập liệu
+            /// 
+            var maxStudent = students.Any() ? students.Max(x => x.Id) + 1 : 1;
+
+
+            var student = new Student1()
             {
-                Clear();
-                switch (value)
-                {
-                    case 1:
-                        WriteLine("Hello, this is lesson 1");
+                Id = students.Any() ? students.Max(x => x.Id) + 1 : 1, // 1 -> 1
+                Name = "Long"
+            };
+            students.Add(student); // add 1 phần tử vào cuối mảng
 
-                        DoEndLesson(value);
-                        goto EnterLesson;
-
-                    case 2:
-                        PrintSubLesson(value);
-                        EnterSubLesson: var subOption = GetOptionFromKeyBoard("Enter the sub-lesson you wanna see: ");
-                        while (subOption > 0)
-                        {
-                            Clear();
-                            switch (subOption)
-                            {
-                                case 1:
-                                    Parameter();
-
-                                    DoEndSubLesson(value, subOption);
-                                    goto EnterSubLesson;
-
-                                case 2:
-                                    ReferenceType();
-
-                                    DoEndSubLesson(value, subOption);
-                                    goto EnterSubLesson;
-
-                                case 3:
-                                    ValueType();
-
-                                    DoEndSubLesson(value, subOption);
-                                    goto EnterSubLesson;
-                                case 4:
-                                    ConditionStatement();
-
-                                    DoEndSubLesson(value, subOption);
-                                    goto EnterSubLesson;
-                                default:
-                                    DoEndSubLesson(value, subOption, false);
-                                    goto EnterSubLesson;
-                            }
-                        }
-
-                        DoEndLesson(value);
-                        goto EnterLesson;
-
-                    case 3:
-                        Array();
-                        DoEndLesson(value);
-                        goto EnterLesson;
-
-                    case 4:
-                        //ShowEnum();
-                        var student = AddStudentIntoClass();
-                        WriteLine(student);
-                        DoEndLesson(value);
-                        goto EnterLesson;
-
-                    default:
-                        DoEndLesson(value, false);
-                        goto EnterLesson;
-
-                }
+            var student2 = new Student1()
+            {
+                Id = students.Any() ? students.Max(x => x.Id) + 1 : 1, // 1 -> 2
+                Name = "Long"
+            };
+            students.Add(student2); // add 1 phần tử vào cuối mảng
+            students.Remove(students.FirstOrDefault(x => x.Id == 1));
+            foreach (var student1 in students)
+            {
+                WriteLine($"{student1.Id} - {student1.Name}");
             }
 
-            Beep();
-            WriteLine("-------------------------------------------------------END-------------------------------------------------------");
-            ReadKey();
+            /// Thêm -> tạo đối tượng -> add
+            /// Sửa -> tìm ra thằng muốn sửa -> sửa
+            /// Xóa -> Tìm thằng muốn xóa -> Xóa
+
         }
 
         #region [Private functions helper]
@@ -154,10 +209,19 @@ namespace Practice
 
         }
 
-        private static int GetOptionFromKeyBoard(string msg)
+        public static int GetOptionFromKeyBoard(string msg)
         {
             Write($@"{msg}");
-            return ConvertStringToInt(ReadLine());
+            var value = ReadLine();
+            if (RuleChecking(value, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
+                return 1;
+            return -1;
+        }
+
+        private static bool RuleChecking(string message, string rule)
+        {
+            var re = new Regex(rule);
+            return re.IsMatch(message);
         }
 
         private static void PrintLesson()

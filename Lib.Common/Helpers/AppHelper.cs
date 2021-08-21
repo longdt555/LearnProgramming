@@ -30,7 +30,7 @@ namespace Lesson.Common.Helpers
 
         public static string GetValueFromKeyBoard(string msg)
         {
-            Write($@"{msg}");
+            Write($@"{msg}: ");
             return ReadLine();
         }
     }

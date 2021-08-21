@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -20,6 +21,22 @@ namespace Practice
              Tuổi
              CMND.
          */
+
+        public static void CalculateSalary()
+        {
+            var luong = new Salary();
+            luong.BacLuong = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+            luong.LuongCoBan = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+            luong.TroCap = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+        }
+
+        public static void CalculateSalaryCoBan()
+        {
+            int bacLuong = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+            int ngayLmaTt = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+            int troCap = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: "));
+        }
+
         public static Student AddStudentIntoClass()
         {
             //var student = new Student();
@@ -27,7 +44,6 @@ namespace Practice
             //student.FullName = GetValueFromKeyBoard("Nhập họ tên học sinh: ");
             //student.Age = ConvertStringToInt(GetValueFromKeyBoard("Nhập tuổi học sinh: "));
             //student.IdentityNum = ConvertStringToInt(GetValueFromKeyBoard("Nhập cmnd học sinh: "));
-
             var student = new Student
             {
                 Id = ConvertStringToInt(GetValueFromKeyBoard("Nhập mã số học sinh: ")),
@@ -58,6 +74,7 @@ namespace Practice
             WriteLine((int)Color3.YELLOW);
         }
 
+        
     }
 
     public struct Student
@@ -66,5 +83,17 @@ namespace Practice
         public string FullName;
         public int Age;
         public int IdentityNum;
+    }
+
+    public struct Salary
+    {
+        public int BacLuong;
+        public int LuongCoBan;
+        public int TroCap;
+        public int TroC123ap;
+        public int Tr123oCap;
+        public int Tro123Cap;
+        public int Tro1d111d23Cap;
+        public int Tr12312oCap;
     }
 }

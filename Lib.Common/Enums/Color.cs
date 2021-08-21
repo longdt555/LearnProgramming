@@ -6,9 +6,9 @@ namespace Lesson.Common.Enums
 {
     public enum Color
     {
-        RED,
-        BLUE,
-        YELLOW
+        RED, // 0
+        BLUE, // 1
+        YELLOW // 2
     }
     public enum Color1
     {
@@ -29,5 +29,17 @@ namespace Lesson.Common.Enums
         RED = 2,
         BLUE = 4,
         YELLOW
+    }
+
+
+    public enum IdentityLesson
+    {
+        Lesson1 = 1,
+        Lesson2,
+        Lesson3,
+        Lesson4,
+        Lesson5,
+        Lesson6,
+        Lesson7,
     }
 }
