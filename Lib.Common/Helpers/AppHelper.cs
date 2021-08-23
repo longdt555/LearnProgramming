@@ -1,4 +1,5 @@
-﻿using static System.Console;
+﻿using System;
+using static System.Console;
 using static System.Int32;
 
 namespace Lesson.Common.Helpers
@@ -7,7 +8,7 @@ namespace Lesson.Common.Helpers
     {
         public static int ConvertStringToInt(string value)
         {
-            return TryParse(value, out var outValue) ? outValue : 0;
+            return TryParse(value, out int outValue) ? outValue : 0;
         }
 
         public static string RomanNumeralFrom(int number)
