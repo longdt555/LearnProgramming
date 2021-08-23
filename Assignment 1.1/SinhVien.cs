@@ -21,7 +21,7 @@ namespace Assignment
             student.DiemHoa = Convert.ToSingle(Helper.GetValue("Nhập điểm hóa của sinh viên: "));
             student.DiemTB = ((student.DiemToan + student.DiemLy + student.DiemHoa) / 3);
             student.IdSinhVien = 0;
-           
+
             WriteLine("Điểm TB của sinh viên là: " + student.DiemTB);
             if (student.DiemTB >= 8)
                 student.HocLuc = "Học sinh giỏi";
@@ -49,12 +49,12 @@ namespace Assignment
         public static int GenerateId(List<Student> students)
         {
             int max = 1;
-            if(students!= null && students.Count > 0)
+            if (students != null && students.Count > 0)
             {
                 max = students[0].IdSinhVien;
                 foreach (var IdSinhVien in students)
                 {
-                    if(max < IdSinhVien.IdSinhVien)
+                    if (max < IdSinhVien.IdSinhVien)
                     {
                         max = IdSinhVien.IdSinhVien;
                     }
@@ -66,41 +66,50 @@ namespace Assignment
         public static int SoLuongSinhVien(List<Student> students)
         {
             int Count = 0;
-            if ( students!= null)
+            if (students != null)
             {
                 Count = students.Count;
             }
             return Count;
         }
 
-        public static void UpdateSinhVien(List<Student> students)
+        // 1_ class
+        // 2_ UpdateSinhVien -> tham trị -> return Student -> setNguoc lại
+        // 3_ UpdateSinhVien -> Tham trị -> return List<Student> -> set students = students
+
+        public static void UpdateSinhVien(ref Student student)
         {
-                Printf(students);
-                Student student = new Student();
-                int id = Convert.ToInt32(Helper.GetValue("Nhập id sinh viên: "));
-                students.Find(x => x.IdSinhVien == id);
-                students.Remove(student);
-                if(students == null)
-                {
-                    WriteLine("Không tìm thấy học sinh này!");
-                }
-                else
-                { 
-                    Write("Nhập họ tên: ");
-                    student.Name = Console.ReadLine();
-                    student.GioiTinh = Helper.GetValue("Nhập giới tính: ");
-                    student.AgeSinhVien = Convert.ToInt32(Helper.GetValue("Nhập tuổi: "));
-                    student.DiemToan = Convert.ToSingle(Helper.GetValue("Nhập điểm toán: "));
-                    student.DiemLy = Convert.ToSingle(Helper.GetValue("Nhập điểm lý: "));
-                    student.DiemHoa = Convert.ToSingle(Helper.GetValue("Nhập điểm hóa: "));
-                }
-            
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("Sửa thành công!");
-            Printf(students);
+            student.Name = "Long";
+            student.GioiTinh = "Male";
+            student.AgeSinhVien = 24;
+            student.DiemHoa = 1;
+
+            // ctrl + k+ c
+            //Printf(students);
+            //Student student = new Student();
+            //int id = Convert.ToInt32(Helper.GetValue("Nhập id sinh viên: "));
+            //student = students.Find(x => x.IdSinhVien == id);
+            //if (students == null)
+            //{
+            //    WriteLine("Không tìm thấy học sinh này!");
+            //}
+            //else
+            //{
+            //    Write("Nhập họ tên: ");
+            //    student.Name = Console.ReadLine();
+            //    student.GioiTinh = Helper.GetValue("Nhập giới tính: ");
+            //    student.AgeSinhVien = Convert.ToInt32(Helper.GetValue("Nhập tuổi: "));
+            //    student.DiemToan = Convert.ToSingle(Helper.GetValue("Nhập điểm toán: "));
+            //    student.DiemLy = Convert.ToSingle(Helper.GetValue("Nhập điểm lý: "));
+            //    student.DiemHoa = Convert.ToSingle(Helper.GetValue("Nhập điểm hóa: "));
+            //}
+
+            //Console.WriteLine("---------------------------------------------");
+            //Console.WriteLine("Sửa thành công!");
+            //Printf(students);
 
         }
-       
+
         public static void SearchSinhVien(List<Student> students)
         {
             List<Student> student = new List<Student>();
@@ -129,7 +138,7 @@ namespace Assignment
             else
             {
                 WriteLine("Không tìm thấy học sinh!!!");
-            }     
+            }
         }
 
         public static void SortByDiemTB(List<Student> students)
@@ -137,20 +146,21 @@ namespace Assignment
             students.Sort(delegate (Student student, Student student1)
             {
                 return student.DiemTB.CompareTo(student1.DiemTB);
-               
-               
+
+
             });
-            
+
         }
 
         public static void SortByName(List<Student> students)
         {
-            students.Sort(delegate (Student student, Student student1) {
+            students.Sort(delegate (Student student, Student student1)
+            {
                 return student.Name.CompareTo(student1.Name);
             });
         }
 
-        
+
 
         public static void Printf(List<Student> students)
         {
@@ -164,7 +174,8 @@ namespace Assignment
 
         public static void SortByID(List<Student> students)
         {
-            students.Sort(delegate (Student student, Student student1) {
+            students.Sort(delegate (Student student, Student student1)
+            {
                 return student1.IdSinhVien.CompareTo(student1.IdSinhVien);
             });
         }
@@ -182,7 +193,5 @@ namespace Assignment
         public float DiemHoa;
         public float DiemTB;
         public string HocLuc;
-
-       
     }
 }

@@ -3,6 +3,7 @@ using System.Text;
 using static System.Console;
 using System.Linq;
 using System.Collections.Generic;
+using static Assignment.SinhVien;
 
 namespace Assignment
 {
@@ -16,7 +17,8 @@ namespace Assignment
 
             var students = new List<Student>();
 
-            EnterOption: try {
+            EnterOption: try
+            {
                 while (true)
                 {
                     Console.WriteLine("\nCHƯƠNG TRÌNH QUẢN LÍ SINH VIÊN\a");
@@ -33,57 +35,78 @@ namespace Assignment
                     Console.WriteLine("=======================================================");
                     Console.Write("Nhập tùy chọn: ");
                     int key = Convert.ToInt32(Console.ReadLine());
-                     switch (key)
+                    switch (key)
                     {
                         case 1:
                             WriteLine("\n1. Thêm sinh viên.");
 
-                            var student = SinhVien.themSinhVien(); // Tạo ra sinh viên
-                            student.IdSinhVien = SinhVien.GenerateId(students); // Cập nhật id cho sinh viên đó là unique
+                            var student = themSinhVien(); // Tạo ra sinh viên
+                            student.IdSinhVien = GenerateId(students); // Cập nhật id cho sinh viên đó là unique
 
                             students.Add(student); // Thêm sinh viên đó vào danh sách sinh viên
                             WriteLine("\nThêm sinh viên thành công!");
 
                             break;
-
+                            // theo code này: sửa cho n chạy đúng luồng
+                        //  -> cách khác giải quyết khác -> 
                         case 2:
-                            WriteLine("2. Cập nhật thông tin sinh viên bởi ID.");
-                            SinhVien.UpdateSinhVien(students);
+                            var studentFound = students.Find(x => x.IdSinhVien == 1);
+
+                            UpdateSinhVien(ref studentFound);
+
+                            var index = students.FindIndex(x => x.IdSinhVien == studentFound.IdSinhVien);
+                            students[index] = studentFound;
+                            Printf(students);
+                            //string[] students2 = new string[5]
+                            //{
+                            //    "A","B", "C", "D","E"
+                            //};
+
+                            ////var student = new string(); => Vùng nhớ mới,
+                            ////có giá trị giống như giá trị của phần tử thư 1 trong Mảng Student
+
+                            //var studentTemp = students2[1]; 
+                            //studentTemp = "b";
+
+                            //students2[1] = studentTemp;
+                            //// students2[1] => changed ????????
+                            //Console.WriteLine($"{students2[1]}");
                             break;
+
 
                         case 3:
                             WriteLine("3. Xóa sinh viên bởi ID.");
-                            SinhVien.DeleteSinhVien(students);
+                            DeleteSinhVien(students);
                             break;
 
                         case 4:
                             WriteLine("4. Tìm kiếm sinh viên theo tên. ");
-                            SinhVien.SearchSinhVien(students);
+                            SearchSinhVien(students);
                             break;
 
                         case 5:
                             WriteLine("5. Sắp xếp sinh viên theo điểm trung bình (GPA).");
-                            SinhVien.SortByDiemTB(students);
-                            SinhVien.Printf(students);
+                            SortByDiemTB(students);
+                            Printf(students);
                             break;
 
                         case 6:
                             WriteLine("6. Sắp xếp sinh viên theo tên.");
-                            SinhVien.SortByName(students);
-                            SinhVien.Printf(students);
+                            SortByName(students);
+                            Printf(students);
                             break;
 
                         case 7:
                             WriteLine("7. Sắp xếp sinh viên theo ID.");
-                            SinhVien.SortByID(students);
-                            SinhVien.Printf(students);
+                            SortByID(students);
+                            Printf(students);
                             break;
 
                         case 8:
                             WriteLine("\n8. Hiển thị danh sách sinh viên.");
                             if (students.Count() > 0)
                             {
-                                SinhVien.Printf(students);
+                                Printf(students);
                             }
                             else
                             {
@@ -99,7 +122,8 @@ namespace Assignment
                             break;
                     }
                 }
-            }catch(Exception a)
+            }
+            catch (Exception a)
             {
                 WriteLine("Hãy nhập số !!!");
                 goto EnterOption;
