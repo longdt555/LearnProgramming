@@ -73,16 +73,20 @@ namespace Assignment
             return Count;
         }
 
-        // 1_ class
-        // 2_ UpdateSinhVien -> tham trị -> return Student -> setNguoc lại
-        // 3_ UpdateSinhVien -> Tham trị -> return List<Student> -> set students = students
+        //// 1_ class
+        //// 2_ UpdateSinhVien -> tham trị -> return Student -> setNguoc lại
+        //// 3_ UpdateSinhVien -> Tham trị -> return List<Student> -> set students = students
 
         public static void UpdateSinhVien(ref Student student)
-        {
-            student.Name = "Long";
-            student.GioiTinh = "Male";
-            student.AgeSinhVien = 24;
-            student.DiemHoa = 1;
+        {         
+         
+                Write("Nhập họ tên: ");
+                student.Name = Console.ReadLine();
+                student.GioiTinh = Helper.GetValue("Nhập giới tính: ");
+                student.AgeSinhVien = Convert.ToInt32(Helper.GetValue("Nhập tuổi: "));
+                student.DiemToan = Convert.ToSingle(Helper.GetValue("Nhập điểm toán: "));
+                student.DiemLy = Convert.ToSingle(Helper.GetValue("Nhập điểm lý: "));
+                student.DiemHoa = Convert.ToSingle(Helper.GetValue("Nhập điểm hóa: "));
 
             // ctrl + k+ c
             //Printf(students);

@@ -50,20 +50,23 @@ namespace Assignment
                             // theo code này: sửa cho n chạy đúng luồng
                         //  -> cách khác giải quyết khác -> 
                         case 2:
-                            var studentFound = students.Find(x => x.IdSinhVien == 1);
-
+                            WriteLine("2. Cập nhật thông tin sinh viên bởi ID. ");
+                            int id = Convert.ToInt32(Helper.GetValue("Nhập id sinh viên: "));
+                            var studentFound = students.Find(x => x.IdSinhVien == id);
                             UpdateSinhVien(ref studentFound);
-
                             var index = students.FindIndex(x => x.IdSinhVien == studentFound.IdSinhVien);
                             students[index] = studentFound;
-                            Printf(students);
+
+                            Console.WriteLine("---------------------------------------------");
+                            Console.WriteLine("Sửa thành công!");
+
                             //string[] students2 = new string[5]
                             //{
                             //    "A","B", "C", "D","E"
                             //};
 
                             ////var student = new string(); => Vùng nhớ mới,
-                            ////có giá trị giống như giá trị của phần tử thư 1 trong Mảng Student
+                            ////có giá trị giống như giá trị của phần tử như 1 trong Mảng Student
 
                             //var studentTemp = students2[1]; 
                             //studentTemp = "b";
@@ -128,13 +131,6 @@ namespace Assignment
                 WriteLine("Hãy nhập số !!!");
                 goto EnterOption;
             }
-
         }
-
-
-
-
     }
-
-
 }
