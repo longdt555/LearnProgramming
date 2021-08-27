@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practice", "Practice.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson.Common", "..\Lib.Common\Lesson.Common.csproj", "{5C209F98-412C-4779-AA91-E6AECFC855A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeDraff", "..\PracticeDraff\PracticeDraff.csproj", "{2A972BF5-8492-4AB5-B686-E7EE70C6F46E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeDraff", "..\PracticeDraff\PracticeDraff.csproj", "{2A972BF5-8492-4AB5-B686-E7EE70C6F46E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMgn", "..\BookMgn\BookMgn.csproj", "{525C9497-FEA3-45C6-94BF-43056BB7D271}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2A972BF5-8492-4AB5-B686-E7EE70C6F46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A972BF5-8492-4AB5-B686-E7EE70C6F46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A972BF5-8492-4AB5-B686-E7EE70C6F46E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{525C9497-FEA3-45C6-94BF-43056BB7D271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{525C9497-FEA3-45C6-94BF-43056BB7D271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{525C9497-FEA3-45C6-94BF-43056BB7D271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{525C9497-FEA3-45C6-94BF-43056BB7D271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
