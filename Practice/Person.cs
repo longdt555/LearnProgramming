@@ -2,6 +2,6 @@
 {
     public class Person
     {
-        public int Age { get; set; } = 50;
+        public int Age { get; set; } = 5;
     }
 }
