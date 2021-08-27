@@ -1,4 +1,6 @@
-﻿using static System.Int32;
+﻿using System;
+using static System.Console;
+using static System.Int32;
 
 namespace Lesson.Common.Helpers
 {
@@ -6,7 +8,7 @@ namespace Lesson.Common.Helpers
     {
         public static int ConvertStringToInt(string value)
         {
-            return TryParse(value, out var outValue) ? outValue : 0;
+            return TryParse(value, out int outValue) ? outValue : 0;
         }
 
         public static string RomanNumeralFrom(int number)
@@ -25,6 +27,12 @@ namespace Lesson.Common.Helpers
                     .Replace(new string('I', 9), "IX")
                     .Replace(new string('I', 5), "V")
                     .Replace(new string('I', 4), "IV");
+        }
+
+        public static string GetValueFromKeyBoard(string msg)
+        {
+            Write($@"{msg}: ");
+            return ReadLine();
         }
     }
 }
