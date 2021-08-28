@@ -20,7 +20,7 @@ namespace BookMgn.Repo
             return model;
         }
 
-        //public T GetById<T2>(T2 id)
+        //public T GetById<T2>(T2 id) //SachHoa Id int, SachLy Id: string
         //{
         //    //return DataList.FirstOrDefault()...
         //}

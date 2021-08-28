@@ -23,10 +23,9 @@ namespace PracticeDraff
         }
 
         // generic 
-        public static int ConvertValueToInt<T>(T value)
+        public static int ConvertValueToInt<T>(T model)
         {
-            return Convert.ToInt32(value);
+            return Convert.ToInt32(model);
         }
-
     }
 }
