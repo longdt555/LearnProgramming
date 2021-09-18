@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace BookMgn
+namespace BookMgn.Models
 {
     public class SachToan : BaseModel
     {
@@ -19,11 +17,7 @@ namespace BookMgn
         {
             return new SachToan();
         }
-
-        public SachToan GetByCongThucToan()
-        {
-
-        }
+        
         public SachToan GetById(List<SachToan> toans, int id)
         {
             return toans.FirstOrDefault(x => x.Id == id);

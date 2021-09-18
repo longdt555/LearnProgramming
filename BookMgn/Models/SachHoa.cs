@@ -1,28 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BookMgn
+﻿namespace BookMgn.Models
 {
     public class SachHoa : BaseModel
     {
-        public string SachHoaDif { get; set; }
-
-        public SachHoa Add(SachHoa model)
-        {
-            // thêm đối tượng đó vào mảng ban đầu
-            return model;
-        }
-
-        public SachHoa Edit()
-        {
-            return new SachHoa();
-        }
-
-        public SachHoa GetById(List<SachHoa> hoas, int id)
-        {
-            return hoas.FirstOrDefault(x => x.Id == id);
-        }
+        public string NameCombine { get; set; }
+        public int PageNumber { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -7,23 +7,29 @@ namespace BookMgn.Repo
 {
     public class CommonRepo<T> // Sach Hoa, 
     {
-        public List<T> DataList;
+        public  int SoLuongTuMangToiDa = 10;
 
-        public CommonRepo()
+        public T[] DataList;
+
+        public CommonRepo(int size)
         {
-            DataList = new List<T>();
+            if (SoLuongTuMangToiDa > 10)
+                DataList = new T[10];
+            else
+            {
+                DataList = new T[size];
+            }
         }
 
-        public T Add(T model)
+
+        private int ConfigLengthOfArray(T model)
         {
-            DataList.Add(model);
-            return model;
+            return 0;
         }
 
-        //public T GetById<T2>(T2 id) //SachHoa Id int, SachLy Id: string
-        //{
-        //    //return DataList.FirstOrDefault()...
-        //}
-
+        public int FindIndex(T model)
+        {
+            return 1;
+        }
     }
 }

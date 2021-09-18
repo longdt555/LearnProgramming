@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BookMgn.Models;
 using BookMgn.Repo;
 
 namespace BookMgn
@@ -8,23 +10,18 @@ namespace BookMgn
     {
         static void Main(string[] args)
         {
-            // normal
-            var dsSachLy = new List<SachLy>();
-            var dsSachHoa = new List<SachHoa>();
+            var SachLyLop1 = new SachLy(); // đối tượng
+            SachLyLop1.suffixName = "Long_HackRoiCon_";
+            
+            SachLyLop1._data.Add(new SachHoa());
 
-            var sachLy = new SachLy();
-            sachLy.Add(new SachLy());
+            SachLyLop1.CombineValue("Lop 1");
 
-            var sachHoa = new SachHoa();
-            sachHoa.Add(new SachHoa());
+            Console.WriteLine(SachLyLop1.GetValue());
 
-            // generic
-            var dsGSachLy = new CommonRepo<SachLy>();
-            var dsGSachHoa = new CommonRepo<SachHoa>();
-            dsGSachLy.Add(new SachLy());
+            //SachLyLop1.PrintData();
 
 
-            Console.WriteLine("Quản lý đầu sách!");
         }
     }
 }

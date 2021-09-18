@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BookMgn
+namespace BookMgn.Models
 {
     public class BaseModel
     {

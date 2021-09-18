@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BookMgn
+﻿namespace BookMgn.Models
 {
     public class SachTriet
     {
-        public string SachVanDif { get; set; }
+        public string Name { get; set; }
     }
 }
+

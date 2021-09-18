@@ -20,15 +20,33 @@ namespace Practice
             var intss = new List<int>();
             // Thuộc tính nâng cao của Collection so với mảng 
 
+            var arr = new int[5]
+            {
+                1,2,5,4,3
+            };
+            var arr2 = new string[5]
+            {
+                "1,2,5,4,3",
+                "1,2,5,4,3",
+                "1,2,5,4,3",
+                "1,2,5,4,3",
+                "1,2,5,4,3"
+            };
 
             var array = new ArrayList()
             {
-                1,2,5,4,3
-            }; // _> khởi tại array list rỗng
+                1,2,5,4, "long"
+            };
+
+            // _> khởi tại array list rỗng
+
+            ArrayList arr1 = new ArrayList(); // mảng rỗng
 
             ArrayList array2 = new ArrayList(5);
 
             ArrayList array3 = new ArrayList(array);
+
+            ArrayList array6 = array; // tham chiếu
 
             var arrCount = array3.Count;
             //array3.Sort();
@@ -65,7 +83,7 @@ namespace Practice
 
             var array4 = new ArrayList()
             {
-                "Thanh", "Than", "Thanhhhhh", "Long"
+                "Thanh", "Than", "Thanhhhhh", 1
             };
 
             foreach (var item in array4)

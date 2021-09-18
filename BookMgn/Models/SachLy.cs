@@ -1,28 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BookMgn
+namespace BookMgn.Models
 {
-    public class SachLy
+    public class SachLy // class
     {
-        public string SachVanDif { get; set; }
-        public string Id { get; set; }
-        public SachLy Add(SachLy model)
+        //public SachLy(int pageNumber)
+        //{
+        //    _data = new List<SachHoa>
+        //    {
+        //        new SachHoa()
+        //        {
+        //            Id = 1,
+        //            PageNumber = 20,
+        //            NameCombine = "SachLy_Lop_1"
+        //        },
+        //        new SachHoa()
+        //        {
+        //            Id = 2,
+        //            PageNumber = 20,
+        //            NameCombine = "SachLy_Lop_2"
+        //        }
+        //    };
+        //    PageNumber = pageNumber;
+        //}
+
+        public List<SachHoa> _data { get; set; }
+        public string suffixName = "SachLy_";
+
+        private string NameCombine { get; set; }
+        public int PageNumber { get; set; }
+        public int Id { get; set; }
+
+        public void CombineValue(string name)
         {
-            // thêm đối tượng đó vào mảng ban đầu
-            return model;
+
+            NameCombine = suffixName + name;
         }
 
-        public SachLy Edit()
+        public string GetValue()
         {
-            return new SachLy();
+            return NameCombine;
         }
 
-        public SachLy GetById(List<SachLy> lys, string id)
+        public List<SachHoa> GetData()
         {
-            return lys.FirstOrDefault(x => x.Id == id);
+            return _data;
         }
+
+        //public void PrintData()
+        //{
+        //    foreach (var item in GetData())
+        //    {
+        //        Console.Write($"Id: {item.Id}, Name: {item.NameCombine}, PageNumber: {item.PageNumber}");
+        //    }
+        //}
     }
 }

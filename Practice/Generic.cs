@@ -4,7 +4,26 @@ using System.Text;
 
 namespace Practice
 {
-    public class Generic
+    public static class HelpersFunc
     {
+
+        // Tái sử dụng
+        // Tối ưu mã nguồn
+        public static int ConvertValueToInt<T>(T value)
+        {
+            return Convert.ToInt32(value);
+        }
+
+        // normal way 
+        public static int ConvertStringToInt(string value)
+        {
+            return Convert.ToInt32(value);
+        }
+        public static int ConvertFloatToInt(float value)
+        {
+            return Convert.ToInt32(value);
+        }
     }
+
 }
+    
