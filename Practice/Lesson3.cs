@@ -32,10 +32,8 @@ namespace Practice
 
             var studentsInt = new int[4]
             {
-                1,2,3,4
+                1,2,1,3
             };
-
-            Console.WriteLine(studentsInt.Length);
 
             var studentsFloat = new float[4];
 
@@ -148,51 +146,6 @@ namespace Practice
                 }
             };
 
-            var array5 = new string[1, 2, 2, 5]
-            {
-                {
-                    {
-                        {
-                            "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
-                        },
-                        {
-                            "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
-                        }
-                    },
-                    {
-                        {
-                            "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
-                        },
-                        {
-                            "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
-                        }
-                    }
-                }
-            };
-            var array6 = new string[1, 1, 2, 2, 5]
-            {
-                {
-                    {
-                        {
-                            {
-                                "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
-                            },
-                            {
-                                "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
-                            }
-                        },
-                        {
-                            {
-                                "HaNam", "HaNoi", "DienBien", "CaoBang", "HaiPhong"
-                            },
-                            {
-                                "SaiGon", "VungTau", "CaMau", "BinhDuong", "DaLat"
-                            }
-                        }
-                    }
-                }
-            };
-
             var array4 = new string[,,]
             {
                 {
@@ -240,11 +193,14 @@ namespace Practice
 
 
         #region [Private functions helper]
+
         private static int GetValueFromKeyBoard(string msg)
         {
             Write($@"{msg}");
             return ConvertStringToInt(ReadLine());
         }
+
+
         #endregion
     }
 }
