@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using Lesson1_Bai5.Common;
+using Microsoft.VisualBasic;
 using static System.Console;
 
 namespace Lesson1_Bai5
