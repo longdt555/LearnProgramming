@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learn20_9.Abstract;
 
 namespace Learn20_9.Other
 {
-    class Student : Abstract.Animal
+    class Student : Animal
     {
         public string Name { get; set; }
         public int Id { get; set; }
         public float AvgScore { get; set; }
         public override string SayHello(string msg)
         {
+            if (msg == "hhiii")
+            {
+                return "hiiii";
+            }
             return msg;
         }
 
@@ -45,12 +50,12 @@ namespace Learn20_9.Other
         {
             AvgScore = avgScore;
         }
-        public Student(string name,int id)
+        public Student(string name, int id)
         {
             Name = name;
             Id = id;
         }
-        public Student(string name , int id, float avgScore)
+        public Student(string name, int id, float avgScore)
         {
             Name = name;
             Id = id;

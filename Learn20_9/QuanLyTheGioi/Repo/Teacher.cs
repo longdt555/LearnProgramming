@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Learn20_9.Abstract;
+using QuanLyTheGioi.AbtractRepo;
 
-namespace Learn20_9.Other
+namespace QuanLyTheGioi.Repo
 {
     class Teacher : TeacherAbstract
     {
@@ -56,7 +52,12 @@ namespace Learn20_9.Other
         //    Random random = new Random();
         //    return random.Next(1, 100);
         //}
-        public override string NoiTenTruongDayHoc()
+        public override string NoiThoiGianDiDay()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string NoiSoNamDiDay()
         {
             throw new NotImplementedException();
         }

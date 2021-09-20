@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn20_9", "Learn20_9\Learn20_9.csproj", "{CC061EAF-0EB7-47EE-A46F-1B6CB26DC631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn20_9", "Learn20_9\Learn20_9.csproj", "{CC061EAF-0EB7-47EE-A46F-1B6CB26DC631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyTheGioi", "QuanLyTheGioi\QuanLyTheGioi.csproj", "{46D2077A-D1FB-45CC-BF44-270C027AD784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CC061EAF-0EB7-47EE-A46F-1B6CB26DC631}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC061EAF-0EB7-47EE-A46F-1B6CB26DC631}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC061EAF-0EB7-47EE-A46F-1B6CB26DC631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D2077A-D1FB-45CC-BF44-270C027AD784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D2077A-D1FB-45CC-BF44-270C027AD784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D2077A-D1FB-45CC-BF44-270C027AD784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D2077A-D1FB-45CC-BF44-270C027AD784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

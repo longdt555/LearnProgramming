@@ -13,6 +13,10 @@ namespace Learn20_9.Other
         public int Age { get; set; }
         public override string SayHello(string msg)
         {
+            if (msg.Length > 10)
+            {
+                return msg + " Haha";
+            }
             return msg;
         }
 
