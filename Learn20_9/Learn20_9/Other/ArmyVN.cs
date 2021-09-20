@@ -7,7 +7,8 @@ using Learn20_9.Abstract;
 
 namespace Learn20_9.Other
 {
-    public class ArmyVn : ArmyAbstract, WomanAbstract, ManAbstract
+    // Class không hỗ trợ đa kế thừa, 1 con chỉ có 1 cha
+    public class ArmyVn : ArmyAbstract
     {
         public override string SayUnit(int unit)
         {
@@ -28,6 +29,5 @@ namespace Learn20_9.Other
         {
             return "6h";
         }
-        
     }
 }

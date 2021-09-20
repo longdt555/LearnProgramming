@@ -21,10 +21,15 @@ namespace Learn20_9.Abstract
             return Data.Count;
         }
 
-        public string SayHello(string msg)
+        public string SayHello()
         {
-            return $"{msg}";
+            return $"Hello";
 
+        }
+
+        public string SayHello(int a)
+        {
+            return $"Hello";
         }
     }
 }

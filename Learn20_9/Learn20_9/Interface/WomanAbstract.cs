@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Learn20_9.Abstract
 {
-    public abstract class ManAbstract
+    public interface WomanInterface
     {
-        public abstract string LayVo();
-        public abstract string ChamVo();
+        public abstract string SayHello();
+        public abstract string DeCon();
     }
 }
