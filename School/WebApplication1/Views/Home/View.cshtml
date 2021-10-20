@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.KhachHangModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/_ViewImports.cshtml";
+}
+
+<h1>View</h1>
+
+<h4>KhachHangModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="HoTen" class="control-label"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatKhau" class="control-label"></label>
+                <input asp-for="MatKhau" class="form-control" />
+                <span asp-validation-for="MatKhau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandomKey" class="control-label"></label>
+                <input asp-for="RandomKey" class="form-control" />
+                <span asp-validation-for="RandomKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DangHoatDong" class="control-label"></label>
+                <input asp-for="DangHoatDong" class="form-control" />
+                <span asp-validation-for="DangHoatDong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NhanQuangCao" class="control-label"></label>
+                <input asp-for="NhanQuangCao" class="form-control" />
+                <span asp-validation-for="NhanQuangCao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
