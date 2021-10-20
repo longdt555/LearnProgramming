@@ -1,0 +1,85 @@
+﻿@model List<ChiTietDHModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+
+    <h1>Chi Tiet Don Hang Table</h1>
+    <button>ADD</button>
+    <table id="customers">
+        <tr>
+            <th>ID</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Updated By</th>
+            <th>Is Deleted</th>
+            <th>Ma DH</th>
+            <th>Ma HH</th>
+            <th>Don Gia</th>
+            <th>So Luong</th>
+
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.UpdatedDate</td>
+                    <td>@item.UpdateddBy</td>
+                    <td>@item.IsDeleted</td>
+                    <td>@item.MaDH</td>
+                    <td>@item.MaHH</td>
+                    <td>@item.DonGia</td>
+                    <td>@item.SoLuong</td>
+
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                    <td>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</body>
+</html>
+
+
