@@ -6,12 +6,12 @@ using System.Diagnostics;
 
 namespace StoreManagement.Controllers
 {
-    public class ChiTietDH : Controller
+    public class ChiTietDHController : Controller
     {
-        private readonly ILogger<ChiTietDH> _logger;
+        private readonly ILogger<ChiTietDHController> _logger;
         private readonly IChiTietDH customerService;
 
-        public ChiTietDH(ILogger<ChiTietDH> logger, IChiTietDH customerService)
+        public ChiTietDHController(ILogger<ChiTietDHController> logger, IChiTietDH customerService)
         {
             _logger = logger;
             this.customerService = customerService;

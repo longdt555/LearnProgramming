@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School", "School\School.csproj", "{5AA6956E-1247-4C9D-AB6C-5909B612367B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School", "School\School.csproj", "{5AA6956E-1247-4C9D-AB6C-5909B612367B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreManagement", "WebApplication1\StoreManagement.csproj", "{D4A8107B-EAF1-469F-9FAB-3A6628A09E38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5AA6956E-1247-4C9D-AB6C-5909B612367B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AA6956E-1247-4C9D-AB6C-5909B612367B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AA6956E-1247-4C9D-AB6C-5909B612367B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4A8107B-EAF1-469F-9FAB-3A6628A09E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A8107B-EAF1-469F-9FAB-3A6628A09E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A8107B-EAF1-469F-9FAB-3A6628A09E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A8107B-EAF1-469F-9FAB-3A6628A09E38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

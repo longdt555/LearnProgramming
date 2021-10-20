@@ -23,7 +23,7 @@ namespace StoreManagement.Services
                             CreatedBy = ctdh.CreatedBy,
                             CreatedDate = ctdh.CreatedDate,
                             UpdatedDate = ctdh.UpdatedDate,
-                            UpdateddBy = ctdh.UpdateddBy,
+                            UpdatedBy = ctdh.UpdatedBy,
                             IsDeleted = ctdh.IsDeleted,
                             MaDH = ctdh.MaDH,
                             MaHH = ctdh.MaHH,

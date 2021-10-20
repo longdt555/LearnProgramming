@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreManagement.Models
 {
     [Table("HangHoa")]
 
-    public class HangHoaModel
+    public class HangHoaModel : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
         public string TenHH { get; set; }
         public string MaLoai { get; set; }
         public int SoLuong { get; set; }

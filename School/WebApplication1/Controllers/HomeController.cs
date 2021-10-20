@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Logging;
 using StoreManagement.IServices;
 using StoreManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StoreManagement.Controllers
 {
@@ -25,6 +21,11 @@ namespace StoreManagement.Controllers
         {
             var customers = customerService.GetAll();
             return View(customers);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
 
 

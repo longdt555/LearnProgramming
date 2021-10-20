@@ -3,7 +3,7 @@ using StoreManagement.Models;
 
 namespace StoreManagement.Context
 {
-    public class SMDBContext: DbContext
+    public class SMDBContext : DbContext
     {
         public SMDBContext(DbContextOptions<SMDBContext> options) : base(options)
         {
@@ -17,6 +17,5 @@ namespace StoreManagement.Context
         public DbSet<HangHoaModel> HangHoas { get; set; }
         public DbSet<KhachHangModel> KhachHangs { get; set; }
         public DbSet<LoaiModel> Loais { get; set; }
-
     }
 }
