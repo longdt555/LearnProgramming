@@ -32,7 +32,7 @@ namespace StoreManagement
             services.AddTransient<ILoai, LoaiService>();
             services.AddTransient<IKhachHang, KhachHangService>();
             services.AddTransient<IHangHoa, HangHoaService>();
-            services.AddTransient<IDonHang, DonHangService>();
+            services.AddTransient<IDonHangService, DonHangService>();
             services.AddTransient<IChiTietDH, ChiTietDHService>();
 
             #endregion

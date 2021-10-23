@@ -1,4 +1,4 @@
-﻿@model List<DonHangModel>
+﻿@model List<StoreManagement.Dtos.DonHangDto>
 @* Razor *@
 <!DOCTYPE html>
 <html>
@@ -93,11 +93,9 @@
             {
                 <tr>
                     <td>@item.TenKhachHang</td>
-                    <td>@item.</td>
-
-
-
-
+                    <td>@item.Email</td>
+                    <td>@item.PhiVanChuyen</td>
+                    <td>@item.TongTien</td>
                     <td>
                         <button>Edit</button>
                     </td>

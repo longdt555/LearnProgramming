@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreManagement.Dtos;
 
 namespace StoreManagement.Services
 {
-    public class DonHangService : IDonHang 
+    public class DonHangService : IDonHangService
     {
         private readonly SMDBContext _context;
         public DonHangService(SMDBContext _context)
@@ -27,24 +28,39 @@ namespace StoreManagement.Services
 
         //         return query;
         //     }
-                                           
-        public List<DonHangModel> GetAll()
-        {
-            var data1 = (from dh in _context.DonHangs
-                        select new DonHangModel
-                        {
-                            Id = dh.Id,
-                            IdKhachHang = dh.IdKhachHang,
-                            TenKhachHang = dh.TenKhachHang,
-                            NgayLap = dh.NgayLap,
-                            PhiVanChuyen = dh.PhiVanChuyen,
-                            ThanhTien = dh.ThanhTien,
-                            TongTien = dh.TongTien,
-                            TrangThaiDonHang = dh.TrangThaiDonHang,
-                            TrangThaiThanhToan = dh.TrangThaiThanhToan,
 
-                        }).ToList();
-            return data1;
+        // inner join
+        // left join
+        public List<DonHangDto> GetAll()
+        {
+            //var query = from person in people
+            //    join pet in pets on person equals pet.Owner into gj
+            //    from subpet in gj.DefaultIfEmpty()
+            //    select new { person.FirstName, PetName = subpet?.Name ?? String.Empty };
+
+            // JOIN: from [table1] join [table2] on [condition] where [condition] select [model]
+
+            var donHangDtos = (from dh in _context.DonHangs
+                               join kh in _context.KhachHangs
+                                   on dh.IdKhachHang equals kh.Id into dhkh
+                               from khlj in dhkh.DefaultIfEmpty()
+
+
+                               //where !khlj.IsDeleted && !dh.IsDeleted
+                               select new DonHangDto
+                               {
+                                   Id = dh.Id,
+                                   IdKhachHang = dh.IdKhachHang,
+                                   Email = khlj.Email,
+                                   TenKhachHang = khlj.HoTen,
+                                   NgayLap = dh.NgayLap,
+                                   PhiVanChuyen = dh.PhiVanChuyen,
+                                   ThanhTien = dh.ThanhTien,
+                                   TongTien = dh.TongTien,
+                                   TrangThaiDonHang = dh.TrangThaiDonHang,
+                                   TrangThaiThanhToan = dh.TrangThaiThanhToan
+                               }).ToList();
+            return donHangDtos;
         }
 
     }

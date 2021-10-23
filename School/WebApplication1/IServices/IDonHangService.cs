@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreManagement.Dtos;
 
 namespace StoreManagement.IServices
 {
-    public interface IDonHang
+    public interface IDonHangService
     {
-        List<DonHangModel> GetAll();
+        List<DonHangDto> GetAll();
 
         //List<DonHangModel> Get();
 
