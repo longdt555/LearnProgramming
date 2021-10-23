@@ -29,9 +29,14 @@ namespace StoreManagement
 
             #region DI : Dependency Injection
             services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<ILoai, LoaiService>();
+            services.AddTransient<IKhachHang, KhachHangService>();
+            services.AddTransient<IHangHoa, HangHoaService>();
+            services.AddTransient<IDonHang, DonHangService>();
+            services.AddTransient<IChiTietDH, ChiTietDHService>();
+
             #endregion
 
-          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StoreManagement.Migrations
 {
-    public partial class _202110182042initialdb : Migration
+    public partial class _202110212058initialdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace StoreManagement.Migrations
                     CreatedBy = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: true),
-                    UpdateddBy = table.Column<int>(nullable: false),
+                    UpdatedBy = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     MaDH = table.Column<int>(nullable: false),
                     MaHH = table.Column<int>(nullable: false),
@@ -34,8 +34,13 @@ namespace StoreManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     MaKH = table.Column<int>(nullable: false),
-                    NgayLap = table.Column<DateTime>(nullable: false),
+                    NgayLap = table.Column<DateTime>(nullable: true),
                     PhiVanChuyen = table.Column<float>(nullable: false),
                     ThanhTien = table.Column<float>(nullable: false),
                     TongTien = table.Column<float>(nullable: false),
@@ -53,6 +58,11 @@ namespace StoreManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     TenHH = table.Column<string>(nullable: true),
                     MaLoai = table.Column<string>(nullable: true),
                     SoLuong = table.Column<int>(nullable: false),
@@ -71,6 +81,11 @@ namespace StoreManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     HoTen = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     MatKhau = table.Column<string>(nullable: true),
@@ -89,6 +104,11 @@ namespace StoreManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     TenLoai = table.Column<string>(nullable: true),
                     Mota = table.Column<string>(nullable: true),
                     MaLoaiCha = table.Column<int>(nullable: false)

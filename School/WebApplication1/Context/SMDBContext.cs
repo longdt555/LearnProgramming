@@ -8,6 +8,11 @@ namespace StoreManagement.Context
         public SMDBContext(DbContextOptions<SMDBContext> options) : base(options)
         {
         }
+
+        public SMDBContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }

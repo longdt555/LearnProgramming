@@ -71,17 +71,20 @@ namespace StoreManagement.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdKhachHang")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MaKH")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayLap")
+                    b.Property<DateTime?>("NgayLap")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("PhiVanChuyen")
                         .HasColumnType("real");
+
+                    b.Property<string>("TenKhachHang")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("ThanhTien")
                         .HasColumnType("real");
@@ -128,6 +131,9 @@ namespace StoreManagement.Migrations
                     b.Property<float>("GiamGia")
                         .HasColumnType("real");
 
+                    b.Property<int>("IdLoai")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -138,6 +144,9 @@ namespace StoreManagement.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TenHH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenLoai")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UpdatedBy")
