@@ -5,16 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Test\**" />
+    <Compile Remove="Views\TypeCotroller\**" />
+    <Content Remove="Views\Test\**" />
+    <Content Remove="Views\TypeCotroller\**" />
+    <EmbeddedResource Remove="Views\Test\**" />
+    <EmbeddedResource Remove="Views\TypeCotroller\**" />
+    <None Remove="Views\Test\**" />
+    <None Remove="Views\TypeCotroller\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\CustomerController.cs" />
+    <Compile Remove="Controllers\TestController.cs" />
     <Compile Remove="IServices\IDelete.cs" />
     <Compile Remove="Services\Class.cs" />
     <Compile Remove="Services\DeleteService.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\Privacy.cshtml" />
     <Content Remove="Views\Home\View.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>

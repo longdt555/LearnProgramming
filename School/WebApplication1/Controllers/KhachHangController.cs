@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreManagement.IServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StoreManagement.Controllers
 {
-    public class HangHoaController : Controller
+    public class KhachHangController : Controller
     {
-        private readonly ILogger<HangHoaController> _logger;
-        private readonly IHangHoa customerService;
+        private readonly ILogger<KhachHangController> _logger;
+        private readonly IKhachHang customerService;
 
-        public HangHoaController(ILogger<HangHoaController> logger, IHangHoa customerService)
+        public KhachHangController(ILogger<KhachHangController> logger, IKhachHang customerService)
         {
             _logger = logger;
             this.customerService = customerService;

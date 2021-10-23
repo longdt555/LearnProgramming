@@ -1,29 +1,29 @@
-﻿@model List<HangHoaModel>
+﻿@model List<LoaiModel>
 @* Razor *@
 <!DOCTYPE html>
 <html>
 <head>
     <style>
-        #hanghoa {
+        #type {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-            #hanghoa td, #hanghoa th {
+            #type td, #type th {
                 border: 1px solid #ddd;
                 padding: 8px;
             }
 
-            #hanghoa tr:nth-child(even) {
+            #type tr:nth-child(even) {
                 background-color: #f2f2f2;
             }
 
-            #hanghoa tr:hover {
+            #type tr:hover {
                 background-color: #ddd;
             }
 
-            #hanghoa th {
+            #type th {
                 padding-top: 12px;
                 padding-bottom: 12px;
                 text-align: left;
@@ -34,40 +34,25 @@
 </head>
 <body>
 
-    <h1>Hang Hoa Table</h1>
+    <h1>Loai Table</h1>
     <button><a href="add">ADD</a></button>
-    <table id="hanghoa">
+    <table id="type">
         <tr>
             <th>ID</th>
-            <th>Ten HH</th>
-            <th>Ma Loai</th>
-            <th>So Luong</th>
-            <th>Don Gia</th>
-            <th>Giam Gia</th>
-            <th>Chi Tiet</th>
-            <th>Id Loai</th>
             <th>Ten Loai</th>
+            <th>Mo Ta</th>
+            <th>Ma Loai Cha</th>
             <th>Edit</th>
             <th>Delete</th>
-
-
-
-
-
         </tr>
         @{
             foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.TenHH</td>
-                    <td>@item.MaLoai</td>
-                    <td>@item.SoLuong</td>
-                    <td>@item.DonGia</td>
-                    <td>@item.GiamGia</td>
-                    <td>@item.ChiTiet</td>
-                    <td>@item.IdLoai</td>
                     <td>@item.TenLoai</td>
+                    <td>@item.Mota</td>
+                    <td>@item.MaLoaiCha</td>
 
                     <td>
                         <button>Edit</button>

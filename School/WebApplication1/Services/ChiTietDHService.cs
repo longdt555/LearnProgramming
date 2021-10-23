@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace StoreManagement.Services
 {
-    public class ChiTietDHService : IChiTietDH
+    public class ChiTietDHService : IChiTietDH 
     {
         private readonly SMDBContext _context;
         public ChiTietDHService(SMDBContext _context)
