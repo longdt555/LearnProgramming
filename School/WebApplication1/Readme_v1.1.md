@@ -29,3 +29,7 @@
 										services.AddTransient<ICustomerService, CustomerService>();
 									#endregion
 						- Step.2.1.4 Gọi vào Controller 
+
+
+
+.gitignore: bỏ file cache, dll
