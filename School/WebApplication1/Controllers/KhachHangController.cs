@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Controllers
 {
+    
     public class KhachHangController : Controller
     {
         private readonly ILogger<KhachHangController> _logger;
@@ -19,7 +20,9 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
-        public IActionResult Index()
+        
+        [Route("khach-hang")]
+        public IActionResult Index(int pagingIndex, int pageSize)
         {
             var customers = customerService.GetAll();
             return View(customers);

@@ -16,22 +16,23 @@ namespace StoreManagement.Controllers
     public class LoaiController : Controller
     {
         private readonly ILogger<LoaiController> _logger;
-        private readonly ILoaiService customerService;
+        private readonly ILoaiService _customerService;
 
         public LoaiController(ILogger<LoaiController> logger, ILoaiService customerService)
         {
             _logger = logger;
-            this.customerService = customerService;
+            this._customerService = customerService;
         }
-        public IActionResult Index( int? page)
+
+        public IActionResult Index()
         {
-            var customers = customerService.GetAll().ToList().ToPagedList(page ?? 1, 5);
+            var customers = _customerService.GetAll().ToList();
             return View(customers);
         }
 
         public IActionResult Delete(int id)
         {
-            customerService.Delete(id);
+            _customerService.Delete(id);
             return RedirectToAction("index");
         }
 
@@ -42,12 +43,12 @@ namespace StoreManagement.Controllers
 
         public IActionResult DoAdd(LoaiModel loaiModel)
         {
-            customerService.Add(loaiModel);
+            _customerService.Add(loaiModel);
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int id)
         {
-            var loai = customerService.GetById(id);
+            var loai = _customerService.GetById(id);
             if (loai == null) return BadRequest();
             return View(loai);
         }
@@ -55,7 +56,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoEdit(LoaiModel loaiModel)
         {
 
-            customerService.Edit(loaiModel);
+            _customerService.Edit(loaiModel);
             return RedirectToAction("Index");
         }
 

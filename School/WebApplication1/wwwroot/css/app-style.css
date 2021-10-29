@@ -1,0 +1,43 @@
+﻿/*css scroll*/
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    background-color: #F2F3F3;
+    border-radius: 2.5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+    background-color: #0888b1;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 2.5px;
+    background-color: #0888b1;
+}
+/*end*/
+
+
+
+.footer.footer-black.footer-white {
+    line-height: 7px;
+    position: fixed;
+    height: 50px;
+    display: block;
+    bottom: 0;
+    background: #fff;
+    width: calc(100% - 260px);
+}
+
+.main-panel > .content {
+    margin-top: 60px;
+    margin-bottom: 101px;
+    height: calc(100vh - 240px);
+    overflow: hidden;
+    padding-bottom: 60px;
+}
+
+.table-responsive {
+    height: 600px !important;
+}

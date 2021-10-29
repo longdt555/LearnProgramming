@@ -22,6 +22,8 @@ namespace StoreManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllers();
             services.AddControllersWithViews();
             #region database context
             services.AddDbContext<SMDBContext>(item => item.UseSqlServer(Configuration.GetConnectionString("App-Conn"))); //context
@@ -58,6 +60,8 @@ namespace StoreManagement
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

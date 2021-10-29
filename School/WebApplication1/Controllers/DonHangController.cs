@@ -22,6 +22,8 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
+
+        [Route("don-hang")]
         public IActionResult Index()
         {
             var customers = customerService.GetAll();
