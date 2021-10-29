@@ -1,4 +1,4 @@
-﻿@model List<ChiTietDHModel>
+﻿@model List<StoreManagement.Dtos.HangHoaDto>
 @* Razor *@
 <!DOCTYPE html>
 <html>
@@ -234,21 +234,17 @@
 </head>
 <body>
 
-    <h1>Chi Tiet Don Hang Table</h1>
-    <button><a href="add">ADD</a></button>
-    <button><a href="/DonHang/details">Xem Them</a></button>
-
-    <table id="chitietdonhang">
+    <h1>Hang Hoa DTO</h1>
+    @*<button><a href="add">ADD</a></button>*@
+    <table id="donhang">
         <tr>
-            <th>ID</th>
-            <th>Created By</th>
-            <th>Created Date</th>
-            <th>Updated Date</th>
-            <th>Updated By</th>
-            <th>Is Deleted</th>
-            <th>Ma DH</th>
-            <th>Don Gia</th>
+            <th>Id</th>
+            <th>Ten Hang Hoa</th>
+            <th>Ten Loai</th>
             <th>So Luong</th>
+            <th>Mo Ta</th>
+            <th>Don Gia</th>
+            <th>Chi Tiet</th>
 
             <th>Edit</th>
             <th>Delete</th>
@@ -258,29 +254,24 @@
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.CreatedBy</td>
-                    <td>@item.CreatedDate</td>
-                    <td>@item.UpdatedDate</td>
-                    <td>@item.UpdatedBy</td>
-                    <td>@item.IsDeleted</td>
-                    <td>@item.MaDH</td>
-                    <td>@item.DonGia</td>
+                    <td>@item.TenHH</td>
+                    <td>@item.TenLoai</td>
                     <td>@item.SoLuong</td>
-
-
+                    <td>@item.MoTa</td>
+                    <td>@item.DonGia</td>
+                    <td>@item.ChiTiet</td>
 
                     <td>
-                        <button><a href="/ChiTietDH/Edit/@item.Id">Edit</a></button>
+                        <button><a href="/HangHoa/Edit/@item.Id">Edit</a></button>
                     </td>
                     <td>
-                        <button><a href="/ChiTietDH/Delete/@item.Id">Delete</a></button>
+                        <button><a href="/HangHoa/Delete/@item.Id">Delete</a></button>
                     </td>
                 </tr>
             }
         }
-
-
     </table>
+
 
 </body>
 </html>

@@ -12,6 +12,6 @@ namespace StoreManagement.Models
         public string RandomKey { get; set; }
         public string DangHoatDong { get; set; }
         public string NhanQuangCao { get; set; }
-        public KhachHangModel khachhang { get; set; }
+
     }
 }

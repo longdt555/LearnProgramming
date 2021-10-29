@@ -6,5 +6,6 @@ namespace StoreManagement.IServices
     public interface ICustomerService
     {
          List<KhachHangModel> GetAll();
+
     }
 }

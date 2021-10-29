@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.IServices
 {
-    public interface IKhachHang
+    public interface IKhachHangService
     {
         List<KhachHangModel> GetAll();
+        void Delete(int id);
+
+        int Add(KhachHangModel khachHangModel);
+        KhachHangModel GetById(int id);
+        int Edit(KhachHangModel khachHangModel);
+
     }
 }

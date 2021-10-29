@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.IServices
 {
-    public interface ILoai
+    public interface ILoaiService
     {
         List<LoaiModel> GetAll();
+
+        void Delete(int id);
+        int Add(LoaiModel loaiModel);
+        LoaiModel GetById(int id);
+        int Edit(LoaiModel loaiModel);
     }
 }

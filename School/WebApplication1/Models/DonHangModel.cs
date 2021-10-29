@@ -15,7 +15,6 @@ namespace StoreManagement.Models
         public float TongTien { get; set; }
         public string TrangThaiDonHang { get; set; }
         public string TrangThaiThanhToan { get; set; }
-        public KhachHangModel khachhang { get; set; }
 
     }
 }

@@ -1,22 +1,119 @@
 ﻿using StoreManagement.Context;
+using StoreManagement.Dtos;
 using StoreManagement.IServices;
 using StoreManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StoreManagement.Services
 {
-    public class ChiTietDHService : IChiTietDH 
+    public class ChiTietDHService : BaseService, IChiTietDHService
     {
-        private readonly SMDBContext _context;
-        public ChiTietDHService(SMDBContext _context)
+        public ChiTietDHService(SMDBContext _context) : base(_context) { }
+
+        public int Add(ChiTietDHModel chiTietDHModel)
         {
-            this._context = _context;
+            DBContext().ChiTietDHs.Add(chiTietDHModel);
+            return DBContext().SaveChanges();
         }
 
-        List<ChiTietDHModel> IChiTietDH.GetAll()
+        public void Delete(int id)
         {
-            var data = (from ctdh in _context.ChiTietDHs
+            var data = (from ctdh in DBContext().ChiTietDHs where ctdh.Id == id select ctdh).FirstOrDefault(); // Lấy ra đối tượng cần được xóa
+
+            if (data == null) return;
+
+            data.IsDeleted = true;
+            data.UpdatedDate = DateTime.Now;
+
+            DBContext().ChiTietDHs.Update(data);
+            DBContext().SaveChanges();
+        }
+
+        public int Edit(ChiTietDHModel chiTietDHModel)
+        {
+            var data = DBContext().ChiTietDHs.Where(x => x.Id == chiTietDHModel.Id).FirstOrDefault();
+            if (data == null) return 0;
+            data.CreatedBy = chiTietDHModel.CreatedBy;
+            data.CreatedDate = chiTietDHModel.CreatedDate;
+            data.UpdatedDate = chiTietDHModel.UpdatedDate;
+            data.UpdatedBy = chiTietDHModel.UpdatedBy;
+            data.IsDeleted = chiTietDHModel.IsDeleted;
+            data.MaDH = chiTietDHModel.MaDH;
+            data.DonGia = chiTietDHModel.DonGia;
+            data.SoLuong = chiTietDHModel.SoLuong;
+
+            DBContext().Update(data);
+            return DBContext().SaveChanges();
+            
+        }
+
+        public ChiTietDHModel GetById(int id)
+        {
+            return DBContext().ChiTietDHs.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
+        }
+
+
+
+        //public List<ChiTietDHModel> Delete()
+        //{
+        //    var deleteOrderDetails =
+        //              from ctdh in _context.ChiTietDHs
+        //              where ctdh.Id == ctdh.MaDH
+        //              select ctdh;
+
+        //    foreach (var ctdh in deleteOrderDetails)
+        //    {
+        //        _context.ChiTietDHs.DeleteOnSubmit(ctdh);
+        //    }
+
+        //    try
+        //    {
+        //        db.SubmitChanges();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        // Provide for exceptions.
+        //    }
+        //}
+
+        public List<ChiTietDHDto> GetChiTietDHDto()
+        {
+            var chiTietDonHangs = (from kh in DBContext().KhachHangs
+                                   join dh in DBContext().DonHangs
+                                       on kh.Id equals dh.Id
+                                   join hh in DBContext().HangHoas on dh.Id equals hh.Id
+
+
+                                   //    into dhkh
+                                   //from khlj in dhkh.DefaultIfEmpty()
+
+
+                                   where !kh.IsDeleted && !dh.IsDeleted
+                                   select new ChiTietDHDto
+                                   {
+                                       Id = dh.Id,
+                                       HoTen = kh.HoTen,
+                                       Email = kh.Email,
+                                       MaDH = dh.Id,
+                                       TenHH = hh.TenHH,
+                                       SoLuong = hh.SoLuong,
+                                       DonGia = hh.DonGia
+                                   }).ToList();
+            return chiTietDonHangs;
+        }
+
+        //public List<ChiTietDHModel> Insert()
+        //{
+        //    var ChiTietDH = new List
+        //}
+
+        List<ChiTietDHModel> IChiTietDHService.GetAll()
+        {
+            var data = (from ctdh in DBContext().ChiTietDHs
+                        where ctdh.IsDeleted == false
                         select new ChiTietDHModel
                         {
                             Id = ctdh.Id,

@@ -29,11 +29,11 @@ namespace StoreManagement
 
             #region DI : Dependency Injection
             services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<ILoai, LoaiService>();
-            services.AddTransient<IKhachHang, KhachHangService>();
-            services.AddTransient<IHangHoa, HangHoaService>();
+            services.AddTransient<ILoaiService, LoaiService>();
+            services.AddTransient<IKhachHangService, KhachHangService>();
+            services.AddTransient<IHangHoaService, HangHoaService>();
             services.AddTransient<IDonHangService, DonHangService>();
-            services.AddTransient<IChiTietDH, ChiTietDHService>();
+            services.AddTransient<IChiTietDHService, ChiTietDHService>();
 
             #endregion
 

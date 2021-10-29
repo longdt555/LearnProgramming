@@ -6,17 +6,14 @@ using System.Linq;
 
 namespace StoreManagement.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : BaseService, ICustomerService
     {
-        private readonly SMDBContext _context;
-        public CustomerService(SMDBContext context)
-        {
-            this._context = context;
-        }
+        public CustomerService(SMDBContext _context) : base(_context) { }
 
         public List<KhachHangModel> GetAll()
         {
-            var data = (from kh in _context.KhachHangs
+            var data = (from kh in DBContext().KhachHangs
+                        where kh.IsDeleted == false
                 select new KhachHangModel
                 {
                     Id = kh.Id,

@@ -1,4 +1,4 @@
-﻿@model List<ChiTietDHModel>
+﻿@model List<StoreManagement.Dtos.DonHangDto>
 @* Razor *@
 <!DOCTYPE html>
 <html>
@@ -234,21 +234,15 @@
 </head>
 <body>
 
-    <h1>Chi Tiet Don Hang Table</h1>
-    <button><a href="add">ADD</a></button>
-    <button><a href="/DonHang/details">Xem Them</a></button>
-
-    <table id="chitietdonhang">
+    <h1>Don Hang DTO</h1>
+    @*<button><a href="add">ADD</a></button>*@
+    <table id="donhang">
         <tr>
-            <th>ID</th>
-            <th>Created By</th>
-            <th>Created Date</th>
-            <th>Updated Date</th>
-            <th>Updated By</th>
-            <th>Is Deleted</th>
-            <th>Ma DH</th>
-            <th>Don Gia</th>
-            <th>So Luong</th>
+            <th>Ten Khach Hang</th>
+            <th>Email</th>
+            <th>Phi Van Chuyen</th>
+            <th>Tong Tien</th>
+            <th>Trang Thai Thanh Toan</th>
 
             <th>Edit</th>
             <th>Delete</th>
@@ -257,30 +251,23 @@
             foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.CreatedBy</td>
-                    <td>@item.CreatedDate</td>
-                    <td>@item.UpdatedDate</td>
-                    <td>@item.UpdatedBy</td>
-                    <td>@item.IsDeleted</td>
-                    <td>@item.MaDH</td>
-                    <td>@item.DonGia</td>
-                    <td>@item.SoLuong</td>
-
-
+                    <td>@item.TenKhachHang</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhiVanChuyen</td>
+                    <td>@item.TongTien</td>
+                    <td>@item.TrangThaiThanhToan</td>
 
                     <td>
-                        <button><a href="/ChiTietDH/Edit/@item.Id">Edit</a></button>
+                        <button><a href="/DonHang/Edit/@item.Id">Edit</a></button>
                     </td>
                     <td>
-                        <button><a href="/ChiTietDH/Delete/@item.Id">Delete</a></button>
+                        <button><a href="/DonHang/Delete/@item.Id">Delete</a></button>
                     </td>
                 </tr>
             }
         }
-
-
     </table>
+
 
 </body>
 </html>
