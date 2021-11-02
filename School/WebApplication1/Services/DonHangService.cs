@@ -99,43 +99,43 @@ namespace StoreManagement.Services
 
         // inner join
         // left join
-        public List<DonHangDto> GetDonHangDto()
-        {
-            //var query = from person in people
-            //    join pet in pets on person equals pet.Owner into gj
-            //    from subpet in gj.DefaultIfEmpty()
-            //    select new { person.FirstName, PetName = subpet?.Name ?? String.Empty };
+        //public List<DonHangDto> GetDonHangDto()
+        //{
+        //    //var query = from person in people
+        //    //    join pet in pets on person equals pet.Owner into gj
+        //    //    from subpet in gj.DefaultIfEmpty()
+        //    //    select new { person.FirstName, PetName = subpet?.Name ?? String.Empty };
 
-            // JOIN: from [table1] join [table2] on [condition] where [condition] select [model]
+        //    // JOIN: from [table1] join [table2] on [condition] where [condition] select [model]
 
-            var donHangDtos = (from dh in DBContext().DonHangs
-                               join kh in DBContext().KhachHangs
-                                   on dh.IdKhachHang equals kh.Id into dhkh
-                               from khlj in dhkh.DefaultIfEmpty()
+        //    var donHangDtos = (from dh in DBContext().DonHangs
+        //                       join kh in DBContext().KhachHangs
+        //                           on dh.IdKhachHang equals kh.Id into dhkh
+        //                       from khlj in dhkh.DefaultIfEmpty()
 
 
-                               where !dh.IsDeleted && !khlj.IsDeleted
-                               select new DonHangDto
-                               {
-                                   Id = dh.Id,
-                                   IdKhachHang = dh.IdKhachHang,
-                                   Email = khlj.Email,
-                                   TenKhachHang = khlj.HoTen,
-                                   NgayLap = dh.NgayLap,
-                                   PhiVanChuyen = dh.PhiVanChuyen,
-                                   ThanhTien = dh.ThanhTien,
-                                   TongTien = dh.TongTien,
-                                   TrangThaiDonHang = dh.TrangThaiDonHang,
-                                   TrangThaiThanhToan = dh.TrangThaiThanhToan
-                               }).ToList();
-            return donHangDtos;
-        }
+        //                       where !dh.IsDeleted && !khlj.IsDeleted
+        //                       select new DonHangDto
+        //                       {
+        //                           Id = dh.Id,
+        //                           IdKhachHang = dh.IdKhachHang,
+        //                           Email = khlj.Email,
+        //                           TenKhachHang = khlj.HoTen,
+        //                           NgayLap = dh.NgayLap,
+        //                           PhiVanChuyen = dh.PhiVanChuyen,
+        //                           ThanhTien = dh.ThanhTien,
+        //                           TongTien = dh.TongTien,
+        //                           TrangThaiDonHang = dh.TrangThaiDonHang,
+        //                           TrangThaiThanhToan = dh.TrangThaiThanhToan
+        //                       }).ToList();
+        //    return donHangDtos;
+        //}
 
-        List<DonHangDto> IDonHangService.GetAll()
+        List<DonHangModel> IDonHangService.GetAll()
         {
             var donHang = (from dh in DBContext().DonHangs
                            where dh.IsDeleted == false
-                           select new DonHangDto
+                           select new DonHangModel
                            {
                                Id = dh.Id,
                                IdKhachHang = dh.IdKhachHang,
@@ -148,20 +148,20 @@ namespace StoreManagement.Services
 
                            }).ToList();
 
-            foreach (var item in donHang)
-            {
-                var idsHangHoa = DBContext().ChiTietDHs.Where(x => x.MaDH == item.Id).Select(x => x.MaHH);
+            //foreach (var item in donHang)
+            //{
+            //    var idsHangHoa = DBContext().ChiTietDHs.Where(x => x.MaDH == item.Id).Select(x => x.MaHH);
 
-                var hanhHoas = (from hh in DBContext().HangHoas
-                                where idsHangHoa.Contains(hh.Id)
-                                select new HangHoaDto
-                                {
-                                    TenHH = hh.TenHH,
-                                    MaLoai = hh.MaLoai
-                                }).ToList();
+            //    var hanhHoas = (from hh in DBContext().HangHoas
+            //                    where idsHangHoa.Contains(hh.Id)
+            //                    select new HangHoaDto
+            //                    {
+            //                        TenHH = hh.TenHH,
+            //                        MaLoai = hh.MaLoai
+            //                    }).ToList();
 
-                item.HangHoaDtos = hanhHoas;
-            }
+            //    item.HangHoaDtos = hanhHoas;
+            //}
 
             return donHang;
         }

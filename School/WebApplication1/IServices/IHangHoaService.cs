@@ -9,7 +9,7 @@ namespace StoreManagement.IServices
 {
     public interface IHangHoaService
     {
-        List<HangHoaDto> GetHangHoaDto();
+        List<HangHoaModel> GetHangHoaDto();
 
         List<HangHoaModel> GetAll();
 

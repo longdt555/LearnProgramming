@@ -1,4 +1,4 @@
-﻿@model StoreManagement.Dtos.DonHangDto
+﻿@model StoreManagement.Models.DonHangModel
 
 @{
     Layout = null;
@@ -13,11 +13,11 @@
 </head>
 <body>
 
-<h4>DonHangDto</h4>
+<h4>DonHangModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Add">
+        <form asp-action="DoAdd">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdKhachHang" class="control-label"></label>
@@ -28,11 +28,6 @@
                 <label asp-for="TenKhachHang" class="control-label"></label>
                 <input asp-for="TenKhachHang" class="form-control" />
                 <span asp-validation-for="TenKhachHang" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NgayLap" class="control-label"></label>

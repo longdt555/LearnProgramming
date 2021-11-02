@@ -1,4 +1,7 @@
-﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container-fluid">
@@ -10,7 +13,7 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="javascript:;">Paper Dashboard 2</a>
+            <a class="navbar-brand" href="javascript:;">Trang Chủ</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -62,7 +65,7 @@
         </div>
     </div>
 </nav>
-<!-- End Navbar -->
+ @*End Navbar*@ 
 <div class="content">
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -236,6 +239,8 @@
         </div>
     </div>
 </div>
+
+
 <footer class="footer footer-black  footer-white ">
     <div class="container-fluid">
         <div class="row">

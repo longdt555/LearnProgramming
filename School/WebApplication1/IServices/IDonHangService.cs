@@ -9,9 +9,7 @@ namespace StoreManagement.IServices
 {
     public interface IDonHangService
     {
-        List<DonHangDto> GetDonHangDto();
-
-        List<DonHangDto> GetAll();  //sửa sang Don Hang Model ///
+        List<DonHangModel> GetAll();  //sửa sang Don Hang Model ///
 
         void Delete(int id);
         int Add(DonHangModel donHangModel);

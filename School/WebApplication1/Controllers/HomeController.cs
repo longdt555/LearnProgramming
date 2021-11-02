@@ -16,6 +16,7 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
+        //[Route("home")]
 
         public IActionResult Index()
         {

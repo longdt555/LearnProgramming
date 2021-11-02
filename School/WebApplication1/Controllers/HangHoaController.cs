@@ -15,16 +15,18 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
+        [Route("hh")]
+        [Route("hanghoa")]
         public IActionResult Index()
         {
             var customers = customerService.GetAll();
             return View(customers);
         }
-        public IActionResult Details()
-        {
-            var customers = customerService.GetHangHoaDto();
-            return View(customers);
-        }
+        //public IActionResult Details()
+        //{
+        //    var customers = customerService.GetHangHoaDto();
+        //    return View(customers);
+        //}
         public IActionResult Delete(int id)
         {
             customerService.Delete(id);

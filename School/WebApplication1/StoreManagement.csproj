@@ -86,4 +86,8 @@
     <None Include="wwwroot\assets\scss\paper-dashboard\_variables.scss" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Respones\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Dtos.Params;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -20,12 +21,22 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
-        
-        [Route("khach-hang")]
-        public IActionResult Index(int pagingIndex, int pageSize)
+
+        //[Route("khach-hang")]
+        public IActionResult Index(int pg = 1)
         {
-            var customers = customerService.GetAll();
-            return View(customers);
+            var customers = customerService.GetAll().ToList();
+            const int pageSize = 5 ;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = customers.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            return View(data);
         }
         public IActionResult Delete(int id)
         {

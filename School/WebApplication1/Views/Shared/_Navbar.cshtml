@@ -1,4 +1,5 @@
-﻿@*<header>
+﻿@using StoreManagement.Dtos.Params
+@*<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-action="Index">Store</a>
@@ -49,53 +50,55 @@
     <div class="sidebar-wrapper" style="overflow-x: hidden">
         <ul class="nav">
             <li class="active ">
-                <a href="#">
+                <a href="/Home">
                     <i class="nc-icon nc-bank"></i>
                     <p>Trang chủ</p>
                 </a>
+
             </li>
             <li>
-                <a href="/loai">
+                <a href="/Loai">
                     <i class="nc-icon nc-diamond"></i>
                     <p>Loại</p>
                 </a>
             </li>
             <li>
-                <a href="khach-hang">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>Khách hàng</p>
+                <a href="/KhachHang">
+                    <i class="nc-icon nc-bank"></i>
+                    <p>Khách Hàng</p>
                 </a>
             </li>
             <li>
-                <a href="don-hang">
+                <a href="/HangHoa">
                     <i class="nc-icon nc-bell-55"></i>
+                    <p>Hàng hóa</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="/don-hang">
+                    <i class="nc-icon nc-single-02"></i>
                     <p>Đơn hàng</p>
                 </a>
             </li>
             <li>
-                <a href="./user.html">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>User Profile</p>
-                </a>
-            </li>
-            <li>
-                <a href="./tables.html">
+                <a href="/ChiTietDH">
                     <i class="nc-icon nc-tile-56"></i>
-                    <p>Table List</p>
+                    <p>Chi Tiết Đơn Hàng</p>
                 </a>
             </li>
-            <li>
-                <a href="./typography.html">
-                    <i class="nc-icon nc-caps-small"></i>
-                    <p>Typography</p>
-                </a>
-            </li>
-            <li class="active-pro">
-                <a href="./upgrade.html">
-                    <i class="nc-icon nc-spaceship"></i>
-                    <p>Haha Hihi Hoho</p>
-                </a>
-            </li>
+            @*<li>
+                    <a href="./typography.html">
+                        <i class="nc-icon nc-caps-small"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li class="active-pro">
+                    <a href="./upgrade.html">
+                        <i class="nc-icon nc-spaceship"></i>
+                        <p>Haha Hihi Hoho</p>
+                    </a>
+                </li>*@
         </ul>
     </div>
 </div>

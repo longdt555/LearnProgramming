@@ -30,11 +30,11 @@ namespace StoreManagement.Controllers
             return View(customers);
         }
 
-        public IActionResult Details()
-        {
-            var customers = customerService.GetDonHangDto();
-            return View(customers);
-        }
+        //public IActionResult Details()
+        //{
+        //    var customers = customerService.GetDonHangDto();
+        //    return View(customers);
+        //}
 
         public IActionResult Delete(int id)
         {

@@ -1,16 +1,9 @@
-﻿@model List<StoreManagement.Dtos.DonHangDto>
+﻿@model List<DonHangModel>
 @* Razor *@
 <!DOCTYPE html>
 <html>
 <head>
     <style>
-
-
-        /*//////////////////////////////////////////////////////////////////
-        [ FONT ]*/
-
-        /*//////////////////////////////////////////////////////////////////
-        [ RESTYLE TAG ]*/
         * {
             margin: 0px;
             padding: 0px;
@@ -21,8 +14,6 @@
             height: 100%;
             font-family: sans-serif;
         }
-
-        /* ------------------------------------ */
         a {
             margin: 0px;
             transition: all 0.4s;
@@ -38,8 +29,6 @@
             a:hover {
                 text-decoration: none;
             }
-
-        /* ------------------------------------ */
         h1, h2, h3, h4, h5, h6 {
             margin: 0px;
         }
@@ -52,9 +41,6 @@
             margin: 0px;
             list-style-type: none;
         }
-
-
-        /* ------------------------------------ */
         input {
             display: block;
             outline: none;
@@ -70,7 +56,6 @@
                 border-color: transparent !important;
             }
 
-        /* ------------------------------------ */
         button {
             outline: none !important;
             border: none;
@@ -84,20 +69,6 @@
         iframe {
             border: none !important;
         }
-
-
-
-
-        /*//////////////////////////////////////////////////////////////////
-        [ Utiliti ]*/
-
-
-
-
-
-
-        /*//////////////////////////////////////////////////////////////////
-        [ Table ]*/
 
         .limiter {
             width: 100%;
@@ -235,11 +206,9 @@
 <body>
 
     <h1>Don Hang DTO</h1>
-    @*<button><a href="add">ADD</a></button>*@
     <table id="donhang">
         <tr>
             <th>Ten Khach Hang</th>
-            <th>Email</th>
             <th>Phi Van Chuyen</th>
             <th>Tong Tien</th>
             <th>Trang Thai Thanh Toan</th>
@@ -252,7 +221,6 @@
             {
                 <tr>
                     <td>@item.TenKhachHang</td>
-                    <td>@item.Email</td>
                     <td>@item.PhiVanChuyen</td>
                     <td>@item.TongTien</td>
                     <td>@item.TrangThaiThanhToan</td>

@@ -70,21 +70,20 @@ namespace StoreManagement.Services
             return DBContext().HangHoas.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
-        public List<HangHoaDto> GetHangHoaDto()
+        public List<HangHoaModel> GetHangHoaDto()
         {
             var hangHoaDtos = (from hh in DBContext().HangHoas
                                join loai in DBContext().Loais
                                   on hh.IdLoai equals loai.Id into hhl
                                from hhloai in hhl.DefaultIfEmpty()
-                               where hhloai.IsDeleted == false
+                               where hh.IsDeleted == false
 
-                               select new HangHoaDto
+                               select new HangHoaModel
                                {
                                    Id = hh.Id,
                                    TenHH = hh.TenHH,
-                                   TenLoai = hhloai.TenLoai,
+                                   //TenLoai = hh.TenLoai,
                                    SoLuong = hh.SoLuong,
-                                   MoTa = hhloai.Mota,
                                    DonGia = hh.DonGia,
                                    ChiTiet = hh.ChiTiet
                                }).ToList();
