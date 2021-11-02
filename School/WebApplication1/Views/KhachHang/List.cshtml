@@ -1,0 +1,102 @@
+﻿@model IEnumerable<StoreManagement.Dtos.KhachHangDto>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title"> Simple Table</h4>
+                    </div>
+                    <div class="update col-md-4">
+                        <button type="submit" class="btn btn-primary btn-round pull-right">Thêm mới</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table tbl-contents">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Họ tên
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mật khẩu
+                                </th>
+                                <th>
+                                    Key
+                                </th>
+                                <th>
+                                    Đang hoạt động
+                                </th>
+                                <th>
+                                    Nhận quảng cáo
+                                </th>
+                                <th>
+                                    Loại khách hàng
+                                </th>
+                                <th>
+                                    Ngày tạo
+                                </th>
+                                <th>
+                                    Ngày sửa
+                                </th>
+                                <th></th>
+                            </tr>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoTen)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MatKhau)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RandomKey)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DangHoatDong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NhanQuangCao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LoaiKhachHang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UpdatedDate)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin: 0 auto">
+
+    @await Html.PartialAsync("Pagination")
+</div>

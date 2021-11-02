@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreManagement.Context;
 
 namespace StoreManagement.Migrations
 {
     [DbContext(typeof(SMDBContext))]
-    partial class SMDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211102152857_202111022226-add_seeddata_loaikhachhang")]
+    partial class _202111022226add_seeddata_loaikhachhang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

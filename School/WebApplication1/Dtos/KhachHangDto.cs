@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StoreManagement.Models
+namespace StoreManagement.Dtos
 {
-    [Table("KhachHang")]
-
-    public class KhachHangModel : BaseModel
+    public class KhachHangDto : BaseDto
     {
         public string HoTen { get; set; }
         public string Email { get; set; }
@@ -13,5 +14,6 @@ namespace StoreManagement.Models
         public string DangHoatDong { get; set; }
         public string NhanQuangCao { get; set; }
         public int IdLoaiKhachHang { get; set; }
+        public string LoaiKhachHang { get; set; }
     }
 }

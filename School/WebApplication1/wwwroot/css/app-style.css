@@ -7,7 +7,7 @@
 
 ::-webkit-scrollbar {
     width: 5px;
-    height: 0px;
+    height: 5px;
     background-color: #0888b1;
 }
 
@@ -18,8 +18,15 @@
 }
 /*end*/
 
+/*common style*/
+.pull-right {
+    float: right !important;
+}
 
-
+.pull-left {
+    float: left !important;
+}
+/*end common style*/
 .footer.footer-black.footer-white {
     line-height: 7px;
     position: fixed;
@@ -30,14 +37,19 @@
     width: calc(100% - 260px);
 }
 
-.main-panel > .content {
-    margin-top: 60px;
-    margin-bottom: 101px;
-    height: calc(100vh - 240px);
-    overflow: hidden;
-    padding-bottom: 60px;
+.main-panel {
+    height: 100% !important;
 }
 
+    .main-panel > .content {
+        margin-top: 100px !important;
+    }
+
 .table-responsive {
-    height: 600px !important;
+    height: 650px;
+    overflow-x: auto !important;
+}
+
+.tbl-contents {
+    overflow: hidden !important;
 }

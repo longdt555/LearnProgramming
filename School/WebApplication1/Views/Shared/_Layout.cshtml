@@ -24,16 +24,13 @@
     <div class="wrapper">
         @await Html.PartialAsync("_Navbar")
         <div class="main-panel">
-
-            <div class="content" style="margin-top: 60px">
-
+            @await Html.PartialAsync("_Navbar_Hor")
+            <div class="content">
                 @RenderBody()
             </div>
             @await Html.PartialAsync("_Footer")
         </div>
     </div>
-
-    @*@Html.Partial("_Footer")*@
 
     @* libs theme *@
     <!--   Core JS Files   -->

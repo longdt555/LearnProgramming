@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreManagement.Dtos;
 
 namespace StoreManagement.IServices
 {
     public interface IKhachHangService
     {
-        List<KhachHangModel> GetAll(/*SearchParam<KhachHangModel> model)*/);
+        List<KhachHangDto> GetAll(/*SearchParam<KhachHangModel> model)*/);
         void Delete(int id);
 
         int Add(KhachHangModel khachHangModel);

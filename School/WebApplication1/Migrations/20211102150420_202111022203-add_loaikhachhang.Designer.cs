@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreManagement.Context;
 
 namespace StoreManagement.Migrations
 {
     [DbContext(typeof(SMDBContext))]
-    partial class SMDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211102150420_202111022203-add_loaikhachhang")]
+    partial class _202111022203add_loaikhachhang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,56 +244,6 @@ namespace StoreManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LoaiKhachHang");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
-                            DiscountCode = 2,
-                            IsDeleted = false,
-                            Name = "VIP_1",
-                            Type = "V1",
-                            UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
-                            DiscountCode = 4,
-                            IsDeleted = false,
-                            Name = "VIP_2",
-                            Type = "V2",
-                            UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
-                            DiscountCode = 6,
-                            IsDeleted = false,
-                            Name = "VIP_3",
-                            Type = "V3",
-                            UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
-                            DiscountCode = 8,
-                            IsDeleted = false,
-                            Name = "VIP_4",
-                            Type = "V4",
-                            UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
-                        });
                 });
 
             modelBuilder.Entity("StoreManagement.Models.LoaiModel", b =>

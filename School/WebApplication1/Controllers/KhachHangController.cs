@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Controllers
 {
-    
+
     public class KhachHangController : Controller
     {
         private readonly ILogger<KhachHangController> _logger;
@@ -26,7 +26,7 @@ namespace StoreManagement.Controllers
         public IActionResult Index(int pg = 1)
         {
             var customers = customerService.GetAll().ToList();
-            const int pageSize = 5 ;
+            const int pageSize = 5;
             if (pg < 1)
             {
                 pg = 1;
@@ -37,6 +37,12 @@ namespace StoreManagement.Controllers
             var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
             this.ViewBag.Pager = pager;
             return View(data);
+        }
+        [Route("ds-khach-hang")]
+        public IActionResult List()
+        {
+            var customers = customerService.GetAll();
+            return View(customers);
         }
         public IActionResult Delete(int id)
         {

@@ -1,11 +1,10 @@
 ﻿using StoreManagement.Context;
-using StoreManagement.Dtos.Params;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using StoreManagement.Dtos;
 
 namespace StoreManagement.Services
 {
@@ -52,11 +51,16 @@ namespace StoreManagement.Services
             return DBContext().KhachHangs.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
-        List<KhachHangModel> IKhachHangService.GetAll(/*SearchParam<KhachHangModel> model*/)
-        {   
+        public List<KhachHangDto> GetAll(/*SearchParam<KhachHangModel> model*/)
+        {
             var data = (from kh in DBContext().KhachHangs
+                        join l in DBContext().LoaiKhachHangs
+                            on kh.IdLoaiKhachHang equals l.Id // inner join
+                            into ls
+                        from l in ls.DefaultIfEmpty()
+
                         where kh.IsDeleted == false
-                        select new KhachHangModel
+                        select new KhachHangDto()
                         {
                             Id = kh.Id,
                             HoTen = kh.HoTen,
@@ -65,13 +69,9 @@ namespace StoreManagement.Services
                             RandomKey = kh.RandomKey,
                             DangHoatDong = kh.DangHoatDong,
                             NhanQuangCao = kh.NhanQuangCao,
-                            
-
+                            LoaiKhachHang = l.Name
                         }).ToList();
-            //var dataPaging = data.Skip((model.PageIndex - 1) * model.PagingSize).Take(model.PagingSize).ToList();
             return data;
-
-            
 
         }
     }
