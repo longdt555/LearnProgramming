@@ -1,7 +1,7 @@
 ﻿@model List<StoreManagement.Dtos.KhachHangDto>
 @{
     ViewData["Title"] = "Khách hàng";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     Pager pager = new Pager();
 
@@ -12,72 +12,34 @@
         pageNo = pager.CurrentPage;
     }
 }
+<style>
+    table {
+        width: 500px;
+    }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Khách hàng</h4>
-            </div>
-            <button style="padding: 10px 10px; background: yellow "><a href="/KhachHang/Add/">Add</a></button>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class=" text-primary">
-                        <th>
-                            Id
-                        </th>
-                        <th>
-                            Tên Khách Hàng
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Mật Khẩu
-                        </th>
-                        <th>
-                            RandomKey
-                        </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-
-                        </thead>
-
-                        <tbody>
-                            @*@await Html.PartialAsync("Pagination")*@
-
-                            @{
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.HoTen</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.MatKhau</td>
-                                        <td>@item.RandomKey</td>
-
-                                        <td>
-                                            <button style="background: yellow"><a href="/KhachHang/Edit/@item.Id">Edit</a></button>
-                                        </td>
-                                        <td>
-                                            <button style="background: yellow"><a href="/KhachHang/Delete/@item.Id">Delete</a></button>
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-
-                    </table>
-                    @await Html.PartialAsync("Pagination")
-
-                </div>
-            </div>
-        </div>
-    </div>
+    .scroll {
+        max-height: 60px;
+        overflow: auto;
+    }
+</style>
+<table border="1">
+    <tr>
+        <th>head1</th>
+        <th>head2</th>
+        <th>head3</th>
+        <th>head4</th>
+    </tr>
+</table>
+<div class="scroll">
+    <table>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>hahahahahahahahahahahahahahahahahahahahahahahahahahahaha </td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>More Text</td><td>More Text</td><td>More Text</td><td>More Text</td></tr>
+        <tr><td>Text Text</td><td>Text Text</td><td>Text Text</td><td>Text Text</td></tr>
+        <tr><td>Even More Text Text</td><td>Even More Text Text</td><td>Even More Text Text</td><td>Even More Text Text</td></tr>
+    </table>
 </div>
-
