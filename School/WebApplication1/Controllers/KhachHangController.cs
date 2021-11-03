@@ -38,10 +38,16 @@ namespace StoreManagement.Controllers
             this.ViewBag.Pager = pager;
             return View(data);
         }
+
         [Route("ds-khach-hang")]
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, string name)
         {
-            var customers = customerService.GetAll();
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam
+            {
+                Name = name
+            });
+
+            var customers = customerService.GetAll(searchModel);
             return View(customers);
         }
         public IActionResult Delete(int id)

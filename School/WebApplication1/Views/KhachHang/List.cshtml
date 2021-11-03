@@ -1,19 +1,29 @@
-﻿@model IEnumerable<StoreManagement.Dtos.KhachHangDto>
+﻿@model StoreManagement.Dtos.Respones.SearchResult<StoreManagement.Dtos.KhachHangDto>
 
 @{
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize);
 }
 <div class="row">
     <div class="col-md-12">
-        <div class="card" style="margin-bottom: 11px;"> 
+        <div class="card" style="margin-bottom: 11px;">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="card-title"> Simple Table</h4>
+                    <div class="update col-md-2">
+                        <button type="submit" class="btn btn-primary btn-round pull-left">Thêm mới</button>
                     </div>
-                    <div class="update col-md-4">
-                        <button type="submit" class="btn btn-primary btn-round pull-right">Thêm mới</button>
+                    <div class="col-md-10">
+                        <form style="width: 300px; padding-top: 11px; " class="pull-right">
+                            <div class="input-group no-border">
+                                <input type="text" id="seachInput" value="" class="form-control" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="nc-icon nc-zoom-split"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -21,13 +31,16 @@
                 <table class="thead-content">
                     <thead class=" text-primary">
                         <tr>
+                            <th class="w-3p">
+                                STT
+                            </th>
                             <th class="w-10p">
                                 Họ tên
                             </th>
                             <th class="w-12p">
                                 Email
                             </th>
-                            <th class="w-12p">
+                            <th class="w-10p">
                                 Mật khẩu
                             </th>
                             <th class="w-5p">
@@ -48,45 +61,52 @@
                             <th class="w-8p">
                                 Ngày sửa
                             </th>
-                            <th></th>
+                            <th class="pull-right">Thao tác</th>
                         </tr>
                 </table>
                 <div class="table-responsive">
                     <table class="table tbl-contents">
                         <tbody>
-                            @foreach (var item in Model)
+                            @{
+                                var count = 0;
+                            }
+                            @foreach (var item in Model.Data.ToList())
                             {
+                                count++;
                                 <tr>
+                                    <td class="w-3p">
+                                        @count
+                                    </td>
                                     <td class="w-10p">
-                                        @Html.DisplayFor(modelItem => item.HoTen)
+                                        @item.HoTen
                                     </td>
                                     <td class="w-12p">
-                                        @Html.DisplayFor(modelItem => item.Email)
+                                        @item.Email
                                     </td>
-                                    <td class="w-12p">
-                                        @Html.DisplayFor(modelItem => item.MatKhau)
+                                    <td class="w-10p">
+                                        @item.MatKhau
                                     </td>
                                     <td class="w-5p">
-                                        @Html.DisplayFor(modelItem => item.RandomKey)
+                                        @item.RandomKey
                                     </td>
                                     <td class="w-11p">
-                                        @Html.DisplayFor(modelItem => item.DangHoatDong)
+                                        @item.DangHoatDong
                                     </td>
                                     <td class="w-11p">
-                                        @Html.DisplayFor(modelItem => item.NhanQuangCao)
+                                        @item.NhanQuangCao
                                     </td>
                                     <td class="w-11p">
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LoaiKhachHang)
+                                        @item.LoaiKhachHang
                                     </td>
                                     <td class="w-8p">
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        @item.CreatedDate
                                     </td>
                                     <td class="w-8p">
-                                        @Html.DisplayFor(modelItem => item.UpdatedDate)
+                                        @item.UpdatedDate
                                     </td>
-                                    <td>
+                                    <td class="pull-right">
                                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
                                         <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
                                         <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
@@ -102,5 +122,5 @@
 </div>
 <div style="margin: 0 auto">
 
-    @await Html.PartialAsync("Pagination")
+    @await Html.PartialAsync("Pagination", paging)
 </div>

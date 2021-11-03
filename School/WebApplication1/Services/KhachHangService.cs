@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StoreManagement.Dtos;
+using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 
 namespace StoreManagement.Services
 {
@@ -16,6 +18,57 @@ namespace StoreManagement.Services
         {
             DBContext().KhachHangs.Add(khachHangModel);
             return DBContext().SaveChanges();
+        }
+
+        /// <summary>
+        /// some comments
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public SearchResult<KhachHangDto> GetAll(SearchParam<KhachHangParam> model)
+        {
+            #region [Params]
+
+            var filter = model.Filter();
+
+            #endregion [Params]
+
+            #region [Query]
+
+            var data = (from kh in DBContext().KhachHangs
+                        join l in DBContext().LoaiKhachHangs
+                            on kh.IdLoaiKhachHang equals l.Id // inner join
+                            into ls
+                        from l in ls.DefaultIfEmpty()
+
+                        where kh.IsDeleted == false && (string.IsNullOrEmpty(filter.Name) || kh.HoTen.ToLower().Contains(filter.Name.ToLower()))
+                        select new KhachHangDto()
+                        {
+                            Id = kh.Id,
+                            HoTen = kh.HoTen,
+                            Email = kh.Email,
+                            MatKhau = kh.MatKhau,
+                            RandomKey = kh.RandomKey,
+                            DangHoatDong = kh.DangHoatDong,
+                            NhanQuangCao = kh.NhanQuangCao,
+                            LoaiKhachHang = l.Name
+                        }).ToList();
+
+            #endregion [Query]
+
+            #region [Paging]
+
+            var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+
+            #endregion [Paging]
+
+            return new SearchResult<KhachHangDto>
+            {
+                CurrentPage = model.PageIndex,
+                Data = dataPaging,
+                TotalRecords = data.Count,
+                PageSize = model.PageSize
+            };
         }
 
         public void Delete(int id)

@@ -27,6 +27,14 @@
     float: left !important;
 }
 
+.w-2p {
+    width: 2%;
+}
+
+.w-3p {
+    width: 3%;
+}
+
 .w-5p {
     width: 5%;
 }
