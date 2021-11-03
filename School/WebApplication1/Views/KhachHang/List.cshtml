@@ -6,7 +6,7 @@
 }
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card" style="margin-bottom: 11px;"> 
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
@@ -18,56 +18,72 @@
                 </div>
             </div>
             <div class="card-body">
+                <table class="thead-content">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th class="w-10p">
+                                Họ tên
+                            </th>
+                            <th class="w-12p">
+                                Email
+                            </th>
+                            <th class="w-12p">
+                                Mật khẩu
+                            </th>
+                            <th class="w-5p">
+                                Key
+                            </th>
+                            <th class="w-11p">
+                                Đang hoạt động
+                            </th>
+                            <th class="w-11p">
+                                Nhận quảng cáo
+                            </th>
+                            <th class="w-11p">
+                                Loại khách hàng
+                            </th>
+                            <th class="w-8p">
+                                Ngày tạo
+                            </th>
+                            <th class="w-8p">
+                                Ngày sửa
+                            </th>
+                            <th></th>
+                        </tr>
+                </table>
                 <div class="table-responsive">
                     <table class="table tbl-contents">
-                        <thead class=" text-primary">
-                            <tr>
-                                <th>
-                                    Họ tên
-                                </th>
-                                <th>
-                                    Email
-                                </th>
-                                <th>
-                                    Đang hoạt động
-                                </th>
-                                @*<th>
-                                    Nhận quảng cáo
-                                </th>*@
-                                <th>
-                                    Loại khách hàng
-                                </th>
-                                <th>
-                                    Ngày tạo
-                                </th>
-                                <th>
-                                    Ngày sửa
-                                </th>
-                                <th></th>
-                            </tr>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    <td class="w-10p">
                                         @Html.DisplayFor(modelItem => item.HoTen)
                                     </td>
-                                    <td>
+                                    <td class="w-12p">
                                         @Html.DisplayFor(modelItem => item.Email)
                                     </td>
-                                    <td>
+                                    <td class="w-12p">
+                                        @Html.DisplayFor(modelItem => item.MatKhau)
+                                    </td>
+                                    <td class="w-5p">
+                                        @Html.DisplayFor(modelItem => item.RandomKey)
+                                    </td>
+                                    <td class="w-11p">
                                         @Html.DisplayFor(modelItem => item.DangHoatDong)
                                     </td>
-                                    @*<td>
+                                    <td class="w-11p">
                                         @Html.DisplayFor(modelItem => item.NhanQuangCao)
-                                    </td>*@
+                                    </td>
+                                    <td class="w-11p">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.LoaiKhachHang)
                                     </td>
+                                    <td class="w-8p">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CreatedDate)
                                     </td>
-                                    <td>
+                                    <td class="w-8p">
                                         @Html.DisplayFor(modelItem => item.UpdatedDate)
                                     </td>
                                     <td>

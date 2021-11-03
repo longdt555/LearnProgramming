@@ -26,6 +26,35 @@
 .pull-left {
     float: left !important;
 }
+
+.w-5p {
+    width: 5%;
+}
+
+.w-8p {
+    width: 8%;
+}
+
+.w-11p {
+    width: 11%;
+}
+
+.w-12p {
+    width: 12%;
+}
+
+
+.w-10p {
+    width: 10%;
+}
+
+.w-15p {
+    width: 15%;
+}
+
+.w-20p {
+    width: 20%;
+}
 /*end common style*/
 .footer.footer-black.footer-white {
     line-height: 7px;
@@ -53,3 +82,18 @@
 .tbl-contents {
     overflow: hidden !important;
 }
+
+/* style fixed-header*/
+.thead-content {
+    width: 100% !important;
+}
+
+    .thead-content > thead > tr > th {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: 0;
+        vertical-align: middle;
+    }
+/* end */
+
