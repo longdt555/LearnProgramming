@@ -19,6 +19,57 @@ namespace StoreManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("StoreManagement.Dtos.KhachHangDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DangHoatDong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdLoaiKhachHang")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LoaiKhachHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MatKhau")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NhanQuangCao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RandomKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KhachHangDto");
+                });
+
             modelBuilder.Entity("StoreManagement.Models.ChiTietDHModel", b =>
                 {
                     b.Property<int>("Id")
@@ -76,6 +127,9 @@ namespace StoreManagement.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("MaKH")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("NgayLap")
                         .HasColumnType("datetime2");
@@ -248,49 +302,49 @@ namespace StoreManagement.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
                             DiscountCode = 2,
                             IsDeleted = false,
                             Name = "VIP_1",
                             Type = "V1",
                             UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
                             DiscountCode = 4,
                             IsDeleted = false,
                             Name = "VIP_2",
                             Type = "V2",
                             UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
                             DiscountCode = 6,
                             IsDeleted = false,
                             Name = "VIP_3",
                             Type = "V3",
                             UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = 1,
-                            CreatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625),
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
                             DiscountCode = 8,
                             IsDeleted = false,
                             Name = "VIP_4",
                             Type = "V4",
                             UpdatedBy = 1,
-                            UpdatedDate = new DateTime(2021, 11, 2, 22, 28, 56, 337, DateTimeKind.Local).AddTicks(2625)
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
                         });
                 });
 

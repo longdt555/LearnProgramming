@@ -7,6 +7,7 @@ namespace StoreManagement.Models
 
     public class DonHangModel : BaseModel
     {
+        public int MaKH { get; set; }
         public int IdKhachHang { get; set; }
         public string TenKhachHang { get; set; }
         public DateTime? NgayLap { get; set; }

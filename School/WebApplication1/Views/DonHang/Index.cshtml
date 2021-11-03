@@ -1,78 +1,90 @@
 ﻿@model List<DonHangModel>
+
 @{
-    ViewData["Title"] = "Đơn Hàng";
+    ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Đơn Hàng</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title">Đơn Hàng Table</h4>
+                    </div>
+                    <div class="update col-md-4">
+                        <button type="submit" class="btn btn-primary btn-round pull-right">Thêm mới</button>
+                    </div>
+                </div>
             </div>
-
-            <button style="padding: 10px 10px; background: yellow "><a href="/DonHang/Add/">Add</a></button>
-
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table tbl-contents">
                         <thead class=" text-primary">
-                        <th>
-                            Id
-                        </th>
-                        <th>
-                            Ngày Lập
-                        </th>
-                        <th>
-                            Phí Vận Chuyển
-                        </th>
-                        <th>
-                            Thành Tiền
-                        </th>
-                        <th>
-                            Tổng Tiền
-                        </th>
-                        <th>
-                            Trạng Thái Đơn Hàng
-                        </th>
-                        <th>
-                            Trạng Thái Thanh Toán
-                        </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-
-                        </thead>
-                        @*@await Html.PartialAsync("Pagination")*@
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Ngày Lập
+                                </th>
+                                <th>
+                                    Phí Vận Chuyển
+                                </th>
+                                @*<th>
+                                    Thành Tiền
+                                </th>*@
+                                <th>
+                                    Tổng Tiền
+                                </th>
+                                <th>
+                                    Trạng Thái Đơn Hàng
+                                </th>
+                                <th>
+                                    Trạng Thái Thanh Toán
+                                </th>
+                            </tr>
                         <tbody>
-                            @{
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.NgayLap</td>
-                                        <td>@item.PhiVanChuyen</td>
-                                        <td>@item.ThanhTien</td>
-                                        <td>@item.TongTien</td>
-                                        <td>@item.TrangThaiDonHang</td>
-                                        <td>@item.TrangThaiThanhToan</td>
-
-                                        <td>
-                                            <button style="background: yellow"><a href="/DonHang/Edit/@item.Id">Edit</a></button>
-                                        </td>
-                                        <td>
-                                            <button style="background: yellow"><a href="/DonHang/Delete/@item.Id">Delete</a></button>
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayLap)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhiVanChuyen)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TongTien)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrangThaiDonHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrangThaiThanhToan)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
-                    @await Html.PartialAsync("Pagination")
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div style="margin: 0 auto">
+
+    @await Html.PartialAsync("Pagination")
+</div>
+

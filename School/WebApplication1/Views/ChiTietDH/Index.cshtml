@@ -1,91 +1,96 @@
-﻿
+﻿@model List<ChiTietDHModel>
 
-@model List<ChiTietDHModel>
 @{
-    ViewData["Title"] = "Chi Tiết Đơn Hàng";
+    ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Chi Tiết Đơn Hàng</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title">Chi Tiết Đơn Hàng Table</h4>
+                    </div>
+                    <div class="update col-md-4">
+                        <button type="submit" class="btn btn-primary btn-round pull-right">Thêm mới</button>
+                    </div>
+                </div>
             </div>
-
-            <button style="padding: 10px 10px; background: yellow "><a href="/ChiTietDH/Add/">Add</a></button>
-
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table tbl-contents">
                         <thead class=" text-primary">
-                        <th>
-                            Id
-                        </th>
-                        <th>
-                            Created By
-                        </th>
-                        <th>
-                            Created Date
-                        </th>
-                        <th>
-                            Updated Date
-                        </th>
-                        <th>
-                            Updated By
-                        </th>
-                        <th>
-                            Is Deleted
-                        </th>
-                        <th>
-                            Mã Đơn Hàng
-                        </th>
-                        <th>
-                            Đơn Giá
-                        </th>
-                        <th>
-                            Số Lượng
-                        </th>
-                        <th>
-                            Edit
-                        </th>
-                        <th>
-                            Delete
-                        </th>
-
-                        </thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Created By
+                                </th>
+                                <th>
+                                    Created Date
+                                </th>
+                                <th>
+                                    Updated Date
+                                </th>
+                                @*<th>
+                                    Updated By
+                                </th>*@
+                                <th>
+                                    Mã Đơn Hàng
+                                </th>
+                                <th>
+                                    Đơn Giá
+                                </th>
+                                <th>
+                                    Số Lượng
+                                </th>
+                            </tr>
                         <tbody>
-                            @*@await Html.PartialAsync("Pagination")*@
-
-                            @{
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.CreatedBy</td>
-                                        <td>@item.CreatedDate</td>
-                                        <td>@item.UpdatedDate</td>
-                                        <td>@item.UpdatedBy</td>
-                                        <td>@item.IsDeleted</td>
-                                        <td>@item.MaDH</td>
-                                        <td>@item.DonGia</td>
-                                        <td>@item.SoLuong</td>
-
-
-                                        <td>
-                                            <button style="background: yellow"><a href="/ChiTietDH/Edit/@item.Id">Edit</a></button>
-                                        </td>
-                                        <td>
-                                            <button style="background: yellow"><a href="/ChiTietDH/Delete/@item.Id">Delete</a></button>
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaDH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DonGia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuong)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
-                    @await Html.PartialAsync("Pagination")
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div style="margin: 0 auto">
+
+    @await Html.PartialAsync("Pagination")
+</div>
+

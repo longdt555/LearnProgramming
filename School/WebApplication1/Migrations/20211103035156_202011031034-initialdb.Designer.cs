@@ -10,8 +10,8 @@ using StoreManagement.Context;
 namespace StoreManagement.Migrations
 {
     [DbContext(typeof(SMDBContext))]
-    [Migration("20211021140105_202110212058-initial-db")]
-    partial class _202110212058initialdb
+    [Migration("20211103035156_202011031034-initialdb")]
+    partial class _202011031034initialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,57 @@ namespace StoreManagement.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("StoreManagement.Dtos.KhachHangDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DangHoatDong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdLoaiKhachHang")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LoaiKhachHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MatKhau")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NhanQuangCao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RandomKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KhachHangDto");
+                });
 
             modelBuilder.Entity("StoreManagement.Models.ChiTietDHModel", b =>
                 {
@@ -73,6 +124,9 @@ namespace StoreManagement.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdKhachHang")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -84,6 +138,9 @@ namespace StoreManagement.Migrations
 
                     b.Property<float>("PhiVanChuyen")
                         .HasColumnType("real");
+
+                    b.Property<string>("TenKhachHang")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("ThanhTien")
                         .HasColumnType("real");
@@ -130,6 +187,9 @@ namespace StoreManagement.Migrations
                     b.Property<float>("GiamGia")
                         .HasColumnType("real");
 
+                    b.Property<int>("IdLoai")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -140,6 +200,9 @@ namespace StoreManagement.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TenHH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenLoai")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UpdatedBy")
@@ -175,6 +238,9 @@ namespace StoreManagement.Migrations
                     b.Property<string>("HoTen")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdLoaiKhachHang")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -196,6 +262,92 @@ namespace StoreManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KhachHang");
+                });
+
+            modelBuilder.Entity("StoreManagement.Models.LoaiKhachHangModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DiscountCode")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoaiKhachHang");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = 1,
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
+                            DiscountCode = 2,
+                            IsDeleted = false,
+                            Name = "VIP_1",
+                            Type = "V1",
+                            UpdatedBy = 1,
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = 1,
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
+                            DiscountCode = 4,
+                            IsDeleted = false,
+                            Name = "VIP_2",
+                            Type = "V2",
+                            UpdatedBy = 1,
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = 1,
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
+                            DiscountCode = 6,
+                            IsDeleted = false,
+                            Name = "VIP_3",
+                            Type = "V3",
+                            UpdatedBy = 1,
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = 1,
+                            CreatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394),
+                            DiscountCode = 8,
+                            IsDeleted = false,
+                            Name = "VIP_4",
+                            Type = "V4",
+                            UpdatedBy = 1,
+                            UpdatedDate = new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394)
+                        });
                 });
 
             modelBuilder.Entity("StoreManagement.Models.LoaiModel", b =>
