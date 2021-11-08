@@ -1,5 +1,7 @@
 ﻿using StoreManagement.Context;
 using StoreManagement.Dtos;
+using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -49,6 +51,38 @@ namespace StoreManagement.Services
             
         }
 
+        public SearchResult<ChiTietDHModel> GetAll(SearchParam<ChiTietDonHangParam> model)
+        {
+            var filter = model.Filter();
+
+
+            var data = (from ctdh in DBContext().ChiTietDHs
+                        where ctdh.IsDeleted == false && (string.IsNullOrEmpty(filter.MaDH.ToString())) || ctdh.MaDH.ToString().Contains(filter.MaDH.ToString())
+                        select new ChiTietDHModel
+                        {
+                            Id = ctdh.Id,
+                            CreatedBy = ctdh.CreatedBy,
+                            CreatedDate = ctdh.CreatedDate,
+                            UpdatedDate = ctdh.UpdatedDate,
+                            UpdatedBy = ctdh.UpdatedBy,
+                            IsDeleted = ctdh.IsDeleted,
+                            MaDH = ctdh.MaDH,
+                            MaHH = ctdh.MaHH,
+                            DonGia = ctdh.DonGia,
+                            SoLuong = ctdh.SoLuong
+
+                        }).ToList();
+            var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+
+            return new SearchResult<ChiTietDHModel>
+            {
+                CurrentPage = model.PageIndex,
+                Data = dataPaging,
+                TotalRecords = data.Count,
+                PageSize = model.PageSize
+            };
+        }
+
         public ChiTietDHModel GetById(int id)
         {
             return DBContext().ChiTietDHs.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
@@ -79,31 +113,31 @@ namespace StoreManagement.Services
         //    }
         //}
 
-        public List<ChiTietDHDto> GetChiTietDHDto()
-        {
-            var chiTietDonHangs = (from kh in DBContext().KhachHangs
-                                   join dh in DBContext().DonHangs
-                                       on kh.Id equals dh.Id
-                                   join hh in DBContext().HangHoas on dh.Id equals hh.Id
+        //public List<ChiTietDHDto> GetChiTietDHDto()
+        //{
+        //    var chiTietDonHangs = (from kh in DBContext().KhachHangs
+        //                           join dh in DBContext().DonHangs
+        //                               on kh.Id equals dh.Id
+        //                           join hh in DBContext().HangHoas on dh.Id equals hh.Id
 
 
-                                   //    into dhkh
-                                   //from khlj in dhkh.DefaultIfEmpty()
+        //                           //    into dhkh
+        //                           //from khlj in dhkh.DefaultIfEmpty()
 
 
-                                   where !kh.IsDeleted && !dh.IsDeleted
-                                   select new ChiTietDHDto
-                                   {
-                                       Id = dh.Id,
-                                       HoTen = kh.HoTen,
-                                       Email = kh.Email,
-                                       MaDH = dh.Id,
-                                       TenHH = hh.TenHH,
-                                       SoLuong = hh.SoLuong,
-                                       DonGia = hh.DonGia
-                                   }).ToList();
-            return chiTietDonHangs;
-        }
+        //                           where !kh.IsDeleted && !dh.IsDeleted
+        //                           select new ChiTietDHDto
+        //                           {
+        //                               Id = dh.Id,
+        //                               HoTen = kh.HoTen,
+        //                               Email = kh.Email,
+        //                               MaDH = dh.Id,
+        //                               TenHH = hh.TenHH,
+        //                               SoLuong = hh.SoLuong,
+        //                               DonGia = hh.DonGia
+        //                           }).ToList();
+        //    return chiTietDonHangs;
+        //}
 
         //public List<ChiTietDHModel> Insert()
         //{

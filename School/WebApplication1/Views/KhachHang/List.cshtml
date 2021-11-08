@@ -1,126 +1,107 @@
-﻿@model StoreManagement.Dtos.Respones.SearchResult<StoreManagement.Dtos.KhachHangDto>
+﻿@model IEnumerable<StoreManagement.Models.KhachHangModel>
 
 @{
     ViewData["Title"] = "List";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize);
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="card" style="margin-bottom: 11px;">
-            <div class="card-header">
-                <div class="row">
-                    <div class="update col-md-2">
-                        <button type="submit" class="btn btn-primary btn-round pull-left">Thêm mới</button>
-                    </div>
-                    <div class="col-md-10">
-                        <form style="width: 300px; padding-top: 11px; " class="pull-right">
-                            <div class="input-group no-border">
-                                <input type="text" id="seachInput" value="" class="form-control" placeholder="Search...">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <i class="nc-icon nc-zoom-split"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="thead-content">
-                    <thead class=" text-primary">
-                        <tr>
-                            <th class="w-3p">
-                                STT
-                            </th>
-                            <th class="w-10p">
-                                Họ tên
-                            </th>
-                            <th class="w-12p">
-                                Email
-                            </th>
-                            <th class="w-10p">
-                                Mật khẩu
-                            </th>
-                            <th class="w-5p">
-                                Key
-                            </th>
-                            <th class="w-11p">
-                                Đang hoạt động
-                            </th>
-                            <th class="w-11p">
-                                Nhận quảng cáo
-                            </th>
-                            <th class="w-11p">
-                                Loại khách hàng
-                            </th>
-                            <th class="w-8p">
-                                Ngày tạo
-                            </th>
-                            <th class="w-8p">
-                                Ngày sửa
-                            </th>
-                            <th class="pull-right">Thao tác</th>
-                        </tr>
-                </table>
-                <div class="table-responsive">
-                    <table class="table tbl-contents">
-                        <tbody>
-                            @{
-                                var count = 0;
-                            }
-                            @foreach (var item in Model.Data.ToList())
-                            {
-                                count++;
-                                <tr>
-                                    <td class="w-3p">
-                                        @count
-                                    </td>
-                                    <td class="w-10p">
-                                        @item.HoTen
-                                    </td>
-                                    <td class="w-12p">
-                                        @item.Email
-                                    </td>
-                                    <td class="w-10p">
-                                        @item.MatKhau
-                                    </td>
-                                    <td class="w-5p">
-                                        @item.RandomKey
-                                    </td>
-                                    <td class="w-11p">
-                                        @item.DangHoatDong
-                                    </td>
-                                    <td class="w-11p">
-                                        @item.NhanQuangCao
-                                    </td>
-                                    <td class="w-11p">
-                                    <td>
-                                        @item.LoaiKhachHang
-                                    </td>
-                                    <td class="w-8p">
-                                    <td>
-                                        @item.CreatedDate
-                                    </td>
-                                    <td class="w-8p">
-                                        @item.UpdatedDate
-                                    </td>
-                                    <td class="pull-right">
-                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div style="margin: 0 auto">
 
-    @await Html.PartialAsync("Pagination", paging)
-</div>
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RandomKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DangHoatDong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanQuangCao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiKhachHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RandomKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DangHoatDong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanQuangCao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

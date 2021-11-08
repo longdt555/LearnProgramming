@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreManagement.Context;
+using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -42,7 +44,7 @@ namespace StoreManagement.Services
             data.MaLoaiCha = loaiModel.MaLoaiCha;
 
             DBContext().Loais.Update(data);
-           return DBContext().SaveChanges();
+            return DBContext().SaveChanges();
 
         }
 
@@ -61,9 +63,46 @@ namespace StoreManagement.Services
             return data;
         }
 
+        public SearchResult<LoaiModel> GetAll(SearchParam<LoaiParam> model)
+        {
+            var filter = model.Filter();
+            var data = (from l in DBContext().Loais
+                        where l.IsDeleted == false && (string.IsNullOrEmpty(filter.Name)) || l.TenLoai.Contains(filter.Name)
+                        select new LoaiModel()
+                        {
+                            Id = l.Id,
+                            TenLoai = l.TenLoai,
+                            Mota = l.Mota,
+                            MaLoaiCha = l.MaLoaiCha,
+                        } ).ToList();
+
+            var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+
+            return new SearchResult<LoaiModel>
+            {
+                CurrentPage = model.PageIndex,
+                Data = dataPaging,
+                TotalRecords = data.Count,
+                PageSize = model.PageSize
+            };
+        }
+
         public LoaiModel GetById(int id)
         {
             return DBContext().Loais.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
+
+        //public List<LoaiModel> Search(string search)
+        //{
+        //    var loai = (from l in DBContext().Loais
+        //                select l);
+
+        //    if (!String.IsNullOrEmpty(search)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
+        //    {
+        //        loai = loai.Where(s => s.TenLoai.Contains(search)); //lọc theo chuỗi tìm kiếm
+        //    }
+
+        //    return loai.ToList();
+        //}
     }
 }

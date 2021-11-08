@@ -10,7 +10,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
-                        <h4 class="card-title">Chi Tiết Đơn Hàng Table</h4>
+                        <h4 class="card-title">Đơn Hàng Table</h4>
                     </div>
                     <div class="update col-md-4">
                         <button type="submit" class="btn btn-primary btn-round pull-right">Thêm mới</button>
@@ -26,61 +26,39 @@
                                     Id
                                 </th>
                                 <th>
-                                    Created By
+                                    Ngày Lập
                                 </th>
                                 <th>
-                                    Created Date
+                                    Phí Vận Chuyển
                                 </th>
                                 <th>
-                                    Updated Date
-                                </th>
-                                @*<th>
-                                    Updated By
-                                </th>*@
-                                <th>
-                                    Mã Đơn Hàng
+                                    Thành Tiền
                                 </th>
                                 <th>
-                                    Đơn Giá
+                                    Tổng Tiền
                                 </th>
                                 <th>
-                                    Số Lượng
+                                    Trạng Thái Đơn Hàng
+                                </th>
+                                <th>
+                                    Trạng Thái Thanh Toán
                                 </th>
                             </tr>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UpdatedDate)
-                                </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.UpdatedBy)
-                                </td>*@
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MaDH)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DonGia)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SoLuong)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="nc-icon nc-spaceship"></i></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

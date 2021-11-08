@@ -1,4 +1,6 @@
 ﻿using StoreManagement.Dtos;
+using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace StoreManagement.IServices
         List<HangHoaModel> GetHangHoaDto();
 
         List<HangHoaModel> GetAll();
+        SearchResult<HangHoaModel> GetAll(SearchParam<HangHoaParam> model);
+
 
         void Delete(int id);
         int Add(HangHoaModel hangHoaModel);

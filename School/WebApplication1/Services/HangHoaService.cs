@@ -1,5 +1,7 @@
 ﻿using StoreManagement.Context;
 using StoreManagement.Dtos;
+using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -63,6 +65,36 @@ namespace StoreManagement.Services
 
                         }).ToList();
             return data;
+        }
+
+        public SearchResult<HangHoaModel> GetAll(SearchParam<HangHoaParam> model)
+        {
+            var filter = model.Filter();
+
+            var data = (from hh in DBContext().HangHoas
+                        where hh.IsDeleted == false && (string.IsNullOrEmpty(filter.Name)) || hh.TenHH.Contains(filter.Name)
+                        select new HangHoaModel
+                        {
+                            Id = hh.Id,
+                            TenHH = hh.TenHH,
+                            MaLoai = hh.MaLoai,
+                            SoLuong = hh.SoLuong,
+                            DonGia = hh.DonGia,
+                            GiamGia = hh.GiamGia,
+                            ChiTiet = hh.ChiTiet,
+                            IdLoai = hh.IdLoai,
+                            TenLoai = hh.TenLoai,
+                        }).ToList();
+
+            var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+
+            return new SearchResult<HangHoaModel>
+            {
+                CurrentPage = model.PageIndex,
+                Data = dataPaging,
+                TotalRecords = data.Count,
+                PageSize = model.PageSize
+            };
         }
 
         public HangHoaModel GetById(int id)

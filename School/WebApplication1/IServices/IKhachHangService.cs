@@ -8,8 +8,8 @@ namespace StoreManagement.IServices
 {
     public interface IKhachHangService
     {
-        List<KhachHangDto> GetAll(/*SearchParam<KhachHangModel> model)*/);
-        SearchResult<KhachHangDto> GetAll(SearchParam<KhachHangParam> model);
+        List<KhachHangModel> GetAll();
+        SearchResult<KhachHangModel> GetAll(SearchParam<KhachHangParam> model);
         void Delete(int id);
         int Add(KhachHangModel khachHangModel);
         KhachHangModel GetById(int id);

@@ -22,7 +22,6 @@ namespace StoreManagement.Controllers
             this.customerService = customerService;
         }
 
-        //[Route("khach-hang")]
         public IActionResult Index(int pg = 1)
         {
             var customers = customerService.GetAll().ToList();
@@ -39,16 +38,16 @@ namespace StoreManagement.Controllers
             return View(data);
         }
 
-        [Route("ds-khach-hang")]
-        public IActionResult List(int pageIndex, int pageSize, string name)
+        [Route("KhachHang")]
+        public IActionResult ListKhachHang(int pageIndex, int pageSize, string name)
         {
-            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam  //TEST
             {
                 Name = name
             });
-
             var customers = customerService.GetAll(searchModel);
             return View(customers);
+
         }
         public IActionResult Delete(int id)
         {

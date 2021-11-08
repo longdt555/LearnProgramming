@@ -2,7 +2,7 @@
 
 namespace StoreManagement.Models
 {
-    [Table("ChiTietDH")]
+    [Table("ChiTietDonHang")]
 
     public class ChiTietDHModel : BaseModel
     {

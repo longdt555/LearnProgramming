@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using StoreManagement.Context;
 using StoreManagement.Dtos;
+using StoreManagement.Dtos.Params;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -23,11 +24,32 @@ namespace StoreManagement.Controllers
             this.customerService = customerService;
         }
 
-        [Route("don-hang")]
-        public IActionResult Index()
+        //[Route("don-hang")]
+        public IActionResult Index(int pg = 1)
         {
-            var customers = customerService.GetAll();
+            var customers = customerService.GetAll().ToList();
+            const int pageSize = 5;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = customers.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            return View(data);
+        }
+        [Route("DonHang")]
+        public IActionResult List(int pageIndex,int pageSize, string trangThaiDonHang)
+        {
+            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam
+            {
+                TrangThaiDonHang = trangThaiDonHang
+            }) ;
+            var customers = customerService.GetAll(searchModel);
             return View(customers);
+
         }
 
         //public IActionResult Details()

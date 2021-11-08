@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Dtos.Params;
 using StoreManagement.IServices;
 using StoreManagement.Models;
+using System.Linq;
 
 namespace StoreManagement.Controllers
 {
@@ -15,13 +17,35 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
-        [Route("hh")]
-        [Route("hanghoa")]
-        public IActionResult Index()
+        //[Route("hh")]
+        //[Route("hanghoa")]
+        public IActionResult Index(int pg = 1)
         {
             var customers = customerService.GetAll();
+            const int pageSize = 5;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = customers.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            return View(data);
+        }
+        [Route("HangHoa")]
+        public IActionResult List(int pageIndex, int pageSize,string name)
+        {
+            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam
+            {
+                Name = name
+            });
+            var customers = customerService.GetAll(searchModel);
             return View(customers);
         }
+
+
         //public IActionResult Details()
         //{
         //    var customers = customerService.GetHangHoaDto();

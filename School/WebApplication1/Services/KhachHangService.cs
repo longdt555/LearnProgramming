@@ -25,7 +25,7 @@ namespace StoreManagement.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public SearchResult<KhachHangDto> GetAll(SearchParam<KhachHangParam> model)
+        public SearchResult<KhachHangModel> GetAll(SearchParam<KhachHangParam> model)
         {
             #region [Params]
 
@@ -36,13 +36,10 @@ namespace StoreManagement.Services
             #region [Query]
 
             var data = (from kh in DBContext().KhachHangs
-                        join l in DBContext().LoaiKhachHangs
-                            on kh.IdLoaiKhachHang equals l.Id // inner join
-                            into ls
-                        from l in ls.DefaultIfEmpty()
+                        
 
-                        where kh.IsDeleted == false && (string.IsNullOrEmpty(filter.Name) || kh.HoTen.ToLower().Contains(filter.Name.ToLower()))
-                        select new KhachHangDto()
+                        where kh.IsDeleted == false &&  (string.IsNullOrEmpty(filter.Name)) || kh.HoTen.Contains(filter.Name)
+                        select new KhachHangModel()
                         {
                             Id = kh.Id,
                             HoTen = kh.HoTen,
@@ -51,7 +48,7 @@ namespace StoreManagement.Services
                             RandomKey = kh.RandomKey,
                             DangHoatDong = kh.DangHoatDong,
                             NhanQuangCao = kh.NhanQuangCao,
-                            LoaiKhachHang = l.Name
+                        
                         }).ToList();
 
             #endregion [Query]
@@ -62,7 +59,7 @@ namespace StoreManagement.Services
 
             #endregion [Paging]
 
-            return new SearchResult<KhachHangDto>
+            return new SearchResult<KhachHangModel>
             {
                 CurrentPage = model.PageIndex,
                 Data = dataPaging,
@@ -104,16 +101,13 @@ namespace StoreManagement.Services
             return DBContext().KhachHangs.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
-        public List<KhachHangDto> GetAll(/*SearchParam<KhachHangModel> model*/)
+        public List<KhachHangModel> GetAll()
         {
             var data = (from kh in DBContext().KhachHangs
-                        join l in DBContext().LoaiKhachHangs
-                            on kh.IdLoaiKhachHang equals l.Id // inner join
-                            into ls
-                        from l in ls.DefaultIfEmpty()
+                    
 
                         where kh.IsDeleted == false
-                        select new KhachHangDto()
+                        select new KhachHangModel()
                         {
                             Id = kh.Id,
                             HoTen = kh.HoTen,
@@ -122,10 +116,10 @@ namespace StoreManagement.Services
                             RandomKey = kh.RandomKey,
                             DangHoatDong = kh.DangHoatDong,
                             NhanQuangCao = kh.NhanQuangCao,
-                            LoaiKhachHang = l.Name
                         }).ToList();
             return data;
 
         }
+
     }
 }
