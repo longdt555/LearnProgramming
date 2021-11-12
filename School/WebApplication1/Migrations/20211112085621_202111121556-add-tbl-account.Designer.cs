@@ -10,8 +10,8 @@ using StoreManagement.Context;
 namespace StoreManagement.Migrations
 {
     [DbContext(typeof(SMDBContext))]
-    [Migration("20211108100150_20211108-add-table-account")]
-    partial class _20211108addtableaccount
+    [Migration("20211112085621_202111121556-add-tbl-account")]
+    partial class _202111121556addtblaccount
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace StoreManagement.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("StoreManagement.Models.AccountModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Account");
+                });
 
             modelBuilder.Entity("StoreManagement.Models.ChiTietDHModel", b =>
                 {

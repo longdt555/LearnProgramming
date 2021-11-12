@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StoreManagement.Migrations
 {
-    public partial class _202011031034initialdb : Migration
+    public partial class _202111121544initdbv10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ChiTietDH",
+                name: "ChiTietDonHang",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -25,7 +25,7 @@ namespace StoreManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChiTietDH", x => x.Id);
+                    table.PrimaryKey("PK_ChiTietDonHang", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,31 +104,6 @@ namespace StoreManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "KhachHangDto",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedBy = table.Column<int>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: true),
-                    UpdatedDate = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    HoTen = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    MatKhau = table.Column<string>(nullable: true),
-                    RandomKey = table.Column<string>(nullable: true),
-                    DangHoatDong = table.Column<string>(nullable: true),
-                    NhanQuangCao = table.Column<string>(nullable: true),
-                    IdLoaiKhachHang = table.Column<int>(nullable: false),
-                    LoaiKhachHang = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_KhachHangDto", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Loai",
                 columns: table => new
                 {
@@ -167,23 +142,12 @@ namespace StoreManagement.Migrations
                 {
                     table.PrimaryKey("PK_LoaiKhachHang", x => x.Id);
                 });
-
-            migrationBuilder.InsertData(
-                table: "LoaiKhachHang",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DiscountCode", "IsDeleted", "Name", "Type", "UpdatedBy", "UpdatedDate" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394), 2, false, "VIP_1", "V1", 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394) },
-                    { 2, 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394), 4, false, "VIP_2", "V2", 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394) },
-                    { 3, 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394), 6, false, "VIP_3", "V3", 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394) },
-                    { 4, 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394), 8, false, "VIP_4", "V4", 1, new DateTime(2021, 11, 3, 10, 51, 55, 702, DateTimeKind.Local).AddTicks(1394) }
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChiTietDH");
+                name: "ChiTietDonHang");
 
             migrationBuilder.DropTable(
                 name: "DonHang");
@@ -193,9 +157,6 @@ namespace StoreManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "KhachHang");
-
-            migrationBuilder.DropTable(
-                name: "KhachHangDto");
 
             migrationBuilder.DropTable(
                 name: "Loai");

@@ -18,9 +18,9 @@ namespace StoreManagement.Services
 
         public List<AccountModel> Login(AccountModel acc)
         {
-            var data = DBContext().AccountModels.Where(x => x.Name == acc.Name && x.Password == acc.Password).ToList();
+            //var data = DBContext().AccountModels.Where(x => x.Name == acc.Name && x.Password == acc.Password).ToList();
 
-            return data;
+            return null;
         }
     }
 }
