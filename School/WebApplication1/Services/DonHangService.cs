@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using StoreManagement.Dtos;
 using StoreManagement.Dtos.Respones;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Data;
 
 namespace StoreManagement.Services
 {
@@ -50,7 +51,12 @@ namespace StoreManagement.Services
 
         public SearchResult<DonHangModel> GetAll(SearchParam<DonHangParam> model)
         {
+            #region [Params]
+
             var filter = model.Filter();
+            var currentUser = LoggedOnUser.Get();
+
+            #endregion [Params]
 
             var data = (from dh in DBContext().DonHangs
                         where dh.IsDeleted == false && (string.IsNullOrEmpty(filter.TrangThaiDonHang)) || dh.TrangThaiThanhToan.Contains(filter.TrangThaiDonHang)
@@ -64,8 +70,14 @@ namespace StoreManagement.Services
                             TongTien = dh.TongTien,
                             TrangThaiDonHang = dh.TrangThaiDonHang,
                             TrangThaiThanhToan = dh.TrangThaiThanhToan,
-
+                            MaKH = dh.MaKH
                         }).ToList();
+
+            if ((int)currentUser.Role != 1)
+            {
+                data = data.Where(x => x.MaKH == currentUser.Id).ToList();
+            }
+
             var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
 
             return new SearchResult<DonHangModel>

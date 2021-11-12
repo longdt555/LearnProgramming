@@ -1,11 +1,53 @@
 ﻿@model StoreManagement.Models.HangHoaModel
 
-    @{
-        ViewData["Title"] = "Add";
-    }
+@{
+    ViewData["Title"] = "Add";
+}
 
 <link href="~/css/hai.css" rel="stylesheet" type="text/css" />
-   
+
+
+@*<script>
+    function myFunction() {
+        // Get the value of the input field with id="numb"
+        let x = document.getElementById("numb").value;
+        // If x is Not a Number or less than one or greater than 10
+        let text;
+        if (isNaN(x) || x < 1 || x > 10) {
+            text = "Input not valid";
+        } else {
+            text = "Input OK";
+        }
+        document.getElementById("demo").innerHTML = text;
+    }
+</script>*@
+
+<script>
+
+
+    const TenHH = document.getElementById('TenHH')
+    const TenLoai = document.getElementById('TenLoai')
+    //const soLuong = document.getElementById('soluong')
+    const form = document.getElementById('form')
+    const errorElement = document.getElementById('error')
+
+    form.addEventListener('submit', (e) => {
+        let messages = []
+        if (TenHH.value === '' || TenHH.value == null) {
+            messages.push('Ten hang hoa is required')
+        }
+        if (TenLoai.value === '' || TenLoai.value == null) {
+            messages.push('Ten loai is required')
+        }
+        if (messages.length > 0) {
+            e.preventDefault()
+            errorElement.innerText = messages.join(', ')
+        }
+
+    })
+</script>
+
+
 <div id="contact-form">
     <div>
         <h1>Thêm Loại</h1>
@@ -16,21 +58,21 @@
     <p id="success">Your message was sent successfully. Thank you!</p>
 
 
-    <form asp-action="DoAdd">
+    <form id="form" asp-action="DoAdd" method="get">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="TenHH" class="control-label">Tên Hàng Hóa</label>
-            <input asp-for="TenHH" class="form-control" />
+            <input id="TenHH" asp-for="TenHH" class="form-control" />
             <span asp-validation-for="TenHH" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="TenLoai" class="control-label"></label>
-            <input asp-for="TenLoai" class="form-control" />
+            <input id="TenLoai" asp-for="TenLoai" class="form-control" />
             <span asp-validation-for="TenLoai" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SoLuong" class="control-label"></label>
-            <input asp-for="SoLuong" class="form-control" />
+            <input id="soluong" asp-for="SoLuong" class="form-control" />
             <span asp-validation-for="SoLuong" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -78,19 +120,20 @@
             <input asp-for="UpdatedBy" class="form-control" />
             <span asp-validation-for="UpdatedBy" class="text-danger"></span>
         </div>
-
+        @*<div style="display:none" class="errorMessage">Error</div>*@
+        @*<p id="demo"></p>*@
         <div>
-            <button name="submit" type="submit" id="submit">Create</button>
+            <button name="submit" type="submit" @*onclick="myFunction()"*@ id="submit">Create</button>
         </div>
         <div>
-            <a style="color:white" asp-action="Index">Back to List</a>
+            <a style="color:white" asp-action="">Back to List</a>
         </div>
 
     </form>
 </div>
 
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

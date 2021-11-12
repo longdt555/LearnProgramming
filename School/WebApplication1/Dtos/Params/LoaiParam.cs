@@ -7,6 +7,14 @@ namespace StoreManagement.Dtos.Params
 {
     public class LoaiParam
     {
+        public LoaiParam()
+        {
+
+        }
+        public LoaiParam(string name)
+        {
+            Name = name;
+        }
         public string Name { get; set; }
     }
 }

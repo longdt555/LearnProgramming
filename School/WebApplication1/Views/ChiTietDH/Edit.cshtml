@@ -57,17 +57,12 @@
             <input asp-for="UpdatedBy" class="form-control" />
             <span asp-validation-for="UpdatedBy" class="text-danger"></span>
         </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-            </label>
-        </div>
         <div>
             <button name="submit" type="submit" id="submit">SAVE</button>
         </div>
 
     </form>
     <div>
-        <a style="color:white" asp-action="Index">Back to List</a>
+        <a style="color:white" asp-action="">Back to List</a>
     </div>
 </div>

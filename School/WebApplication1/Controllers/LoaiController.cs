@@ -15,7 +15,7 @@ using StoreManagement.Context;
 namespace StoreManagement.Controllers
 {
 
-    public class LoaiController : Controller
+    public class LoaiController : BaseController
     {
 
         private readonly ILogger<LoaiController> _logger;
@@ -46,14 +46,11 @@ namespace StoreManagement.Controllers
         }
 
         [Route("Loai")]
-
-
         public IActionResult List(int pageIndex, int pageSize, string name)
         {
-            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam  //TEST
-            {
-                Name = name
-            });
+            if (!isAuthenticated()) return Redirect("404");
+            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam(name));  //TEST
+           
             var customers = _service.GetAll(searchModel);
             return View(customers);
 
@@ -68,7 +65,7 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
 
         public IActionResult Add()
@@ -79,7 +76,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoAdd(LoaiModel loaiModel)
         {
             _service.Add(loaiModel);
-            return RedirectToAction("Index");
+            return RedirectToAction("");
         }
         public IActionResult Edit(int id)
         {
@@ -92,7 +89,7 @@ namespace StoreManagement.Controllers
         {
 
             _service.Edit(loaiModel);
-            return RedirectToAction("Index");
+            return RedirectToAction("");
         }
 
 

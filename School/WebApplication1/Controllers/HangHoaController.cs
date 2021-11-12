@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace StoreManagement.Controllers
 {
-    public class HangHoaController : Controller
+    public class HangHoaController : BaseController
     {
         private readonly ILogger<HangHoaController> _logger;
         private readonly IHangHoaService customerService;
@@ -37,10 +37,9 @@ namespace StoreManagement.Controllers
         [Route("HangHoa")]
         public IActionResult List(int pageIndex, int pageSize,string name)
         {
-            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam
-            {
-                Name = name
-            });
+            if (!isAuthenticated()) return Redirect("404");
+            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
+            
             var customers = customerService.GetAll(searchModel);
             return View(customers);
         }
@@ -54,7 +53,7 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             customerService.Delete(id);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Add()
         {
@@ -63,7 +62,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoAdd(HangHoaModel hangHoaModel)
         {
             customerService.Add(hangHoaModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Edit(int id)
         {
@@ -73,7 +72,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoEdit(HangHoaModel hangHoaModel)
         {
             customerService.Edit(hangHoaModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
     }
 }

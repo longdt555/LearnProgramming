@@ -15,6 +15,44 @@
     <p id="failure">Oopsie...message not sent.</p>
     <p id="success">Your message was sent successfully. Thank you!</p>
 
+    <script>
+        $(() => {
+            $('#myForm').submit(e => {
+                //e.preventDefault();
+                const taikhoan = $('#taikhoan').val().trim()
+                const matkhau = $('#matkhau').val().trim()
+                const phanquyen = $('#phanquyen').val().trim()
+
+                if (taikhoan.length === 0) {
+                    showError('Vui lòng nhập tài khoản')
+                    e.preventDefault();
+                }
+                else if (taikhoan.length < 3) {
+                    showError('Tài khoản phải có tối thiểu 6 kí tự')
+                    e.preventDefault();
+                }
+                else if (matkhau.length === 0) {
+                    showError('Vui lòng nhập mật khẩu')
+                    e.preventDefault();
+                }
+                else if (phanquyen.length === 0) {
+                    showError('Vui lòng nhập phân quyền')
+                    e.preventDefault();
+                }
+                else if (matkhau.length === 6) {
+                    showError('Mật khẩu phải có 6 kí tự')
+                    e.preventDefault();
+                }
+
+            })
+        })
+
+        function showError(message) {
+            $('.errorMessage').html(message)
+            $('.errorMessage').show()
+        }
+    </script>
+
 
     <form asp-action="DoAdd">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -63,7 +101,7 @@
             <button name="submit" type="submit" id="submit">Create</button>
         </div>
         <div>
-            <a style="color:white" asp-action="Index">Back to List</a>
+            <a style="color:white" asp-action="">Back to List</a>
         </div>
 
     </form>

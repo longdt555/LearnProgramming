@@ -7,7 +7,14 @@ namespace StoreManagement.Dtos.Params
 {
     public class DonHangParam
     {
-        public string Name { get; set; }
+        #region [Construtor]
+
+        public DonHangParam(string trangThaiDonHang)
+        {
+            TrangThaiDonHang = trangThaiDonHang;
+        }
+
+        #endregion [Construtor]
         public string TrangThaiDonHang { get; set; }
     }
 }

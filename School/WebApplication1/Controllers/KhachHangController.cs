@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StoreManagement.Controllers
 {
 
-    public class KhachHangController : Controller
+    public class KhachHangController : BaseController
     {
         private readonly ILogger<KhachHangController> _logger;
         private readonly IKhachHangService customerService;
@@ -41,10 +41,9 @@ namespace StoreManagement.Controllers
         [Route("KhachHang")]
         public IActionResult ListKhachHang(int pageIndex, int pageSize, string name)
         {
-            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam  //TEST
-            {
-                Name = name
-            });
+            if (!isAuthenticated()) return Redirect("404");
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));  //TEST
+          
             var customers = customerService.GetAll(searchModel);
             return View(customers);
 
@@ -52,7 +51,7 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             customerService.Delete(id);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Add()
         {
@@ -61,7 +60,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoAdd(KhachHangModel khachHangModel)
         {
             customerService.Add(khachHangModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Edit(int id)
         {
@@ -72,7 +71,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoEdit(KhachHangModel khachHangModel)
         {
             customerService.Edit(khachHangModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
     }
 }
