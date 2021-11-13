@@ -7,6 +7,7 @@ using StoreManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using StoreManagement.Common.Helpers;
 
 namespace StoreManagement.Services
 {
@@ -48,37 +49,59 @@ namespace StoreManagement.Services
 
             DBContext().Update(data);
             return DBContext().SaveChanges();
-            
+
         }
 
         public SearchResult<ChiTietDHModel> GetAll(SearchParam<ChiTietDonHangParam> model)
         {
+            #region [Params]
+
             var filter = model.Filter();
 
+            #endregion [Params]
 
-            var data = (from ctdh in DBContext().ChiTietDHs
-                        where ctdh.IsDeleted == false && (string.IsNullOrEmpty(filter.MaDH.ToString())) || ctdh.MaDH.ToString().Contains(filter.MaDH.ToString())
-                        select new ChiTietDHModel
-                        {
-                            Id = ctdh.Id,
-                            CreatedBy = ctdh.CreatedBy,
-                            CreatedDate = ctdh.CreatedDate,
-                            UpdatedDate = ctdh.UpdatedDate,
-                            UpdatedBy = ctdh.UpdatedBy,
-                            IsDeleted = ctdh.IsDeleted,
-                            MaDH = ctdh.MaDH,
-                            MaHH = ctdh.MaHH,
-                            DonGia = ctdh.DonGia,
-                            SoLuong = ctdh.SoLuong
+            #region [Query]
 
-                        }).ToList();
-            var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+            var query = (from ctdh in DBContext().ChiTietDHs
+                         where ctdh.IsDeleted == false
+                         select new ChiTietDHModel
+                         {
+                             Id = ctdh.Id,
+                             CreatedBy = ctdh.CreatedBy,
+                             CreatedDate = ctdh.CreatedDate,
+                             UpdatedDate = ctdh.UpdatedDate,
+                             UpdatedBy = ctdh.UpdatedBy,
+                             IsDeleted = ctdh.IsDeleted,
+                             MaDH = ctdh.MaDH,
+                             MaHH = ctdh.MaHH,
+                             DonGia = ctdh.DonGia,
+                             SoLuong = ctdh.SoLuong
+                         }).ToList();
+
+            #endregion [Query]
+
+            #region [Filter]
+            var maDHv2 = ConvertHelper.ConvertToInt(filter.MaDHv2);
+
+            if (maDHv2 > 0)
+            {
+                query = query.Where(x => x.MaDH == maDHv2).ToList();
+            }
+
+            #endregion [Filter]
+
+            #region [Paging]
+
+            var dataPaging = query.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
+
+            #endregion [Paging]
+
 
             return new SearchResult<ChiTietDHModel>
             {
                 CurrentPage = model.PageIndex,
                 Data = dataPaging,
-                TotalRecords = data.Count,
+                TotalRecords = query.Count,
                 PageSize = model.PageSize
             };
         }

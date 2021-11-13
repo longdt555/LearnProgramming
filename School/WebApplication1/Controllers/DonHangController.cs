@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Controllers
 {
-    public class DonHangController : Controller
+    public class DonHangController : BaseController
     {
         private readonly ILogger<DonHangController> _logger;
         private readonly IDonHangService customerService;
@@ -40,13 +40,13 @@ namespace StoreManagement.Controllers
             this.ViewBag.Pager = pager;
             return View(data);
         }
+
         [Route("DonHang")]
-        public IActionResult List(int pageIndex,int pageSize, string trangThaiDonHang)
+        public IActionResult List(int pageIndex, int pageSize, string trangThaiDonHang)
         {
-            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam
-            {
-                TrangThaiDonHang = trangThaiDonHang
-            }) ;
+            if (!isAuthenticated()) return Redirect("404");
+            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam(trangThaiDonHang));
+            
             var customers = customerService.GetAll(searchModel);
             return View(customers);
 
@@ -61,7 +61,7 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             customerService.Delete(id);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Add()
         {
@@ -70,7 +70,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoAdd(DonHangModel donHangModel)
         {
             customerService.Add(donHangModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
         public IActionResult Edit(int id)
         {
@@ -80,7 +80,7 @@ namespace StoreManagement.Controllers
         public IActionResult DoEdit(DonHangModel donHangModel)
         {
             customerService.Edit(donHangModel);
-            return RedirectToAction("index");
+            return RedirectToAction("");
         }
 
     }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StoreManagement.Context;
+using StoreManagement.Initial;
 using StoreManagement.IServices;
 using StoreManagement.Services;
 
@@ -30,12 +31,8 @@ namespace StoreManagement
             #endregion
 
             #region DI : Dependency Injection
-            services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<ILoaiService, LoaiService>();
-            services.AddTransient<IKhachHangService, KhachHangService>();
-            services.AddTransient<IHangHoaService, HangHoaService>();
-            services.AddTransient<IDonHangService, DonHangService>();
-            services.AddTransient<IChiTietDHService, ChiTietDHService>();
+            
+            IoC.Register(services);
 
             #endregion
 
@@ -67,7 +64,10 @@ namespace StoreManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

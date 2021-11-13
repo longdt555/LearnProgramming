@@ -7,6 +7,14 @@ namespace StoreManagement.Dtos.Params
 {
     public class HangHoaParam
     {
+        public HangHoaParam()
+        {
+
+        }
+        public HangHoaParam(string name)
+        {
+            Name = name;
+        }
         public string Name { get; set; }
     }
 }

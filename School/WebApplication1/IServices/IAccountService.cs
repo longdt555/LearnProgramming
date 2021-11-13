@@ -1,13 +1,20 @@
-﻿using StoreManagement.Models;
-using System;
+﻿using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
+using StoreManagement.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StoreManagement.IServices
 {
-    interface IAccountService
+    public interface IAccountService
     {
-        List<AccountModel> Login(AccountModel acc);
+        AccountModel Login(UserLoginParam model);
+        int Save(AccountModel model);
+
+        List<AccountModel> GetAll();
+        SearchResult<AccountModel> GetAll(SearchParam<AccountParam> model);
+        void Delete(int id);
+        int Add(AccountModel accountModel);
+        int Edit(AccountModel accountModel);
+        AccountModel GetById(int id);
     }
 }

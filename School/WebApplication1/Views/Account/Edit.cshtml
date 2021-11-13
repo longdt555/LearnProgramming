@@ -1,0 +1,71 @@
+﻿@model StoreManagement.Models.AccountModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link href="~/css/hai.css" rel="stylesheet" type="text/css" />
+
+<div id="contact-form">
+    <div>
+        <h1>Sửa User</h1>
+        <p></p>
+        <h4>Have a question or just want to get in touch? Let's chat.</h4>
+    </div>
+    <p id="failure">Oopsie...message not sent.</p>
+    <p id="success">Your message was sent successfully. Thank you!</p>
+
+
+    <form asp-action="DoEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label">Tên User</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label">Mật Khẩu</label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Role" class="control-label">Phân Quyền</label>
+            <input asp-for="Role" class="form-control" />
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="control-label"></label>
+            <input asp-for="CreatedBy" class="form-control" />
+            <span asp-validation-for="CreatedBy" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedDate" class="control-label"></label>
+            <input asp-for="CreatedDate" class="form-control" />
+            <span asp-validation-for="CreatedDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="control-label"></label>
+            <input asp-for="UpdatedBy" class="form-control" />
+            <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedDate" class="control-label"></label>
+            <input asp-for="UpdatedDate" class="form-control" />
+            <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+        </div>
+
+        <div>
+            <button name="submit" type="submit" id="submit">SAVE</button>
+        </div>
+        <div>
+            <a style="color:white" asp-action="">Back to List</a>
+        </div>
+
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

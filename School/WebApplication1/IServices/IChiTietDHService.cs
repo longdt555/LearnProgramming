@@ -12,10 +12,9 @@ namespace StoreManagement.IServices
 
         List<ChiTietDHModel> GetAll();
         SearchResult<ChiTietDHModel> GetAll(SearchParam<ChiTietDonHangParam> model);
-
         void Delete(int id);
         int Add(ChiTietDHModel chiTietDHModel);
-        ChiTietDHModel GetById(int id);
         int Edit(ChiTietDHModel chiTietDHModel);
+        ChiTietDHModel GetById(int id);
     }
 }

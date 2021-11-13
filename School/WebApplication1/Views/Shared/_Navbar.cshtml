@@ -1,4 +1,9 @@
-﻿<div class="sidebar" data-color="white" data-active-color="danger">
+﻿@using StoreManagement.Data;
+@using StoreManagement.Common.Helpers;
+@{
+    var isAuthenticated = !LoggedOnUser.Get().IsNull();
+}
+<div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
         <a href="https://www.creative-tim.com" class="simple-text logo-mini">
             <div class="logo-image-small">
@@ -7,50 +12,57 @@
             <!-- <p>CT</p> -->
         </a>
         <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-            Trần Đức Hải
-             @*<div class="logo-image-big">
-              <img src="../assets/img/logo-big.png">
-            </div>*@ 
+            @{
+                var name = isAuthenticated ? LoggedOnUser.Get().UserName : "...";
+            }
+            @name
         </a>
     </div>
     <div class="sidebar-wrapper" style="overflow-x: hidden">
         <ul class="nav">
             <li class="active ">
                 <a href="/Home">
-                    <i class="nc-icon nc-bank"></i>
+                    <i class="nc-icon nc-shop"></i>
                     <p>Trang chủ</p>
                 </a>
 
             </li>
             <li>
                 <a href="/Loai">
-                    <i class="nc-icon nc-diamond"></i>
+                    <i class="nc-icon nc-bullet-list-67"></i>
                     <p>Loại</p>
                 </a>
             </li>
             <li>
                 <a href="/KhachHang">
-                    <i class="nc-icon nc-bank"></i>
+                    <i class="nc-icon nc-single-02"></i>
+
                     <p>Khách Hàng</p>
                 </a>
-            </li> 
+            </li>
             <li>
                 <a href="/HangHoa">
-                    <i class="nc-icon nc-bell-55"></i>
+                    <i class="nc-icon nc-cart-simple"></i>
                     <p>Hàng hóa</p>
                 </a>
             </li>
 
             <li>
                 <a href="/DonHang">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="nc-icon nc-bag-16"></i>
                     <p>Đơn hàng</p>
                 </a>
             </li>
             <li>
-                <a href="/ChiTietDonHang">
+                <a href="/ChiTietDH">
                     <i class="nc-icon nc-tile-56"></i>
                     <p>Chi Tiết Đơn Hàng</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Account">
+                    <i class="nc-icon nc-simple-add"></i>
+                    <p>Thêm User</p>
                 </a>
             </li>
         </ul>
