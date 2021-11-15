@@ -93,6 +93,7 @@ namespace StoreManagement.Controllers
         }
         public IActionResult Add()
         {
+
             return View();
         }
         public IActionResult DoAdd(AccountModel accountModel)
