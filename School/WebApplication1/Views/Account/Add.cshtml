@@ -60,12 +60,12 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="UserName" class="control-label">Tên Tài Khoản</label>
-            <input id="taikhoan" asp-for="UserName" class="form-control" />
+            <input id="taikhoan" asp-for="UserName" class="form-control" longProp = "userName"/>
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Password" class="control-label">Mật Khẩu</label>
-            <input id="matkhau" asp-for="Password" class="form-control" />
+            <input id="matkhau" asp-for="Password" class="form-control" required/>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -110,4 +110,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

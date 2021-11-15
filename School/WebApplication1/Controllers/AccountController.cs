@@ -30,12 +30,12 @@ namespace StoreManagement.Controllers
             var logged = customerService.Login(acc);
             if (logged.IsNull())
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Error");
             }
             LoggedOnUser.Set(logged);
 
             return RedirectToAction("Index", "Home");
-         
+
         }
 
         [Route("login")]
@@ -58,7 +58,7 @@ namespace StoreManagement.Controllers
         public IActionResult Save()
         {
             //var executed = customerService.Save(new AccountModel { UserName = "longdt", Password = "123456", Role = Common.Enum.RoleEnum.User });
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Index(int pg = 1)
@@ -74,7 +74,7 @@ namespace StoreManagement.Controllers
             int recSkip = (pg - 1) * pageSize;
             var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
             this.ViewBag.Pager = pager;
-            return View(data);
+            return View();
 
         }
         [Route("Account")]
@@ -98,8 +98,22 @@ namespace StoreManagement.Controllers
         }
         public IActionResult DoAdd(AccountModel accountModel)
         {
+            #region [Validate]
+
+            if (string.IsNullOrEmpty(accountModel.UserName))
+            {
+                return RedirectToAction("index", "error", new { message = "Không được bỏ trống tài khoản." });
+            };
+
+            if (string.IsNullOrEmpty(accountModel.Password))
+            {
+                return RedirectToAction("index", "error", new { message = "Không được bỏ trống mật khẩu." });
+            };
+
+            #endregion [Validate]
+
             customerService.Add(accountModel);
-            return RedirectToAction("");
+            return Redirect("List");
         }
         public IActionResult Edit(int id)
         {
