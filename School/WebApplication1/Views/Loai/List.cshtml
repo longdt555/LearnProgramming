@@ -5,15 +5,89 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "Loai");
 }
+@*<script>
+        loadData: function() {
+            $.ajax({
+                url: '/Home/LoadData',
+                type: 'GET',
+                data: {
+                    pa
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status) {
+                        var data = response.data;
+                        var html = '';
+                        var template = $('#data-template').html();
+                        $.each(data, function (i, item)){
+                            html += Mustache.render(template, {})
+                        }
+                    }
+                }
+            })
+        }
+    </script>*@
+
+
+
+
+@*<script src ="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn-search").click(function () {
+                var searchBy = $("#SearchBy").val();
+                var searchValue = $("#search-loai").val();
+                var setData = $("#DataSearching");
+                setData.html("");
+                $.ajax({
+                    type: "post",
+                    url: "/Home/GetSearchingData?SearchBy" + searchBy + "&searchValue" + searchValue,
+                    contentType: "html",
+                    success: function (result) {
+
+                    }
+                })
+
+            })
+        })
+    </script>*@
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#search-loai").on("keyup", function () {
+        var txtenter = $(this).val();
+        $("table tr").each(function (results) {
+            if (results! == 0) {
+                var id = $(this).find("td:nth-child(2)").text();
+                if (id.indexOf(txtenter) == 0 && id.toLowerCase().indexOf(txtenter.toLowerCase() < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    }
+</script>
+
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="card" style="margin-bottom: 11px;">
             <div class="card-header">
                 <div class="row">
-                    
+
                     <form class="update col-md-2" action="https://localhost:44319/Loai/Add">
                         <button type="submit" class="btn btn-primary btn-round">Thêm mới</button>
                     </form>
+                    @*<select id="SearchBy">
+                        <option value="Name">Name</option>
+                        <option value="ID">ID</option>
+                    </select>*@
+                    <br /> <br />
                     <div class="col-md-10">
                         <form name="timkiem" style="width: 300px; padding-top: 11px; " class="pull-right">
                             <div class="form-group form-inline">
@@ -52,7 +126,7 @@
                 </table>
                 <div class="table-responsive">
                     <table class="table tbl-contents">
-                        <tbody>
+                        <tbody id="DataSearching">
                             @{
                                 var count = 0;
                             }
@@ -81,7 +155,7 @@
                                     </td>
                                     <td class="w-15p">
                                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
-                                 
+
                                         <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
                                     </td>
                                 </tr>
