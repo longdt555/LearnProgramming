@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreManagement.Dtos.Respones;
 using StoreManagement.Models;
-using System.Web.Mvc;
 using static StoreManagement.Common.JMessage;
 
 namespace StoreManagement.Controllers
@@ -23,16 +22,16 @@ namespace StoreManagement.Controllers
                 {
                     Success = false,
                     Message = NameRequied
-                }, JsonRequestBehavior.AllowGet);
+                });
             }
 
             #endregion [Validate]
 
-            return Json(new
+            return Json(new JsonResDto
             {
-                IsSucces = false,
-                data = listError
-            }, JsonRequestBehavior.AllowGet);
+                Success = true,
+                Data = model.Name
+            });
         }
     }
 }

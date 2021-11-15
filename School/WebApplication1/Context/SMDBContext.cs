@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using StoreManagement.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
 using StoreManagement.Models;
 
 namespace StoreManagement.Context
@@ -24,5 +22,6 @@ namespace StoreManagement.Context
         public DbSet<LoaiModel> Loais { get; set; }
         public DbSet<LoaiKhachHangModel> LoaiKhachHangs { get; set; }
         public DbSet<AccountModel> AccountModels { get; set; }
+        public DbSet<RoleModel> Roles { get; set; }
     }
 }
