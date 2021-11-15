@@ -35,7 +35,11 @@ namespace StoreManagement.Services
 
         public int Edit(AccountModel accountModel)
         {
-            var data = DBContext().AccountModels.Where(x => x.Id == accountModel.Id).FirstOrDefault();
+            var data = DBContext().AccountModels.Where(x => x.Id == accountModel.Id).FirstOrDefault(); // mới - ngắn ngọn hơn
+
+            var data1 = (from acc in DBContext().AccountModels where acc.Id == accountModel.Id select acc).FirstOrDefault(); // cũ - dài hơn / khi join nhiều bảng và thực hiện xử lý logic
+
+
             if (data == null) return 0;
             data.Password = accountModel.Password;
             data.Role = accountModel.Role;
