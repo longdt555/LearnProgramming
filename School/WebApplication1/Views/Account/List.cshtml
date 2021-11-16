@@ -48,7 +48,8 @@
                             <th class="w-8p">Thao tác</th>
                         </tr>
                 </table>
-                <div class="table-responsive">
+
+                <div class="table-responsive" id="account-list">
                     <table class="table tbl-contents">
                         <tbody>
                             @{
@@ -86,22 +87,20 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-<div style="margin: 0 auto">
 
+<div style="margin: 0 auto">
     @await Html.PartialAsync("Pagination", paging)
 </div>
 
-<script>
-    function search(event) {
-        event.preventDefault();
-        var searchTxt = $('#search-Account').val();
 
-        var path = `${window.location.origin}/Account?pageIndex=1&pageSize=20&name=${searchTxt}`;
+<script src="/js/app/account.js"></script>
 
-        window.location.href = path;
-    };
+
+<script type="text/javascript">
+    $("#account-list").load("/Account/Search", function (response) { });
 </script>

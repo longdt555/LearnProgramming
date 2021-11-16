@@ -1,0 +1,38 @@
+﻿@model List<AccountModel>
+
+<table class="table tbl-contents">
+    <tbody>
+        @{
+            var count = 0;
+        }
+        @foreach (var item in Model.ToList())
+        {
+            count++;
+            <tr>
+                <td class="w-5p">
+                    @count
+                </td>
+                <td class="w-15p">
+                    @item.UserName
+                </td>
+                <td class="w-12p">
+                    @item.CreatedBy
+                </td>
+                <td class="w-10p">
+                    @item.UpdatedBy
+                </td>
+                <td class="w-10p">
+                    @item.CreatedDate
+                </td>
+                <td class="w-10p">
+                    @item.UpdatedDate
+                </td>
+                <td class="w-8p">
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

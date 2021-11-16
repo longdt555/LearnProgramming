@@ -6,6 +6,9 @@ using StoreManagement.Common.Helpers;
 using StoreManagement.Data;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using StoreManagement.Dtos.Respones;
+using StoreManagement.Common;
+using static StoreManagement.Common.JMessage;
 
 namespace StoreManagement.Controllers
 {
@@ -126,6 +129,23 @@ namespace StoreManagement.Controllers
             return RedirectToAction("");
         }
 
+        #region [16/11/2021]
 
+        public IActionResult Search()
+        {
+            if (!isAuthenticated())
+                return Json(new JsonResDto
+                {
+                    Success = false,
+                    Message = Forbidden
+                });
+
+            var searchModel = new SearchParam<AccountParam>(1, 20, new AccountParam());
+
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("../Account/Partials/_ListPartial", customers.Data);
+        }
+
+        #endregion [16/11/2021
     }
 }
