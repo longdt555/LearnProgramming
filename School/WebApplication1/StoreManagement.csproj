@@ -15,6 +15,8 @@
     <Compile Remove="Controllers\CustomerController.cs" />
     <Compile Remove="Controllers\TestController.cs" />
     <Compile Remove="IServices\IDelete.cs" />
+    <Compile Remove="Migrations\20211115160226_202111152402-add.cs" />
+    <Compile Remove="Migrations\20211115160226_202111152402-add.Designer.cs" />
     <Compile Remove="Services\Class.cs" />
     <Compile Remove="Services\DeleteService.cs" />
   </ItemGroup>
