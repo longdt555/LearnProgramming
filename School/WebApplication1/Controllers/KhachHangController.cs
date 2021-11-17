@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Context;
 using StoreManagement.Dtos.Params;
 using StoreManagement.IServices;
 using StoreManagement.Models;
@@ -15,6 +16,8 @@ namespace StoreManagement.Controllers
     {
         private readonly ILogger<KhachHangController> _logger;
         private readonly IKhachHangService customerService;
+
+        SMDBContext db = new SMDBContext();
 
         public KhachHangController(ILogger<KhachHangController> logger, IKhachHangService customerService)
         {
@@ -48,10 +51,25 @@ namespace StoreManagement.Controllers
             return View(customers);
 
         }
-        public IActionResult Delete(int id)
+        //public IActionResult Delete(int id)
+        //{
+        //    customerService.Delete(id);
+        //    return RedirectToAction("");
+        //}
+        public JsonResult DeleteEmployee(int loaiId)
         {
-            customerService.Delete(id);
-            return RedirectToAction("");
+            //MVCTutorialEntities db = new MVCTutorialEntities();
+
+            bool result = false;
+            var loai = db.Loais.SingleOrDefault(x => x.IsDeleted == false && x.Id == loaiId);
+            if (loai != null)
+            {
+                loai.IsDeleted = true;
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
         public IActionResult Add()
         {

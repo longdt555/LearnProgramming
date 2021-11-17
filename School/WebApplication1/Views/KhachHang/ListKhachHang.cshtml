@@ -80,8 +80,9 @@
 
                                     <td class="w-6p">
                                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
-                                      
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+
+                                        @*<a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>*@
+                                        <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.Id)"><i class="glyphicon glyphicon-trash"></i> </a>
                                     </td>
                                 </tr>
                             }
@@ -91,6 +92,33 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Delete Employee</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure ? You want to delete this. </h4>
+
+                    <div style="text-align:center;display:none" id="loaderDiv">
+                        <img src="~/Content/InternetSlowdown_Day.gif" width="150" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <input type="hidden" id="hiddenEmployeeId" />
+
 </div>
 <div style="margin: 0 auto">
 
@@ -105,5 +133,37 @@
         var path = `${window.location.origin}/KhachHang?pageIndex=1&pageSize=20&name=${searchTxt}`;
 
         window.location.href = path;
+    }
+
+</script>
+<script>
+
+    var ConfirmDelete = function (Id) {
+
+        $("#hiddenEmployeeId").val(Id);
+        $("#myModal").modal('show');
+
+    }
+
+    var DeleteEmployee = function () {
+
+        $("#loaderDiv").show();
+
+        var loaiId = $("#hiddenEmployeeId").val();
+
+        $.ajax({
+
+            type: "POST",
+            url: "/Loai/DeleteEmployee",
+            data: { Id: loaiId },
+            success: function (result) {
+                $("#loaderDiv").hide();
+                $("#myModal").modal("hide");
+                $("#row_" + empId).remove();
+
+            }
+
+        })
+
     }
 </script>
