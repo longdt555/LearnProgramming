@@ -81,21 +81,11 @@ namespace StoreManagement.Controllers
 
         }
 
-        [Route("Account")]
-        public IActionResult List(int pageIndex, int pageSize, string name)
-        {
-            //if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
-
-            var customers = customerService.GetAll(searchModel);
-            return View(customers);
-        }
-
-        public IActionResult Delete(int id)
-        {
-            customerService.Delete(id);
-            return RedirectToAction("");
-        }
+        //public IActionResult Delete(int id)
+        //{
+        //    customerService.Delete(id);
+        //    return RedirectToAction("");
+        //}
         public IActionResult Add()
         {
 
@@ -133,10 +123,50 @@ namespace StoreManagement.Controllers
 
         #region [16/11/2021]
 
+        /// <summary>
+        /// Hiển thị danh sách người dùng mặc định
+        /// </summary>
+        /// <returns></returns>
+        [Route("Account")]
+        public IActionResult List()
+        {
+            //if (!isAuthenticated()) return Redirect("login");
+            var searchModel = new SearchParam<AccountParam>(1, 20, new AccountParam());
+
+            var customers = customerService.GetAll(searchModel);
+            return View(customers);
+        }
+
+        /// <summary>
+        /// Thực hiện tìm kiếm theo tên
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IActionResult Search(int pageIndex, int pageSize, string name)
         {
             var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
 
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/Account/_ListPartial.cshtml", customers.Data.ToList());
+        }
+
+        /// <summary>
+        /// Xoá bản ghi và lưu lại các thông tin đang tìm kiếm
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
+        {
+            // delete record
+            customerService.Delete(id);
+
+            // Sau khi xóa xong thực hiện tìm kiếm lại
+            var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
             var customers = customerService.GetAll(searchModel);
             return PartialView("~/Views/Account/_ListPartial.cshtml", customers.Data.ToList());
         }

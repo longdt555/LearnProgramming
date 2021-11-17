@@ -80,7 +80,7 @@ namespace StoreManagement.Services
             var filter = model.Filter();
 
             var data = (from acc in DBContext().AccountModels
-                        where acc.IsDeleted == false && (string.IsNullOrEmpty(filter.Name) || acc.UserName == filter.Name)
+                        where acc.IsDeleted == false && (string.IsNullOrEmpty(filter.Name) || acc.UserName.ToLower().Contains(filter.Name.ToLower()))
                         select new AccountModel
                         {
                             Id = acc.Id,

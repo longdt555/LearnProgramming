@@ -9,7 +9,9 @@
 
 function search(event) {
     event.preventDefault();
+
     var searchTxt = $('#search-Account').val();
+
     $.ajax({
         url: "/Account/Search", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
@@ -22,7 +24,30 @@ function search(event) {
             $('#account-list').html(response);
         },
         error: function (response) { // // request returns failed
-            console.log("hihi");
+            console.log("error");
+        }
+    });
+};
+
+function deleteRecord(id) {
+    var searchTxt = $('#search-Account').val();
+    var pIndex = currentPage;
+    var pSize = pageSize;
+
+    $.ajax({
+        url: "/Account/Delete", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        data: {
+            pageIndex: pIndex,
+            pageSize: pSize,
+            name: searchTxt,
+            id
+        }, // data in json format
+        success: function (response) { // request returns successed
+            $('#account-list').html(response);
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
         }
     });
 };
