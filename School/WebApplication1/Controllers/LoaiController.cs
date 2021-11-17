@@ -65,8 +65,33 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return RedirectToAction("Partial1");
+            return PartialView("Partial1");
 
+        }
+
+        public ActionResult Index()
+        {
+
+            var listEmp = db.Loais.Where(x => x.IsDeleted == false).Select(x => new LoaiModel { TenLoai = x.TenLoai, Mota = x.Mota, MaLoaiCha = x.MaLoaiCha, CreatedDate = x.CreatedDate, UpdatedDate = x.UpdatedDate }).ToList();
+
+            ViewBag.EmployeeList = listEmp;
+
+            return View();
+        }
+
+
+        public JsonResult DeleteLoai(int id)
+        {
+            bool result = false;
+            var loaiModel = db.Loais.SingleOrDefault(x => x.IsDeleted == false && x.Id == id);
+            if (loaiModel != null)
+            {
+                loaiModel.IsDeleted = true;
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
 
         public IActionResult Add()

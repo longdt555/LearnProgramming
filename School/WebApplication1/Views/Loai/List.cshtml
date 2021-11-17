@@ -18,9 +18,9 @@
                         <button type="submit" class="btn btn-primary btn-round">Thêm mới</button>
                     </form>
                     @*<select id="SearchBy">
-                        <option value="Name">Name</option>
-                        <option value="ID">ID</option>
-                    </select>*@
+                            <option value="Name">Name</option>
+                            <option value="ID">ID</option>
+                        </select>*@
                     <br /> <br />
                     <div class="col-md-10">
                         <form name="timkiem" style="width: 300px; padding-top: 11px; " class="pull-right">
@@ -90,8 +90,9 @@
                                     <td class="w-15p">
                                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
 
-                                        <a asp-action="Delete" onclick="DeleteLoai(@item.Id)" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                        <a href="#" class="btn btn-danger" @*asp-action="Delete"*@ onclick="DeleteLoai(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
 
+                                        @*<td><a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.EmployeeId)"><i class="glyphicon glyphicon-trash"></i> </a> </td>*@
 
                                     </td>
                                 </tr>
@@ -99,10 +100,40 @@
                         </tbody>
                     </table>
 
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                    <h3 class="modal-title">Delete Loại</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Are you sure ? You want to delete this. </h4>
+
+                                    <div style="text-align:center;display:none" id="loaderDiv">
+                                        <img src="~/Content/InternetSlowdown_Day.gif" width="150" />
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                    <a href="#" class="btn btn-success" onclick="DeleteLoai()">Confirm</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+
+    @*hidden field for storing current employeeId*@
+    <input type="hidden" id="hiddenEmployeeId" />
 </div>
 <div style="margin: 0 auto">
 
@@ -120,7 +151,7 @@
         window.location.href = path;
         };
 
-     $.ajax({
+     @*$.ajax({
         type: "POST",
         url: '@Url.Action("Delete")',
         data: JSON.stringify({ Id: id }), //use id here
@@ -133,5 +164,39 @@
         error: function () {
             alert("Error while deleting data");
         }
-    });
+    });*@
 </script>
+
+<script>
+
+    var DeleteLoai = function (id) {
+
+        $("#hiddenEmployeeId").val(id);
+        $("#myModal").modal('show');
+
+    }
+
+    var DeleteEmployee = function () {
+
+        $("#loaderDiv").show();
+
+        var loaiid = $("#hiddenEmployeeId").val();
+
+        $.ajax({
+
+            type: "POST",
+            url: "/Loai/DeleteLoai",
+            data: { id: empId },
+            success: function (result) {
+                $("#loaderdiv").hide();
+                $("#mymodal").modal("hide");
+                $("#row_" + empid).remove();
+
+            }
+
+        })
+
+    }
+
+</script>
+
