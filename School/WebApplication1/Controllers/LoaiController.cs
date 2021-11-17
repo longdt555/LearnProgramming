@@ -65,7 +65,8 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return RedirectToAction("");
+            return RedirectToAction("Partial1");
+
         }
 
         public IActionResult Add()
@@ -91,6 +92,13 @@ namespace StoreManagement.Controllers
             _service.Edit(loaiModel);
             return RedirectToAction("");
         }
+
+        //public IActionResult Delete(int id)
+        //{
+        //    _service.Delete(id);
+
+        //    return PartialView("Partial1");
+        //}
 
 
     }

@@ -5,72 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "Loai");
 }
-@*<script>
-        loadData: function() {
-            $.ajax({
-                url: '/Home/LoadData',
-                type: 'GET',
-                data: {
-                    pa
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.status) {
-                        var data = response.data;
-                        var html = '';
-                        var template = $('#data-template').html();
-                        $.each(data, function (i, item)){
-                            html += Mustache.render(template, {})
-                        }
-                    }
-                }
-            })
-        }
-    </script>*@
-
-
-
-
-@*<script src ="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#btn-search").click(function () {
-                var searchBy = $("#SearchBy").val();
-                var searchValue = $("#search-loai").val();
-                var setData = $("#DataSearching");
-                setData.html("");
-                $.ajax({
-                    type: "post",
-                    url: "/Home/GetSearchingData?SearchBy" + searchBy + "&searchValue" + searchValue,
-                    contentType: "html",
-                    success: function (result) {
-
-                    }
-                })
-
-            })
-        })
-    </script>*@
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $("#search-loai").on("keyup", function () {
-        var txtenter = $(this).val();
-        $("table tr").each(function (results) {
-            if (results! == 0) {
-                var id = $(this).find("td:nth-child(2)").text();
-                if (id.indexOf(txtenter) == 0 && id.toLowerCase().indexOf(txtenter.toLowerCase() < 0) {
-                    $(this).hide();
-                }
-                else {
-                    $(this).show();
-                }
-            }
-        });
-    }
-</script>
 
 
 
@@ -156,12 +90,15 @@
                                     <td class="w-15p">
                                         <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
 
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+                                        <a asp-action="Delete" onclick="DeleteLoai(@item.Id)" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
+
+
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
@@ -181,5 +118,20 @@
         var path = `${window.location.origin}/Loai?pageIndex=1&pageSize=20&name=${searchTxt}`;
 
         window.location.href = path;
-    };
+        };
+
+     $.ajax({
+        type: "POST",
+        url: '@Url.Action("Delete")',
+        data: JSON.stringify({ Id: id }), //use id here
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            alert("Data has been deleted.");
+            LoadData();
+        },
+        error: function () {
+            alert("Error while deleting data");
+        }
+    });
 </script>
