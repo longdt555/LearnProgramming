@@ -140,4 +140,8 @@
     <None Include="wwwroot\Login\vendor\select2\select2.min.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\fonts\" />
+  </ItemGroup>
+
 </Project>

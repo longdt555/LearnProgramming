@@ -4,13 +4,15 @@
     ViewData["Title"] = "Account";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "Account");
+    var data = Model.Data.ToList();
 }
+
 <div class="row">
     <div class="col-md-12">
         <div class="card" style="margin-bottom: 11px;">
             <div class="card-header">
                 <div class="row">
-                    <form class="update col-md-2" action="https://localhost:44319/Account/Add">
+                    <form class="update col-md-2" action="Add">
                         <button type="submit" class="btn btn-primary btn-round">Thêm mới</button>
                     </form>
                     <div class="col-md-10">
@@ -50,44 +52,8 @@
                 </table>
 
                 <div class="table-responsive" id="account-list">
-                    <table class="table tbl-contents">
-                        <tbody>
-                            @{
-                                var count = 0;
-                            }
-                            @foreach (var item in Model.Data.ToList())
-                            {
-                                count++;
-                                <tr>
-                                    <td class="w-5p">
-                                        @count
-                                    </td>
-                                    <td class="w-15p">
-                                        @item.UserName
-                                    </td>
-                                    <td class="w-12p">
-                                        @item.CreatedBy
-                                    </td>
-                                    <td class="w-10p">
-                                        @item.UpdatedBy
-                                    </td>
-                                    <td class="w-10p">
-                                        @item.CreatedDate
-                                    </td>
-                                    <td class="w-10p">
-                                        @item.UpdatedDate
-                                    </td>
-                                    <td class="w-8p">
-                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
-
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    @await Html.PartialAsync("_ListPartial", data)
                 </div>
-
 
             </div>
         </div>
@@ -98,10 +64,5 @@
     @await Html.PartialAsync("Pagination", paging)
 </div>
 
-
+ @*using external js file*@
 <script src="/js/app/account.js"></script>
-
-
-<script type="text/javascript">
-    $("#account-list").load("/Account/Search", function (response) { });
-</script>

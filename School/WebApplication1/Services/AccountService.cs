@@ -71,7 +71,7 @@ namespace StoreManagement.Services
                             UpdatedDate = acc.UpdatedDate,
                             UserName = acc.UserName
 
-                        }).ToList() ;
+                        }).ToList();
             return data;
         }
 
@@ -79,21 +79,20 @@ namespace StoreManagement.Services
         {
             var filter = model.Filter();
 
-
             var data = (from acc in DBContext().AccountModels
-                         where acc.IsDeleted == false
-                         select new AccountModel
-                         {
-                             Id = acc.Id,
-                             Password = acc.Password,
-                             Role = acc.Role,
-                             CreatedBy = acc.CreatedBy,
-                             CreatedDate = acc.CreatedDate,
-                             IsDeleted = acc.IsDeleted,
-                             UpdatedBy = acc.UpdatedBy,
-                             UpdatedDate = acc.UpdatedDate,
-                             UserName = acc.UserName
-                         }).ToList();
+                        where acc.IsDeleted == false && (string.IsNullOrEmpty(filter.Name) || acc.UserName == filter.Name)
+                        select new AccountModel
+                        {
+                            Id = acc.Id,
+                            Password = acc.Password,
+                            Role = acc.Role,
+                            CreatedBy = acc.CreatedBy,
+                            CreatedDate = acc.CreatedDate,
+                            IsDeleted = acc.IsDeleted,
+                            UpdatedBy = acc.UpdatedBy,
+                            UpdatedDate = acc.UpdatedDate,
+                            UserName = acc.UserName
+                        }).ToList();
 
             var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
 
@@ -104,7 +103,7 @@ namespace StoreManagement.Services
                 TotalRecords = data.Count,
                 PageSize = model.PageSize
             };
-          
+
         }
 
         public AccountModel GetById(int id)

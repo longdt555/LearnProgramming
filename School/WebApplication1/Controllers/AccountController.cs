@@ -80,15 +80,17 @@ namespace StoreManagement.Controllers
             return View();
 
         }
+
         [Route("Account")]
         public IActionResult List(int pageIndex, int pageSize, string name)
         {
-            if (!isAuthenticated()) return Redirect("404");
+            //if (!isAuthenticated()) return Redirect("login");
             var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);
         }
+
         public IActionResult Delete(int id)
         {
             customerService.Delete(id);
@@ -131,21 +133,14 @@ namespace StoreManagement.Controllers
 
         #region [16/11/2021]
 
-        public IActionResult Search()
+        public IActionResult Search(int pageIndex, int pageSize, string name)
         {
-            if (!isAuthenticated())
-                return Json(new JsonResDto
-                {
-                    Success = false,
-                    Message = Forbidden
-                });
-
-            var searchModel = new SearchParam<AccountParam>(1, 20, new AccountParam());
+            var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
 
             var customers = customerService.GetAll(searchModel);
-            return PartialView("../Account/Partials/_ListPartial", customers.Data);
+            return PartialView("~/Views/Account/_ListPartial.cshtml", customers.Data.ToList());
         }
 
-        #endregion [16/11/2021
+        #endregion [16/11/2021]
     }
 }
