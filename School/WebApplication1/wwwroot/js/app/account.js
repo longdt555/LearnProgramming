@@ -55,20 +55,22 @@ function deleteRecord(id) {
 
 /// hiển thị modal thêm tài khoản
 function ShowAddModal(id) {
-    if (id == 0) {
-        $('#title').text('Thêm người dùng');
-        $('#btn-save').text('Lưu người dùng')
-    }
-    else {
-        $('#title').text('Lưu người dùng');
-        $('#btn-save').text('Cập nhật');
-    }
-
     $.ajax({
         url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
+        data: id,
         success: function (response) { // request returns successed
             $('#common-modal').html(response);
+
+            if (id == 0) {
+                $('#title').html('Thêm người dùng');
+                $('#btn-save').html('Lưu người dùng')
+            }
+            else {
+                $('#title').html('Lưu người dùng');
+                $('#btn-save').html('Cập nhật');
+            }
+
             $('#common-modal').modal('show');
         },
         error: function (response) { // // request returns failed
