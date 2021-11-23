@@ -81,7 +81,7 @@ namespace StoreManagement.Services
             #endregion [Query]
 
             #region [Filter]
-            var maDHv2 = ConvertHelper.ConvertToInt(filter.MaDHv2);
+            var maDHv2 = ConvertHelper.ConvertToInt(filter.MaDH);
 
             if (maDHv2 > 0)
             {
@@ -112,60 +112,6 @@ namespace StoreManagement.Services
         }
 
 
-
-        //public List<ChiTietDHModel> Delete()
-        //{
-        //    var deleteOrderDetails =
-        //              from ctdh in _context.ChiTietDHs
-        //              where ctdh.Id == ctdh.MaDH
-        //              select ctdh;
-
-        //    foreach (var ctdh in deleteOrderDetails)
-        //    {
-        //        _context.ChiTietDHs.DeleteOnSubmit(ctdh);
-        //    }
-
-        //    try
-        //    {
-        //        db.SubmitChanges();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        // Provide for exceptions.
-        //    }
-        //}
-
-        //public List<ChiTietDHDto> GetChiTietDHDto()
-        //{
-        //    var chiTietDonHangs = (from kh in DBContext().KhachHangs
-        //                           join dh in DBContext().DonHangs
-        //                               on kh.Id equals dh.Id
-        //                           join hh in DBContext().HangHoas on dh.Id equals hh.Id
-
-
-        //                           //    into dhkh
-        //                           //from khlj in dhkh.DefaultIfEmpty()
-
-
-        //                           where !kh.IsDeleted && !dh.IsDeleted
-        //                           select new ChiTietDHDto
-        //                           {
-        //                               Id = dh.Id,
-        //                               HoTen = kh.HoTen,
-        //                               Email = kh.Email,
-        //                               MaDH = dh.Id,
-        //                               TenHH = hh.TenHH,
-        //                               SoLuong = hh.SoLuong,
-        //                               DonGia = hh.DonGia
-        //                           }).ToList();
-        //    return chiTietDonHangs;
-        //}
-
-        //public List<ChiTietDHModel> Insert()
-        //{
-        //    var ChiTietDH = new List
-        //}
 
         List<ChiTietDHModel> IChiTietDHService.GetAll()
         {

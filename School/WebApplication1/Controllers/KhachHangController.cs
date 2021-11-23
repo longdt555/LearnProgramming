@@ -17,8 +17,6 @@ namespace StoreManagement.Controllers
         private readonly ILogger<KhachHangController> _logger;
         private readonly IKhachHangService customerService;
 
-        SMDBContext db = new SMDBContext();
-
         public KhachHangController(ILogger<KhachHangController> logger, IKhachHangService customerService)
         {
             _logger = logger;
@@ -41,36 +39,6 @@ namespace StoreManagement.Controllers
             return View(data);
         }
 
-        [Route("KhachHang")]
-        public IActionResult ListKhachHang(int pageIndex, int pageSize, string name)
-        {
-            if (!isAuthenticated()) return Redirect("404");
-            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));  //TEST
-          
-            var customers = customerService.GetAll(searchModel);
-            return View(customers);
-
-        }
-        //public IActionResult Delete(int id)
-        //{
-        //    customerService.Delete(id);
-        //    return RedirectToAction("");
-        //}
-        public JsonResult DeleteEmployee(int loaiId)
-        {
-            //MVCTutorialEntities db = new MVCTutorialEntities();
-
-            bool result = false;
-            var loai = db.Loais.SingleOrDefault(x => x.IsDeleted == false && x.Id == loaiId);
-            if (loai != null)
-            {
-                loai.IsDeleted = true;
-                db.SaveChanges();
-                result = true;
-            }
-
-            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
-        }
         public IActionResult Add()
         {
             return View();
@@ -80,16 +48,68 @@ namespace StoreManagement.Controllers
             customerService.Add(khachHangModel);
             return RedirectToAction("");
         }
-        public IActionResult Edit(int id)
+        //public IActionResult Edit(int id)
+        //{
+        //    var khachHang = customerService.GetById(id);
+        //    if (khachHang == null) return BadRequest();
+        //    return View(khachHang);
+        //}
+        //public IActionResult DoEdit(KhachHangModel khachHangModel)
+        //{
+        //    customerService.Edit(khachHangModel);
+        //    return RedirectToAction("");
+        //}
+        public PartialViewResult Edit(int id)
         {
             var khachHang = customerService.GetById(id);
-            if (khachHang == null) return BadRequest();
-            return View(khachHang);
+            //if (khachHang == null) return BadRequest();
+            return PartialView(khachHang);
         }
-        public IActionResult DoEdit(KhachHangModel khachHangModel)
+
+        public JsonResult Edit(KhachHangModel khachHangModel)
         {
             customerService.Edit(khachHangModel);
-            return RedirectToAction("");
+            return Json(khachHangModel, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
+
+        #region [18/11/2021]
+
+        /// <summary>
+        /// Hiển thị danh sách người dùng mặc định
+        /// </summary>
+        /// <returns></returns>
+        [Route("KhachHang")]
+        public IActionResult ListKhachHang()
+        {
+            if (!isAuthenticated()) return Redirect("login");
+            var searchModel = new SearchParam<KhachHangParam>(1, 20, new KhachHangParam());  //TEST
+
+            var customers = customerService.GetAll(searchModel);
+            return View(customers);
+
+        }
+
+       
+        public IActionResult Search(int pageIndex, int pageSize, string name)
+        {
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));
+
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/KhachHang/_ListPartial.cshtml", customers.Data.ToList());
+        }
+
+        
+        public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
+        {
+            // delete record
+            customerService.Delete(id);
+
+            // Sau khi xóa xong thực hiện tìm kiếm lại
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/KhachHang/_ListPartial.cshtml", customers.Data.ToList());
+        }
+
+        #endregion [18/11/2021]
     }
 }

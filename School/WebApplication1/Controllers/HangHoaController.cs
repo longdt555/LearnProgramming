@@ -33,28 +33,8 @@ namespace StoreManagement.Controllers
             var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
             this.ViewBag.Pager = pager;
             return View(data);
-        }
-        [Route("HangHoa")]
-        public IActionResult List(int pageIndex, int pageSize,string name)
-        {
-            if (!isAuthenticated()) return Redirect("404");
-            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
-            
-            var customers = customerService.GetAll(searchModel);
-            return View(customers);
-        }
-
-
-        //public IActionResult Details()
-        //{
-        //    var customers = customerService.GetHangHoaDto();
-        //    return View(customers);
-        //}
-        public IActionResult Delete(int id)
-        {
-            customerService.Delete(id);
-            return RedirectToAction("");
-        }
+        }     
+    
         public IActionResult Add()
         {
             return View();
@@ -74,5 +54,41 @@ namespace StoreManagement.Controllers
             customerService.Edit(hangHoaModel);
             return RedirectToAction("");
         }
+
+        #region 18/11/2021 Hai
+
+        //Hiện thị danh sách 
+        [Route("HangHoa")]
+        public IActionResult List()
+        {
+            if (!isAuthenticated()) return Redirect("login");
+            var searchModel = new SearchParam<HangHoaParam>(1, 20, new HangHoaParam());
+
+            var customers = customerService.GetAll(searchModel);
+            return View(customers);
+        }
+
+        //Thực hiện tìm kiếm theo tên
+        public IActionResult Search(int pageIndex, int pageSize, string name)
+        {
+            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
+
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/HangHoa/_ListPartial.cshtml", customers.Data.ToList());
+        }
+
+        //Xóa bản ghi và lưu lại thông tin đang tìm kiếm 
+        public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
+        {
+            //delete record
+            customerService.Delete(id);
+
+            //Sau khi xóa xong thực hiện tìm kiếm lại 
+            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
+
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/HangHoa/_ListPartial.cshtml", customers.Data.ToList());
+        }
+        #endregion 18/11/2021 Hai
     }
 }

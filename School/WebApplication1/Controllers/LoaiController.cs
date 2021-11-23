@@ -28,7 +28,7 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this._service = customerService;
         }
-    
+
         public IActionResult Index(int pg = 1)
         {
             var customers = _service.GetAll().ToList();
@@ -45,54 +45,6 @@ namespace StoreManagement.Controllers
             return View(data);
         }
 
-        [Route("Loai")]
-        public IActionResult List(int pageIndex, int pageSize, string name)
-        {
-            if (!isAuthenticated()) return Redirect("404");
-            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam(name));  //TEST
-           
-            var customers = _service.GetAll(searchModel);
-            return View(customers);
-
-        }
-        //public ActionResult Search(string searchString)
-        //{
-        //    var search = _service.Search(searchString);
-        //    return View(search);
-        //}
-
-
-        public IActionResult Delete(int id)
-        {
-            _service.Delete(id);
-            return PartialView("Partial1");
-
-        }
-
-        public ActionResult Index()
-        {
-
-            var listEmp = db.Loais.Where(x => x.IsDeleted == false).Select(x => new LoaiModel { TenLoai = x.TenLoai, Mota = x.Mota, MaLoaiCha = x.MaLoaiCha, CreatedDate = x.CreatedDate, UpdatedDate = x.UpdatedDate }).ToList();
-
-            ViewBag.EmployeeList = listEmp;
-
-            return View();
-        }
-
-
-        public JsonResult DeleteLoai(int id)
-        {
-            bool result = false;
-            var loaiModel = db.Loais.SingleOrDefault(x => x.IsDeleted == false && x.Id == id);
-            if (loaiModel != null)
-            {
-                loaiModel.IsDeleted = true;
-                db.SaveChanges();
-                result = true;
-            }
-
-            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
-        }
 
         public IActionResult Add()
         {
@@ -118,13 +70,57 @@ namespace StoreManagement.Controllers
             return RedirectToAction("");
         }
 
-        //public IActionResult Delete(int id)
-        //{
-        //    _service.Delete(id);
 
-        //    return PartialView("Partial1");
+        #region Hai
+
+        [Route("Loai")]
+        public IActionResult List()
+        {
+            if (!isAuthenticated()) return Redirect("login");
+            var searchModel = new SearchParam<LoaiParam>(1, 20, new LoaiParam());  //TEST
+
+            var customers = _service.GetAll(searchModel);
+            return View(customers);
+
+        }
+
+
+        public IActionResult Search(int pageIndex, int pageSize, string name)
+        {
+            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam(name));
+
+            var customers = _service.GetAll(searchModel);
+            return PartialView("~/Views/Loai/_ListPartial.cshtml", customers.Data.ToList());
+        }
+
+      
+        public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
+        {
+            // delete record
+            _service.Delete(id);
+
+            // Sau khi xóa xong thực hiện tìm kiếm lại
+            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam(name));
+            var customers = _service.GetAll(searchModel);
+            return PartialView("~/Views/Loai/_ListPartial.cshtml", customers.Data.ToList());
+        }
+        #endregion Hai
+
+        //#region add edit
+
+        //public ActionResult AddEdit(int id)
+        //{
+        //    LoaiModel loaiModel = new LoaiModel();
+        //    if (id > 0)
+        //    {
+        //        _service.Edit(loaiModel);
+        //    }
+
+        //    return PartialView("Partial2", loaiModel);
         //}
 
-
+        //#endregion
     }
+
 }
+

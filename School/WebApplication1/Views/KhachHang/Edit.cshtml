@@ -1,12 +1,58 @@
 ﻿@model StoreManagement.Models.KhachHangModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
+    <h2>Edit Khách Hàng</h2>
+    <hr />
 
-<link href="~/css/hai.css" rel="stylesheet" type="text/css" />
+@Html.HiddenFor(Model => Model.Id)
+<br />
+Tên Khách Hàng : @Html.TextBoxFor(Model => Model.HoTen)
+<br />
+Email : @Html.TextBoxFor(Model => Model.Email)
+<br />
+Mật khẩu : @Html.TextBoxFor(Model => Model.MatKhau)
+<br />
+Đang Hoạt Động : @Html.TextBoxFor(Model => Model.DangHoatDong)
+<br />
+Nhận Quảng Cáo : @Html.TextBoxFor(Model => Model.NhanQuangCao)
+<br />
+Tạo bởi : @Html.TextBoxFor(Model => Model.CreatedBy)
+<br />
+Ngày tạo : @Html.TextBoxFor(Model => Model.CreatedDate)
+<br />
+Ngày sửa : @Html.TextBoxFor(Model => Model.UpdatedDate)
+<br />
+Sửa bởi : @Html.TextBoxFor(Model => Model.UpdatedBy)
+<br />
 
-<<div id="contact-form">
+<hr />
+
+<input type="button" value="Update" onclick="khachhangupdate()" />
+
+<script>
+    function khachhangupdate()
+    {
+        var id = $("#id").val();
+        var tenkhachhang = $("#tenkhachhang").val();
+        var email = $("#email").val();
+        var matkhau = $("#matkhau").val();
+        var danghoatdong = $("#danghoatdong").val();
+        var nhanquangcao = $("#nhanquangcao").val();
+        var taoboi = $("#taoboi").val();
+        var ngaytao = $("#ngaytao").val();
+        var ngaysua = $("#ngaysua").val();
+        var suaboi = $("#suaboi").val();
+
+        var updatekhachhang = { "id": id, "tenkhachhang": tenkhachhang, "email": email, "matkhau": matkhau, "danghoatdong": danghoatdong, "nhanquangcao": nhanquangcao, "taoboi": taoboi, "ngaytao": ngaytao, "ngaysua": ngaysua, "suaboi": suaboi }
+        $.post('/KhachHang/Edit', updatekhachhang, function (data) { if (data == 0) { location: location.href; } }, 'json');
+        alert("Record Updated Successfully" + id);
+
+    }
+</script>
+
+
+
+
+@*<div id="contact-form">
     <div>
         <h1>Sửa Loại</h1>
         <h4>Have a question or just want to get in touch? Let's chat.</h4>
@@ -17,39 +63,19 @@
     <form asp-action="DoEdit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="HoTen" class="control-label"></label>
-            <input asp-for="HoTen" class="form-control" />
-            <span asp-validation-for="HoTen" class="text-danger"></span>
+            <label asp-for="TenLoai" class="control-label"></label>
+            <input asp-for="TenLoai" class="form-control" />
+            <span asp-validation-for="TenLoai" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <label asp-for="Mota" class="control-label"></label>
+            <input asp-for="Mota" class="form-control" />
+            <span asp-validation-for="Mota" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="MatKhau" class="control-label"></label>
-            <input asp-for="MatKhau" class="form-control" />
-            <span asp-validation-for="MatKhau" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="RandomKey" class="control-label"></label>
-            <input asp-for="RandomKey" class="form-control" />
-            <span asp-validation-for="RandomKey" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="DangHoatDong" class="control-label"></label>
-            <input asp-for="DangHoatDong" class="form-control" />
-            <span asp-validation-for="DangHoatDong" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="NhanQuangCao" class="control-label"></label>
-            <input asp-for="NhanQuangCao" class="form-control" />
-            <span asp-validation-for="NhanQuangCao" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="IdLoaiKhachHang" class="control-label"></label>
-            <input asp-for="IdLoaiKhachHang" class="form-control" />
-            <span asp-validation-for="IdLoaiKhachHang" class="text-danger"></span>
+            <label asp-for="MaLoaiCha" class="control-label"></label>
+            <input asp-for="MaLoaiCha" class="form-control" />
+            <span asp-validation-for="MaLoaiCha" class="text-danger"></span>
         </div>
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
@@ -80,5 +106,5 @@
     <div>
         <a style="color:white" asp-action="">Back to List</a>
     </div>
-</div>
 
+</div>*@

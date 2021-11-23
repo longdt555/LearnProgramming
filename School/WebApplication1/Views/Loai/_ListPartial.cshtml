@@ -1,7 +1,6 @@
 ﻿@model List<LoaiModel>
-
 <table class="table tbl-contents">
-    <tbody id="DataSearching">
+    <tbody>
         @{
             var count = 0;
         }
@@ -29,13 +28,13 @@
                     @item.UpdatedDate
                 </td>
                 <td class="w-15p">
-                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="nc-icon nc-scissors"></i></a> |
+                    <a href="#" onclick="addEdit(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
 
-                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="nc-icon nc-simple-remove"></i></a>
-
+                    <a href="#" onclick="deleteRecord(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
 
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

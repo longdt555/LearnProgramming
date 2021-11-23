@@ -54,12 +54,12 @@ namespace StoreManagement.Services
             #region [Params]
 
             var filter = model.Filter();
-            var currentUser = LoggedOnUser.Get();
+            //var currentUser = LoggedOnUser.Get();
 
             #endregion [Params]
 
             var data = (from dh in DBContext().DonHangs
-                        where dh.IsDeleted == false && (string.IsNullOrEmpty(filter.TrangThaiDonHang)) || dh.TrangThaiThanhToan.Contains(filter.TrangThaiDonHang)
+                        where dh.IsDeleted == false && (string.IsNullOrEmpty(filter.TrangThaiDonHang)) || dh.TrangThaiDonHang.Contains(filter.TrangThaiDonHang)
                         select new DonHangModel
                         {
                             Id = dh.Id,
@@ -73,10 +73,10 @@ namespace StoreManagement.Services
                             MaKH = dh.MaKH
                         }).ToList();
 
-            if ((int)currentUser.Role != 1)
-            {
-                data = data.Where(x => x.MaKH == currentUser.Id).ToList();
-            }
+            //if ((int)currentUser.Role != 1)
+            //{
+            //    data = data.Where(x => x.MaKH == currentUser.Id).ToList();
+            //}
 
             var dataPaging = data.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize);
 

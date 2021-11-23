@@ -81,11 +81,7 @@ namespace StoreManagement.Controllers
 
         }
 
-        //public IActionResult Delete(int id)
-        //{
-        //    customerService.Delete(id);
-        //    return RedirectToAction("");
-        //}
+       
         public IActionResult Add()
         {
 
@@ -115,6 +111,7 @@ namespace StoreManagement.Controllers
             var acc = customerService.GetById(id);
             return View(acc);
         }
+
         public IActionResult DoEdit(AccountModel accountModel)
         {
             customerService.Edit(accountModel);

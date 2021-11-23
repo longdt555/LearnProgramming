@@ -14,6 +14,10 @@ namespace StoreManagement.Dtos.Params
             TrangThaiDonHang = trangThaiDonHang;
         }
 
+        public DonHangParam()
+        {
+
+        }
         #endregion [Construtor]
         public string TrangThaiDonHang { get; set; }
     }

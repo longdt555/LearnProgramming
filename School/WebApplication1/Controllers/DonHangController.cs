@@ -24,10 +24,10 @@ namespace StoreManagement.Controllers
             this.customerService = customerService;
         }
 
-        //[Route("don-hang")]
+
         public IActionResult Index(int pg = 1)
         {
-            var customers = customerService.GetAll().ToList();
+            var customers = customerService.GetAll();
             const int pageSize = 5;
             if (pg < 1)
             {
@@ -38,31 +38,10 @@ namespace StoreManagement.Controllers
             int recSkip = (pg - 1) * pageSize;
             var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
             this.ViewBag.Pager = pager;
-            return View(data);
+            return View();
         }
 
-        [Route("DonHang")]
-        public IActionResult List(int pageIndex, int pageSize, string trangThaiDonHang)
-        {
-            if (!isAuthenticated()) return Redirect("404");
-            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam(trangThaiDonHang));
-            
-            var customers = customerService.GetAll(searchModel);
-            return View(customers);
-
-        }
-
-        //public IActionResult Details()
-        //{
-        //    var customers = customerService.GetDonHangDto();
-        //    return View(customers);
-        //}
-
-        public IActionResult Delete(int id)
-        {
-            customerService.Delete(id);
-            return RedirectToAction("");
-        }
+     
         public IActionResult Add()
         {
             return View();
@@ -82,6 +61,43 @@ namespace StoreManagement.Controllers
             customerService.Edit(donHangModel);
             return RedirectToAction("");
         }
+
+        #region [18/11/2021] Hai
+
+        // Hiển thị danh sách người dùng mặc định
+
+        [Route("DonHang")]
+        public IActionResult List()
+        {
+            if (!isAuthenticated()) return Redirect("login");
+            var searchModel = new SearchParam<DonHangParam>(1, 20, new DonHangParam());
+
+            var customers = customerService.GetAll(searchModel);
+            return View(customers);
+        }
+
+        //Thực hiện tìm kiếm theo tên
+        public IActionResult Search(int pageIndex, int pageSize, string TrangThaiDonHang)
+        {
+            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam(TrangThaiDonHang));
+
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("_ListPartial", customers.Data.ToList());
+        }
+
+        //Xoá bản ghi và lưu lại các thông tin đang tìm kiếm 
+        public IActionResult Delete(int pageIndex, int pageSize,string TrangThaiDonHang, int id)
+        {
+            //delete record
+            customerService.Delete(id);
+
+            //Sau khi xóa xong thực hiện tìm kiếm lại
+            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam(TrangThaiDonHang));
+            var customers = customerService.GetAll(searchModel);
+            return PartialView("~/Views/DonHang/_ListPartial.cshtml", customers.Data.ToList());
+
+        }
+        #endregion [18/11/2021] Hai
 
     }
 }
