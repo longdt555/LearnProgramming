@@ -48,7 +48,7 @@ namespace StoreManagement.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            return RedirectToAction("_AddParital");
         }
 
         public IActionResult DoAdd(LoaiModel loaiModel)

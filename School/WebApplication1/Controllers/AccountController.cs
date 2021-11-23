@@ -81,8 +81,9 @@ namespace StoreManagement.Controllers
        
         public IActionResult Add()
         {
+            return PartialView("_AddParital");
 
-            return View();
+            //return View();
         }
         public IActionResult DoAdd(AccountModel accountModel)
         {
