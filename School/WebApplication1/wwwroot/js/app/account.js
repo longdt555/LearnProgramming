@@ -29,6 +29,7 @@ function search(event) {
     });
 };
 
+/// xóa tài khoản đồng thời reload lại danh sách tài khoản
 function deleteRecord(id) {
     var searchTxt = $('#search-Account').val();
     var pIndex = currentPage;
@@ -52,12 +53,34 @@ function deleteRecord(id) {
     });
 };
 
+/// hiển thị modal thêm tài khoản
+function ShowAddModal(id) {
+    $.ajax({
+        url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        data: id,
+        success: function (response) { // request returns successed
+            $('#common-modal').html(response);
 
-function ShowAddModal(event) {
-    event.preventDefault();
-    $('#common-modal').modal('show');
+            if (id == 0) {
+                $('#title').html('Thêm người dùng');
+                $('#btn-save').html('Lưu người dùng')
+            }
+            else {
+                $('#title').html('Lưu người dùng');
+                $('#btn-save').html('Cập nhật');
+            }
+
+            $('#common-modal').modal('show');
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
+    });
 }
 
+
+/// reload lại danh sách tài khoản
 function ReloadList() {
     $.ajax({
         url: "/Account/Search", // Url of backend (can be python, php, etc..)*/
@@ -68,6 +91,22 @@ function ReloadList() {
         }, // data in json format
         success: function (response) { // request returns successed
             $('#account-list').html(response);
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
+    });
+}
+
+/// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
+function SubmitForm() {
+    event.preventDefault();
+    $.ajax({
+        url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        success: function (response) { // request returns successed
+            $('#common-modal').html(response);
+            $('#common-modal').modal('show');
         },
         error: function (response) { // // request returns failed
             console.log("error");

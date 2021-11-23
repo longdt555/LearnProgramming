@@ -78,12 +78,10 @@ namespace StoreManagement.Controllers
 
         }
 
-       
-        public IActionResult Add()
-        {
-            return PartialView("_AddParital");
 
-            //return View();
+        public IActionResult Add(int id)
+        {
+            return PartialView("_AddParital", customerService.GetById(id) ?? new AccountModel());
         }
         public IActionResult DoAdd(AccountModel accountModel)
         {
