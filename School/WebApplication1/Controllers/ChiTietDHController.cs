@@ -50,14 +50,14 @@ namespace StoreManagement.Controllers
         //}
 
         [Route("Them-ct-dh")]
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            return View();
+            return PartialView("_AddPartial", customerService.GetById(id) ?? new ChiTietDHModel());
         }
         public IActionResult DoAdd(ChiTietDHModel chiTietDHModel)
         {
             customerService.Add(chiTietDHModel);
-            return RedirectToAction("");
+            return Redirect("List");
         }
         public IActionResult Edit(int id)
         {

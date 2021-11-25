@@ -39,14 +39,14 @@ namespace StoreManagement.Controllers
             return View(data);
         }
 
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            return View();
+            return PartialView("_AddPartial",customerService.GetById(id) ?? new KhachHangModel());
         }
         public IActionResult DoAdd(KhachHangModel khachHangModel)
         {
             customerService.Add(khachHangModel);
-            return RedirectToAction("");
+            return Redirect("List");
         }
         //public IActionResult Edit(int id)
         //{

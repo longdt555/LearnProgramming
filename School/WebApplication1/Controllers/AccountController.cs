@@ -81,21 +81,21 @@ namespace StoreManagement.Controllers
 
         public IActionResult Add(int id)
         {
-            return PartialView("_AddParital", customerService.GetById(id) ?? new AccountModel());
+            return PartialView("_AddPartial", customerService.GetById(id) ?? new AccountModel());
         }
         public IActionResult DoAdd(AccountModel accountModel)
         {
             #region [Validate]
 
-            if (string.IsNullOrEmpty(accountModel.UserName))
-            {
-                return RedirectToAction("index", "error", new { message = "Không được bỏ trống tài khoản." });
-            };
+            //if (string.IsNullOrEmpty(accountModel.UserName))
+            //{
+            //    return RedirectToAction("index", "error", new { message = "Không được bỏ trống tài khoản." });
+            //};
 
-            if (string.IsNullOrEmpty(accountModel.Password))
-            {
-                return RedirectToAction("index", "error", new { message = "Không được bỏ trống mật khẩu." });
-            };
+            //if (string.IsNullOrEmpty(accountModel.Password))
+            //{
+            //    return RedirectToAction("index", "error", new { message = "Không được bỏ trống mật khẩu." });
+            //};
 
             #endregion [Validate]
 

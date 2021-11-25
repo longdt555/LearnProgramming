@@ -1,0 +1,48 @@
+﻿@model StoreManagement.Models.LoaiModel;
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="myForm">
+                <div class="form-group">
+                    <label asp-for="TenLoai" class="control-label">Tên Loại</label>
+                    <input value="@Model.TenLoai" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mota" class="control-label">Mô Tả</label>
+                    <input asp-for="Mota" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaLoaiCha" class="control-label">Mã Loại Cha</label>
+                    <input asp-for="MaLoaiCha" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedDate" class="control-label"></label>
+                    <input asp-for="CreatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedDate" class="control-label"></label>
+                    <input asp-for="UpdatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedBy" class="control-label"></label>
+                    <input asp-for="UpdatedBy" class="form-control" />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-save" onclick="SubmitForm()"></button>
+        </div>
+    </div>
+</div>

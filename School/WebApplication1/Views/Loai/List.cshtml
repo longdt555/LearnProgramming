@@ -17,20 +17,9 @@
             <div class="card-header">
                 <div class="row">
 
-                    <!--<form class="update col-md-2" action="https://localhost:44319/Loai/Add">-->
-                    @*<input type="submit" name="submit" class="btn btn-primary btn-round"> </input>*@
-                    <!--<input type="submit" name="submit" value="Thêm mới" id="them-loai" onclick="add(event)" class="btn btn-primary btn-round" />
-
-                    </form>-->
                     <form class="update col-md-2">
-                        <a href="#" class="btn btn-primary btn-round" onclick="Add(0)">Thêm Loại</a>
+                        <a href="#" class="btn btn-primary btn-round" onclick="ShowAddModal(0)">Thêm mới</a>
                     </form>
-                    
-
-                    @*<div class="table-responsive" id="loai-add">
-                        @await Html.PartialAsync("_ListPartial2", data)
-                    </div>*@
-
 
                     <div class="col-md-10">
                         <form name="timkiem" style="width: 300px; padding-top: 11px; " class="pull-right">
@@ -73,35 +62,11 @@
                     @await Html.PartialAsync("_ListPartial", data)
                 </div>
 
-                <div class="modal fade" id="myModal1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <a href="#" class="close" data-dismiss="modal">&times;</a>
-                                    <h3 class="modal-title">AddEdit</h3>
-                                </div>
-                                <div class="modal-body" id="myModalBodyDiv1">
-
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <input type="hidden" id="hiddenEmployeeId" />
-
-
             </div>
         </div>
     </div>
+
 </div>
-
-
-@*</div>*@
 <div style="margin: 0 auto">
 
     @await Html.PartialAsync("Pagination", paging)
@@ -111,11 +76,5 @@
 <script>
      var currentPage = @currentPage;
     var pageSize = @pageSize;
-
-    function Add(Id) {
-        $("#form")[0].reset();
-        $("#ModalTitle").html("Thêm Loại");
-        $("#MyModal1").modal();
-    }
 </script>
 

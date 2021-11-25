@@ -51,3 +51,60 @@ function deleteRecord(id) {
         }
     });
 };
+
+function ShowAddModal(id) {
+    $.ajax({
+        url: "/HangHoa/Add",
+        type: "GET",
+        data: id,
+        success: function (response) {
+            $('#common-modal').html(response);
+
+            if (id == 0) {
+                $('#title').html('Thêm Hàng Hóa');
+                $('#btn-save').html('Lưu Hàng Hóa');
+            }
+            else {
+                $('#title').html('Lưu Hàng Hóa');
+                $('#btn-save').html('Cập nhật');
+            }
+
+            $('#common-modal').modal('show');
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}
+
+function ReloadList() {
+    $.ajax({
+        url: "/HangHoa/Search",
+        type: "GET",
+        data: {
+            pageIndex: 1,
+            pageSize: 20
+        },
+        success: function (response) {
+            $('#hanghoa-list').html(response);
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}
+
+function SubmitForm() {
+    event.preventDefault();
+    $.ajax({
+        url: "/HangHoa/Add",
+        type: "GET",
+        success: function (response) {
+            $('#common-modal').html(response);
+            $('#common-modal').modal('show');
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}

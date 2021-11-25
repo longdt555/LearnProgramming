@@ -46,15 +46,15 @@ namespace StoreManagement.Controllers
         }
 
 
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            return RedirectToAction("_AddParital");
+            return PartialView("_AddPartial", _service.GetById(id) ?? new LoaiModel());
         }
 
         public IActionResult DoAdd(LoaiModel loaiModel)
         {
             _service.Add(loaiModel);
-            return RedirectToAction("");
+            return Redirect("List");
         }
         public IActionResult Edit(int id)
         {

@@ -52,3 +52,61 @@ function deleteRecord(id) {
         }
     });
 };
+
+function ShowAddModal(id) {
+    debugger;
+    $.ajax({
+        url: "/KhachHang/Add",
+        type: "GET",
+        data: id,
+        success: function (response) {
+            $('#common-modal').html(response);
+
+            if (id == 0) {
+                $('#title').html('Thêm Khách Hàng');
+                $('#btn-save').html('Lưu Khách Hàng');
+            }
+            else {
+                $('#title').html('Lưu Khách Hàng');
+                $('#btn-save').html('Cập nhật');
+            }
+
+            $('#common-modal').modal('show');
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}
+
+function ReloadList() {
+    $.ajax({
+        url: "/KhachHang/Search",
+        type: "GET",
+        data: {
+            pageIndex: 1,
+            pageSize: 20
+        },
+        success: function (response) {
+            $('#khachhang-list').html(response);
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}
+
+function SubmitForm() {
+    event.preventDefault();
+    $.ajax({
+        url: "/KhachHang/Add",
+        type: "GET",
+        success: function (response) {
+            $('#common-modal').html(response);
+            $('#common-modal').modal('show');
+        },
+        error: function (response) {
+            console.log("error");
+        }
+    });
+}

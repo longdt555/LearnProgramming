@@ -52,18 +52,40 @@ function deleteRecord(id) {
     });
 };
 
-function add(event) {
-    event.preventDefault();
+function ShowAddModal(id) {
+    $.ajax({
+        url: "/Loai/Add", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        data: id,
+        success: function (response) { // request returns successed
+            $('#common-modal').html(response);
 
-    var searchTxt = $('#search-loai').val();
+            if (id == 0) {
+                $('#title').html('Thêm Loại');
+                $('#btn-save').html('Lưu Loại');
+            }
+            else {
+                $('#title').html('Lưu Loại');
+                $('#btn-save').html('Cập nhật');
+            }
 
+            $('#common-modal').modal('show');
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
+    });
+}
+
+
+/// reload lại danh sách tài khoản
+function ReloadList() {
     $.ajax({
         url: "/Loai/Search", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
         data: {
             pageIndex: 1,
-            pageSize: 20,
-            name: searchTxt
+            pageSize: 20
         }, // data in json format
         success: function (response) { // request returns successed
             $('#loai-list').html(response);
@@ -72,13 +94,21 @@ function add(event) {
             console.log("error");
         }
     });
-};
+}
 
-var addEdit = function (id) {
-
-    //var url = "/Loai/addEdit?Id=" + id;
-
-    $("#myModalBodyDiv1").load(url, function () {
-        $("#myModal1").modal("show");
+/// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
+function SubmitForm() {
+    event.preventDefault();
+    $.ajax({
+        url: "/Loai/Add", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        success: function (response) { // request returns successed
+            $('#common-modal').html(response);
+            $('#common-modal').modal('show');
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
     });
-};
+}
+

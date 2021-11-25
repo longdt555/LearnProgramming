@@ -1,0 +1,56 @@
+﻿@model StoreManagement.Models.DonHangModel;
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="myForm">
+                <div class="form-group">
+                    <label asp-for="PhiVanChuyen" class="control-label">Phí Vận Chuyển</label>
+                    <input value="@Model.PhiVanChuyen" class="form-control" longProp="phiVanChuyen" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThanhTien" class="control-label">Thành Tiền</label>
+                    <input asp-for="ThanhTien" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="TongTien" class="control-label">Tổng Tiền</label>
+                    <input asp-for="TongTien" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrangThaiDonHang" class="control-label">Trạng Thái Đơn Hàng</label>
+                    <input asp-for="TrangThaiDonHang" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrangThaiThanhToan" class="control-label">Trạng Thái Thanh Toán</label>
+                    <input asp-for="TrangThaiThanhToan" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedDate" class="control-label"></label>
+                    <input asp-for="CreatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedDate" class="control-label"></label>
+                    <input asp-for="UpdatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedBy" class="control-label"></label>
+                    <input asp-for="UpdatedBy" class="form-control" />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-save" onclick="SubmitForm()"></button>
+        </div>
+    </div>
+</div>

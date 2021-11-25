@@ -42,14 +42,14 @@ namespace StoreManagement.Controllers
         }
 
      
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            return View();
+            return PartialView("_AddPartial", customerService.GetById(id) ?? new DonHangModel());
         }
         public IActionResult DoAdd(DonHangModel donHangModel)
         {
             customerService.Add(donHangModel);
-            return RedirectToAction("");
+            return Redirect("List");
         }
         public IActionResult Edit(int id)
         {

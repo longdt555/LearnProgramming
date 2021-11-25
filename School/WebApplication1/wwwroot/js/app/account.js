@@ -53,6 +53,8 @@ function deleteRecord(id) {
     });
 };
 
+
+
 /// hiển thị modal thêm tài khoản
 function ShowAddModal(id) {
     $.ajax({
@@ -64,7 +66,7 @@ function ShowAddModal(id) {
 
             if (id == 0) {
                 $('#title').html('Thêm người dùng');
-                $('#btn-save').html('Lưu người dùng')
+                $('#btn-save').html('Lưu người dùng');
             }
             else {
                 $('#title').html('Lưu người dùng');

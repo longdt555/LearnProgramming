@@ -66,3 +66,8 @@
         <a style="color:white" asp-action="">Back to List</a>
     </div>
 </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

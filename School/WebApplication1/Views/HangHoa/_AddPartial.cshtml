@@ -1,0 +1,68 @@
+﻿@model StoreManagement.Models.HangHoaModel;
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="myForm">
+                <div class="form-group">
+                    <label asp-for="TenHH" class="control-label">Tên Hàng Hóa</label>
+                    <input id="TenHH" value="@Model.TenHH" class="form-control" longProp="tenHH"/> 
+                </div>
+                <div class="form-group">
+                    <label asp-for="TenLoai" class="control-label">Tên Loại</label>
+                    <input id="TenLoai" asp-for="TenLoai" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SoLuong" class="control-label">Số Lượng</label>
+                    <input id="soluong" asp-for="SoLuong" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="DonGia" class="control-label">Đơn Giá</label>
+                    <input asp-for="DonGia" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="GiamGia" class="control-label">Giảm Giá</label>
+                    <input asp-for="GiamGia" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChiTiet" class="control-label">Chi Tiết</label>
+                    <input asp-for="ChiTiet" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdLoai" class="control-label">Id Loại</label>
+                    <input asp-for="IdLoai" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaLoai" class="control-label">Mã Loại</label>
+                    <input asp-for="MaLoai" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedDate" class="control-label"></label>
+                    <input asp-for="CreatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedDate" class="control-label"></label>
+                    <input asp-for="UpdatedDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedBy" class="control-label"></label>
+                    <input asp-for="UpdatedBy" class="form-control" />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-save" onclick="SubmitForm()"></button>
+        </div>
+    </div>
+</div>
