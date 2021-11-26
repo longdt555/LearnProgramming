@@ -59,11 +59,8 @@ function deleteRecord(id) {
     });
 };
 
-
-
 /// hiển thị modal thêm tài khoản
 function ShowAddModal(id) {
-    debugger;
     $.ajax({
         url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)

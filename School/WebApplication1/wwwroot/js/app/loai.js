@@ -75,7 +75,7 @@ function ShowAddModal(id) {
             console.log("error");
         }
     });
-}
+};
 
 
 /// reload lại danh sách tài khoản
@@ -94,14 +94,22 @@ function ReloadList() {
             console.log("error");
         }
     });
-}
+};
 
 /// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
 function SubmitForm() {
     event.preventDefault();
+    debugger;
+    var model = {
+        TenLoai: 'TenLoai',
+        Mota: $('#Mota').val(),
+        MaLoaiCha: 1
+    };
+
     $.ajax({
-        url: "/Loai/Add", // Url of backend (can be python, php, etc..)*/
-        type: "GET", // data type (can be get, post, put, delete)
+        url: "/Loai/DoAdd", // Url of backend (can be python, php, etc..)*/
+        type: "POST", // data type (can be get, post, put, delete)
+        data: { loaiModel: model },
         success: function (response) { // request returns successed
             $('#common-modal').html(response);
             $('#common-modal').modal('show');
@@ -110,7 +118,4 @@ function SubmitForm() {
             console.log("error");
         }
     });
-}
-
-
-
+};
