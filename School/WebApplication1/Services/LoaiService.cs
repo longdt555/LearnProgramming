@@ -92,11 +92,7 @@ namespace StoreManagement.Services
             return DBContext().Loais.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
-        public void Print()
-        {
-            Console.WriteLine("ko");
-        }
-
+     
         //public List<LoaiModel> Search(string search)
         //{
         //    var loai = (from l in DBContext().Loais

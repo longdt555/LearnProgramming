@@ -29,6 +29,12 @@ function search(event) {
     });
 };
 
+//function doAdd(accountModel) {
+//    accountModel.preventDefault();
+
+//    var acc = $('#')
+//}
+
 /// xóa tài khoản đồng thời reload lại danh sách tài khoản
 function deleteRecord(id) {
     var searchTxt = $('#search-Account').val();
@@ -57,10 +63,11 @@ function deleteRecord(id) {
 
 /// hiển thị modal thêm tài khoản
 function ShowAddModal(id) {
+    debugger;
     $.ajax({
         url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
-        data: id,
+        data: {id: id},
         success: function (response) { // request returns successed
             $('#common-modal').html(response);
 

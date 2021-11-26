@@ -6,6 +6,7 @@ using StoreManagement.Common.Helpers;
 using StoreManagement.Data;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using StoreManagement.Context;
 
 namespace StoreManagement.Controllers
 {
@@ -81,26 +82,29 @@ namespace StoreManagement.Controllers
 
         public IActionResult Add(int id)
         {
-            return PartialView("_AddPartial", customerService.GetById(id) ?? new AccountModel());
+            var acc = customerService.GetById(id);
+            return PartialView("_AddPartial", acc ?? new AccountModel());
         }
+        //public IActionResult DoAdd(AccountModel accountModel)
+        //{
+        //    customerService.Add(accountModel);
+        //    return Redirect("List");
+        //}
+
         public IActionResult DoAdd(AccountModel accountModel)
         {
-            #region [Validate]
-
-            //if (string.IsNullOrEmpty(accountModel.UserName))
-            //{
-            //    return RedirectToAction("index", "error", new { message = "Không được bỏ trống tài khoản." });
-            //};
-
-            //if (string.IsNullOrEmpty(accountModel.Password))
-            //{
-            //    return RedirectToAction("index", "error", new { message = "Không được bỏ trống mật khẩu." });
-            //};
-
-            #endregion [Validate]
+            //AccountModel model = new AccountModel();
+            //model.UserName = accountModel.UserName;
+            //model.Password = accountModel.Password;
+            //model.Role = accountModel.Role;
+            //model.CreatedBy = accountModel.CreatedBy;
+            //model.CreatedDate = accountModel.CreatedDate;
+            //model.UpdatedBy = accountModel.UpdatedBy;
+            //model.UpdatedDate = accountModel.UpdatedDate;
 
             customerService.Add(accountModel);
-            return Redirect("List");
+
+            return Json(accountModel);
         }
         public IActionResult Edit(int id)
         {

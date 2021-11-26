@@ -54,6 +54,7 @@ function deleteRecord(id) {
 };
 
 function ShowAddModal(id) {
+    //debugger;
     $.ajax({
         url: "/ChiTietDH/Add",
         type: "GET",

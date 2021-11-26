@@ -106,20 +106,32 @@ namespace StoreManagement.Controllers
         }
         #endregion Hai
 
-        //#region add edit
+        public JsonResult SaveDataInDatabase(LoaiModel loaiModel)
+        {
+            var result = false;
+            try
+            {
+                if (loaiModel.Id > 0)
+                {
+                    var loai = db.Loais.SingleOrDefault(x => x.IsDeleted == false && x.Id == loaiModel.Id);
+                    loai.TenLoai = loaiModel.TenLoai;
+                    loai.Mota = loaiModel.Mota;
+                    loai.MaLoaiCha = loaiModel.MaLoaiCha;
+                    loai.CreatedBy = loaiModel.CreatedBy;
+                    loai.CreatedDate = loaiModel.CreatedDate;
+                    loai.UpdatedDate = loaiModel.UpdatedDate;
+                    loai.UpdatedBy = loaiModel.UpdatedBy;
+                    db.SaveChanges();
+                    result = true;
+                }
+                
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
 
-        //public ActionResult AddEdit(int id)
-        //{
-        //    LoaiModel loaiModel = new LoaiModel();
-        //    if (id > 0)
-        //    {
-        //        _service.Edit(loaiModel);
-        //    }
-
-        //    return PartialView("Partial2", loaiModel);
-        //}
-
-        //#endregion
+            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
     }
 
 }

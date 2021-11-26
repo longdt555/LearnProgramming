@@ -49,7 +49,7 @@ namespace StoreManagement.Controllers
         //    return RedirectToAction("");
         //}
 
-        [Route("Them-ct-dh")]
+        //[Route("Them-ct-dh")]
         public IActionResult Add(int id)
         {
             return PartialView("_AddPartial", customerService.GetById(id) ?? new ChiTietDHModel());
