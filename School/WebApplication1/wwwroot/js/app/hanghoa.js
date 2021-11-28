@@ -96,30 +96,31 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
-
+    debugger;
     var hanghoamodel = {
         TenHH: $('#TenHH').val(),
-        TenLoai: $('#TenLoai').val(),
-        SoLuong: $('#SoLuong').val(),
-        DonGia: $('#DonGia').val(),
-        GiamGia: $('#GiamGia').val(),
-        ChiTiet: $('#ChiTiet').val(),
-        IdLoai: $('#IdLoai').val(),
-        MaLoai: $('#MaLoai').val(),
-        CreatedBy: $('#CreatedBy').val,
-        CreatedDate: $('#CreatedDate').val(),
-        UpdatedDate: $('#UpdatedDate').val(),
-        UpdatedBy: $('#UpdatedBy').val()
+        Id: $('#IdHangHoa').val(),
+        //TenLoai: $('#TenLoai').val(),
+        //SoLuong: $('#SoLuong').val(),
+        //DonGia: $('#DonGia').val(),
+        //GiamGia: $('#GiamGia').val(),
+        //ChiTiet: $('#ChiTiet').val(),
+        //IdLoai: $('#IdLoai').val(),
+        //MaLoai: $('#MaLoai').val(),
+        //CreatedBy: $('#CreatedBy').val,
+        //CreatedDate: $('#CreatedDate').val(),
+        //UpdatedDate: $('#UpdatedDate').val(),
+        //UpdatedBy: $('#UpdatedBy').val()
     };
 
     $.ajax({
         url: "/HangHoa/DoAdd",
         type: "POST",
         data: {
-            hangHoaModel: hanghoamodel,
+            hangHoaModel: hanghoamodel
         },
         success: function (response) {
-            $('#hanghoa-list').html(response);
+            ReloadList();
         },
         error: function (response) {
             console.log("error");

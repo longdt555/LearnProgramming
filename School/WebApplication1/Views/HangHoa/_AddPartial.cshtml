@@ -10,9 +10,12 @@
         </div>
         <div class="modal-body">
             <form id="myForm">
+                <div class="form-group" style="">
+                    <input id="IdHangHoa" value="@Model.Id" class="form-control" />
+                </div>
                 <div class="form-group">
                     <label asp-for="TenHH" class="control-label">Tên Hàng Hóa</label>
-                    <input id="TenHH" value="@Model.TenHH" class="form-control"/> 
+                    <input id="TenHH" value="@Model.TenHH" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label asp-for="TenLoai" class="control-label">Tên Loại</label>

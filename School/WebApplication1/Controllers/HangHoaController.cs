@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System.Linq;
+using StoreManagement.Common;
 
 namespace StoreManagement.Controllers
 {
@@ -20,20 +22,30 @@ namespace StoreManagement.Controllers
 
         public IActionResult Add(int id)
         {
-            return PartialView("_AddPartial",customerService.GetById(id) ?? new HangHoaModel());
+            return PartialView("_AddPartial", customerService.GetById(id) ?? new HangHoaModel());
         }
         public IActionResult DoAdd(HangHoaModel hangHoaModel)
         {
             if (hangHoaModel.Id == 0)
             {
                 customerService.Add(hangHoaModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
             }
             else
             {
                 customerService.Edit(hangHoaModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.UpdateSuccessed
+                });
             }
-            return Redirect("List");
         }
+
         public IActionResult Edit(int id)
         {
             var hangHoa = customerService.GetById(id);
