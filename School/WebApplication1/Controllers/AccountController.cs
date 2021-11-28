@@ -85,27 +85,27 @@ namespace StoreManagement.Controllers
             var acc = customerService.GetById(id);
             return PartialView("_AddPartial", acc ?? new AccountModel());
         }
-        //public IActionResult DoAdd(AccountModel accountModel)
-        //{
-        //    customerService.Add(accountModel);
-        //    return Redirect("List");
-        //}
-
         public IActionResult DoAdd(AccountModel accountModel)
         {
-            //AccountModel model = new AccountModel();
-            //model.UserName = accountModel.UserName;
-            //model.Password = accountModel.Password;
-            //model.Role = accountModel.Role;
-            //model.CreatedBy = accountModel.CreatedBy;
-            //model.CreatedDate = accountModel.CreatedDate;
-            //model.UpdatedBy = accountModel.UpdatedBy;
-            //model.UpdatedDate = accountModel.UpdatedDate;
-
             customerService.Add(accountModel);
-
-            return Json(accountModel);
+            return Redirect("List");
         }
+
+        //public IActionResult DoAdd(AccountModel accountModel)
+        //{
+        //    //AccountModel model = new AccountModel();
+        //    //model.UserName = accountModel.UserName;
+        //    //model.Password = accountModel.Password;
+        //    //model.Role = accountModel.Role;
+        //    //model.CreatedBy = accountModel.CreatedBy;
+        //    //model.CreatedDate = accountModel.CreatedDate;
+        //    //model.UpdatedBy = accountModel.UpdatedBy;
+        //    //model.UpdatedDate = accountModel.UpdatedDate;
+
+        //    customerService.Add(accountModel);
+
+        //    return Json(accountModel);
+        //}
         public IActionResult Edit(int id)
         {
             var acc = customerService.GetById(id);

@@ -57,7 +57,7 @@ function ShowAddModal(id) {
     $.ajax({
         url: "/DonHang/Add",
         type: "GET",
-        data: id,
+        data: { id: id },
         success: function (response) {
             $('#common-modal').html(response);
 
@@ -96,12 +96,27 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
+
+    var model = {
+        PhiVanChuyen: $('#PhiVanChuyen').val(),
+        ThanhTien: $('#ThanhTien').val(),
+        TongTien: $('#TongTien').val(),
+        TrangThaiDonHang: $('#TrangThaiDonHang').val(),
+        TrangThaiThanhToan: $('#TrangThaiThanhToan').val(),
+        CreatedBy: $('#CreatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val()
+    };
+
     $.ajax({
-        url: "/DonHang/Add",
-        type: "GET",
+        url: "/DonHang/DoAdd",
+        type: "POST",
+        data: {
+            donHangModel: model,
+        },
         success: function (response) {
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
+            $('#donhang-list').html(response);
         },
         error: function (response) {
             console.log("error")

@@ -25,21 +25,30 @@ namespace StoreManagement.Controllers
 
         public IActionResult DoAdd(LoaiModel loaiModel)
         {
-            _service.Add(loaiModel);
+            if (loaiModel.Id == 0)
+            {
+                _service.Add(loaiModel);
+            }
+            else
+            {
+                _service.Edit(loaiModel);
+            }
+
             return Redirect("List");
         }
 
         public IActionResult Edit(int id)
         {
-            var loai = _service.GetById(id);
-            if (loai == null) return BadRequest();
-            return View(loai);
+            return PartialView("_EditPartial", _service.GetById(id) ?? new LoaiModel());
+
         }
 
         public IActionResult DoEdit(LoaiModel loaiModel)
         {
             _service.Edit(loaiModel);
-            return RedirectToAction("");
+            //return RedirectToAction("");
+            return Redirect("List");
+
         }
 
         #region Hai
@@ -50,7 +59,7 @@ namespace StoreManagement.Controllers
             if (!isAuthenticated()) return Redirect("login");
 
             var searchModel = new SearchParam<LoaiParam>(1, 20, new LoaiParam());
-            var customers = _service.GetAll(searchModel);            
+            var customers = _service.GetAll(searchModel);
             return View(customers);
         }
 

@@ -17,31 +17,21 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
-        //[Route("hh")]
-        //[Route("hanghoa")]
-        public IActionResult Index(int pg = 1)
-        {
-            var customers = customerService.GetAll();
-            const int pageSize = 5;
-            if (pg < 1)
-            {
-                pg = 1;
-            }
-            int recsCount = customers.Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-            return View(data);
-        }     
-    
+
         public IActionResult Add(int id)
         {
             return PartialView("_AddPartial",customerService.GetById(id) ?? new HangHoaModel());
         }
         public IActionResult DoAdd(HangHoaModel hangHoaModel)
         {
-            customerService.Add(hangHoaModel);
+            if (hangHoaModel.Id == 0)
+            {
+                customerService.Add(hangHoaModel);
+            }
+            else
+            {
+                customerService.Edit(hangHoaModel);
+            }
             return Redirect("List");
         }
         public IActionResult Edit(int id)

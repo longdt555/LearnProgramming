@@ -56,7 +56,7 @@ function ShowAddModal(id) {
     $.ajax({
         url: "/HangHoa/Add",
         type: "GET",
-        data: id,
+        data: { id: id },
         success: function (response) {
             $('#common-modal').html(response);
 
@@ -96,15 +96,33 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
+
+    var hanghoamodel = {
+        TenHH: $('#TenHH').val(),
+        TenLoai: $('#TenLoai').val(),
+        SoLuong: $('#SoLuong').val(),
+        DonGia: $('#DonGia').val(),
+        GiamGia: $('#GiamGia').val(),
+        ChiTiet: $('#ChiTiet').val(),
+        IdLoai: $('#IdLoai').val(),
+        MaLoai: $('#MaLoai').val(),
+        CreatedBy: $('#CreatedBy').val,
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val()
+    };
+
     $.ajax({
-        url: "/HangHoa/Add",
-        type: "GET",
+        url: "/HangHoa/DoAdd",
+        type: "POST",
+        data: {
+            hangHoaModel: hanghoamodel,
+        },
         success: function (response) {
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
+            $('#hanghoa-list').html(response);
         },
         error: function (response) {
             console.log("error");
         }
     });
-}
+};

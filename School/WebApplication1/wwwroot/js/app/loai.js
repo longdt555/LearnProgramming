@@ -56,7 +56,7 @@ function ShowAddModal(id) {
     $.ajax({
         url: "/Loai/Add", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
-        data: id,
+        data: { id: id },
         success: function (response) { // request returns successed
             $('#common-modal').html(response);
 
@@ -77,6 +77,30 @@ function ShowAddModal(id) {
     });
 };
 
+function ShowEditModal(id) {
+    $.ajax({
+        url: "/Loai/Edit", // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        data: { id: id },
+        success: function (response) { // request returns successed
+            $('#common-modal').html(response);
+
+            if (id == 0) {
+                $('#title').html('Thêm Loại');
+                $('#btn-save').html('Lưu Loại');
+            }
+            else {
+                $('#title').html('Lưu Loại');
+                $('#btn-save').html('Cập nhật');
+            }
+
+            $('#common-modal').modal('show');
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
+    });
+};
 
 /// reload lại danh sách tài khoản
 function ReloadList() {
@@ -97,25 +121,73 @@ function ReloadList() {
 };
 
 /// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
-function SubmitForm() {
+function SubmitForm(id) {
+    //debugger;
     event.preventDefault();
-    debugger;
     var model = {
-        TenLoai: 'TenLoai',
+        TenLoai: $('#TenLoai').val(),
         Mota: $('#Mota').val(),
-        MaLoaiCha: 1
+        MaLoaiCha: $('#MaLoaiCha').val(),
+        CreatedBy: $('#CreatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val()
     };
+    if (id == 0) {
+        $.ajax({
+            url: "/Loai/DoAdd", // Url of backend (can be python, php, etc..)*/
+            type: "POST", // data type (can be get, post, put, delete)
+            data: {
+                loaiModel: model,
+            },
+            success: function () { // request returns successed
+                window.location.reload();
+            },
+            error: function () { // // request returns failed
+                console.log("error");
+            }
+        });
+    }
+    else {
+        $.ajax({
+            url: "/Loai/DoEdit", // Url of backend (can be python, php, etc..)*/
+            type: "POST", // data type (can be get, post, put, delete)
+            data: {
+                loaiModel: model,
+            },
+            success: function () { // request returns successed
+                window.location.reload();
+            },
+            error: function () { // // request returns failed
+                console.log("error");
+            }
+        });
+    }
 
-    $.ajax({
-        url: "/Loai/DoAdd", // Url of backend (can be python, php, etc..)*/
-        type: "POST", // data type (can be get, post, put, delete)
-        data: { loaiModel: model },
-        success: function (response) { // request returns successed
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
-        },
-        error: function (response) { // // request returns failed
-            console.log("error");
-        }
-    });
 };
+
+//function Submit() {
+//    event.preventDefault();
+//    var model = {
+//        TenLoai: $('#TenLoai').val(),
+//        Mota: $('#Mota').val(),
+//        MaLoaiCha: $('#MaLoaiCha').val(),
+//        CreatedBy: $('#CreatedBy').val(),
+//        CreatedDate: $('#CreatedDate').val(),
+//        UpdatedDate: $('#UpdatedDate').val(),
+//        UpdatedBy: $('#UpdatedBy').val()
+//    };
+//    $.ajax({
+//        url: "/Loai/DoEdit", // Url of backend (can be python, php, etc..)*/
+//        type: "POST", // data type (can be get, post, put, delete)
+//        data: {
+//            loaiModel: model,
+//        },
+//        success: function () { // request returns successed
+//            window.location.reload();
+//        },
+//        error: function () { // // request returns failed
+//            console.log("error");
+//        }
+//    });
+//}

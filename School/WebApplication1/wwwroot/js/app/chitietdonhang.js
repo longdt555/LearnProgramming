@@ -58,7 +58,7 @@ function ShowAddModal(id) {
     $.ajax({
         url: "/ChiTietDH/Add",
         type: "GET",
-        data: id,
+        data: { id: id },
         success: function (response) {
             $('#common-modal').html(response);
 
@@ -98,12 +98,26 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
+
+    var model = {
+        MaDH: $('#MaDH').val(),
+        MaHH: $('#MaHH').val(),
+        DonGia: $('#DonGia').val(),
+        SoLuong: $('#SoLuong').val(),
+        CreatedBy: $('#CreatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val(),
+    };
+
     $.ajax({
-        url: "/ChiTietDH/Add",
-        type: "GET",
+        url: "/ChiTietDH/DoAdd",
+        type: "POST",
+        data: {
+            chiTietDHModel: model,
+        },
         success: function (response) {
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
+            $('#chitietdonhang-list').html(response);
         },
         error: function (response) {
             console.log("error");

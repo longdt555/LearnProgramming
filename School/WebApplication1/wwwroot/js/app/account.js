@@ -29,11 +29,6 @@ function search(event) {
     });
 };
 
-//function doAdd(accountModel) {
-//    accountModel.preventDefault();
-
-//    var acc = $('#')
-//}
 
 /// xóa tài khoản đồng thời reload lại danh sách tài khoản
 function deleteRecord(id) {
@@ -107,12 +102,25 @@ function ReloadList() {
 /// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
 function SubmitForm() {
     event.preventDefault();
+
+    var model = {
+        UserName: $('#UserName').val(),
+        Password: $('#Password').val(),
+        Role: $('#Role').val(),
+        CreatedBy: $('#CreatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+    };
+
     $.ajax({
-        url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
-        type: "GET", // data type (can be get, post, put, delete)
+        url: "/Account/DoAdd", // Url of backend (can be python, php, etc..)*/
+        type: "POST", // data type (can be get, post, put, delete)
+        data: {
+            accountModel: model,
+        },
         success: function (response) { // request returns successed
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
+            $('#account-list').html(response);
         },
         error: function (response) { // // request returns failed
             console.log("error");

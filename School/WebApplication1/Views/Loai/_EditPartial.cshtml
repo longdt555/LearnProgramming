@@ -1,4 +1,4 @@
-﻿@model StoreManagement.Models.DonHangModel;
+﻿@model StoreManagement.Models.LoaiModel;
 
 <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -11,24 +11,16 @@
         <div class="modal-body">
             <form id="myForm">
                 <div class="form-group">
-                    <label asp-for="PhiVanChuyen" class="control-label">Phí Vận Chuyển</label>
-                    <input id="PhiVanChuyen" value="@Model.PhiVanChuyen" class="form-control" longProp="phiVanChuyen" />
+                    <label asp-for="TenLoai" class="control-label">Tên Loại</label>
+                    <input id="TenLoai" value="@Model.TenLoai" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="ThanhTien" class="control-label">Thành Tiền</label>
-                    <input id="ThanhTien" asp-for="ThanhTien" class="form-control" />
+                    <label asp-for="Mota" class="control-label">Mô Tả</label>
+                    <input id="Mota" asp-for="Mota" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="TongTien" class="control-label">Tổng Tiền</label>
-                    <input id="TongTien" asp-for="TongTien" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="TrangThaiDonHang" class="control-label">Trạng Thái Đơn Hàng</label>
-                    <input id="TrangThaiDonHang" asp-for="TrangThaiDonHang" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="TrangThaiThanhToan" class="control-label">Trạng Thái Thanh Toán</label>
-                    <input id="TrangThaiThanhToan" asp-for="TrangThaiThanhToan" class="form-control" />
+                    <label asp-for="MaLoaiCha" class="control-label">Mã Loại Cha</label>
+                    <input id="MaLoaiCha" asp-for="MaLoaiCha" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label asp-for="CreatedBy" class="control-label"></label>
@@ -50,7 +42,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="SubmitForm()"></button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-save" onclick="Submit()"></button>
         </div>
     </div>
 </div>

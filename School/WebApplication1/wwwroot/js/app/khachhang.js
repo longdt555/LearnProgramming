@@ -54,11 +54,10 @@ function deleteRecord(id) {
 };
 
 function ShowAddModal(id) {
-    debugger;
     $.ajax({
         url: "/KhachHang/Add",
         type: "GET",
-        data: id,
+        data: { id: id },
         success: function (response) {
             $('#common-modal').html(response);
 
@@ -98,12 +97,28 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
+
+    var model = {
+        HoTen: $('#HoTen').val(),
+        Email: $('#Email').val(),
+        MatKhau: $('#MatKhau').val(),
+        RandomKey: $('#RandomKey').val(),
+        DangHoatDong: $('#DangHoatDong').val(),
+        NhanQuangCao: $('#NhanQuangCao').val(),
+        CreatedBy: $('#CreatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
+        UpdatedBy: $('#UpdatedBy').val()
+    };
+
     $.ajax({
-        url: "/KhachHang/Add",
-        type: "GET",
+        url: "/KhachHang/DoAdd",
+        type: "POST",
+        data: {
+            khachHangModel: model,
+        },
         success: function (response) {
-            $('#common-modal').html(response);
-            $('#common-modal').modal('show');
+            $('#khachhang-list').html(response);
         },
         error: function (response) {
             console.log("error");

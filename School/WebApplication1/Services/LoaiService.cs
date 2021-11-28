@@ -42,6 +42,11 @@ namespace StoreManagement.Services
             data.TenLoai = loaiModel.TenLoai;
             data.Mota = loaiModel.Mota;
             data.MaLoaiCha = loaiModel.MaLoaiCha;
+            data.Id = loaiModel.Id;
+            data.CreatedBy = loaiModel.CreatedBy;
+            data.CreatedDate = loaiModel.CreatedDate;
+            data.UpdatedDate = loaiModel.UpdatedDate;
+            data.UpdatedBy = loaiModel.UpdatedBy;
 
             DBContext().Loais.Update(data);
             return DBContext().SaveChanges();
@@ -92,18 +97,5 @@ namespace StoreManagement.Services
             return DBContext().Loais.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
-     
-        //public List<LoaiModel> Search(string search)
-        //{
-        //    var loai = (from l in DBContext().Loais
-        //                select l);
-
-        //    if (!String.IsNullOrEmpty(search)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
-        //    {
-        //        loai = loai.Where(s => s.TenLoai.Contains(search)); //lọc theo chuỗi tìm kiếm
-        //    }
-
-        //    return loai.ToList();
-        //}
     }
 }
