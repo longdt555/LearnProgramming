@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Common;
 using StoreManagement.Context;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -23,46 +25,36 @@ namespace StoreManagement.Controllers
             this.customerService = customerService;
         }
 
-        public IActionResult Index(int pg = 1)
-        {
-            var customers = customerService.GetAll().ToList();
-            const int pageSize = 5;
-            if (pg < 1)
-            {
-                pg = 1;
-            }
-            int recsCount = customers.Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-            return View(data);
-        }
-
         public IActionResult Add(int id)
         {
-            return PartialView("_AddPartial",customerService.GetById(id) ?? new KhachHangModel());
+            return PartialView("_AddPartial", customerService.GetById(id) ?? new KhachHangModel());
         }
         public IActionResult DoAdd(KhachHangModel khachHangModel)
         {
-            customerService.Add(khachHangModel);
-            return Redirect("List");
+            if (khachHangModel.Id == 0)
+            {
+                customerService.Add(khachHangModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
+            }
+            else
+            {
+                customerService.Edit(khachHangModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
+            }
+
         }
-        //public IActionResult Edit(int id)
-        //{
-        //    var khachHang = customerService.GetById(id);
-        //    if (khachHang == null) return BadRequest();
-        //    return View(khachHang);
-        //}
-        //public IActionResult DoEdit(KhachHangModel khachHangModel)
-        //{
-        //    customerService.Edit(khachHangModel);
-        //    return RedirectToAction("");
-        //}
+
         public PartialViewResult Edit(int id)
         {
             var khachHang = customerService.GetById(id);
-            //if (khachHang == null) return BadRequest();
             return PartialView(khachHang);
         }
 
@@ -79,17 +71,17 @@ namespace StoreManagement.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("KhachHang")]
-        public IActionResult ListKhachHang()
+        public IActionResult ListKhachHang(int pageIndex, int pageSize, string name)
         {
             if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<KhachHangParam>(1, 20, new KhachHangParam());  //TEST
+            var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));  //TEST
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);
 
         }
 
-       
+
         public IActionResult Search(int pageIndex, int pageSize, string name)
         {
             var searchModel = new SearchParam<KhachHangParam>(pageIndex, pageSize, new KhachHangParam(name));
@@ -98,7 +90,7 @@ namespace StoreManagement.Controllers
             return PartialView("~/Views/KhachHang/_ListPartial.cshtml", customers.Data.ToList());
         }
 
-        
+
         public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
         {
             // delete record

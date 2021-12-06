@@ -61,10 +61,10 @@ namespace StoreManagement.Controllers
 
         //Hiện thị danh sách 
         [Route("HangHoa")]
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, string name)
         {
             if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<HangHoaParam>(1, 20, new HangHoaParam());
+            var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);

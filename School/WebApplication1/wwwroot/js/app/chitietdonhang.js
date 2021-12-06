@@ -100,6 +100,7 @@ function SubmitForm() {
     event.preventDefault();
 
     var model = {
+        Id: $('#Id').val(),
         MaDH: $('#MaDH').val(),
         MaHH: $('#MaHH').val(),
         DonGia: $('#DonGia').val(),
@@ -110,18 +111,39 @@ function SubmitForm() {
         UpdatedBy: $('#UpdatedBy').val(),
     };
 
-    $.ajax({
-        url: "/ChiTietDH/DoAdd",
-        type: "POST",
-        data: {
-            chiTietDHModel: model,
-        },
-        success: function (response) {
-            $('#chitietdonhang-list').html(response);
-        },
-        error: function (response) {
-            console.log("error");
-        }
-    });
+    if (model.MaDH == '' || model.MaDH == '0') {
+        alert("Không được bỏ trống Mã Đơn Hàng");
+    }
+    else if (model.MaHH == '' || model.MaHH == '0') {
+        alert("Không được bỏ trống Mã Hàng Hóa");
+    }
+    else if (model.DonGia == '' || model.DonGia == '0') {
+        alert("Không được bỏ trống Đơn Giá");
+    }
+    else if (model.SoLuong == '' || model.SoLuong == '0') {
+        alert("Không được bỏ trống Số Lượng");
+    }
+    else if (model.CreatedBy == '' || model.CreatedBy == '0') {
+        alert("Không được bỏ trống Created By");
+    }
+    else if (model.UpdatedBy == '' || model.UpdatedBy == '0') {
+        alert("Không được bỏ trống Updated By");
+    }
+    else {
+        $.ajax({
+            url: "/ChiTietDH/DoAdd",
+            type: "POST",
+            data: {
+                chiTietDHModel: model,
+            },
+            success: function (response) {
+                ReloadList();
+            },
+            error: function (response) {
+                console.log("error");
+            }
+        });
+    }
+
 }
 

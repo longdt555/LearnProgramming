@@ -30,7 +30,7 @@ function search(event) {
 };
 
 function deleteRecord(id) {
-   
+
     var searchTxt = $('#search-khachhang').val();
     var pIndex = currentPage;
     var pSize = pageSize;
@@ -99,6 +99,7 @@ function SubmitForm() {
     event.preventDefault();
 
     var model = {
+        Id: $('#Id').val(),
         HoTen: $('#HoTen').val(),
         Email: $('#Email').val(),
         MatKhau: $('#MatKhau').val(),
@@ -111,17 +112,44 @@ function SubmitForm() {
         UpdatedBy: $('#UpdatedBy').val()
     };
 
-    $.ajax({
-        url: "/KhachHang/DoAdd",
-        type: "POST",
-        data: {
-            khachHangModel: model,
-        },
-        success: function (response) {
-            $('#khachhang-list').html(response);
-        },
-        error: function (response) {
-            console.log("error");
-        }
-    });
+    if (model.HoTen == '') {
+        alert("Không được bỏ trống Họ Tên");
+    }
+    else if (model.Email == '') {
+        alert("Không được bỏ trống Email");
+    }
+    else if (model.MatKhau == '') {
+        alert("Không được bỏ trống Mật Khẩu");
+    }
+    else if (model.RandomKey == '') {
+        alert("Không được bỏ trống Random Key");
+    }
+    else if (model.DangHoatDong == '') {
+        alert("Không được bỏ trống Đang Hoạt Động");
+    }
+    else if (model.NhanQuangCao == '') {
+        alert("Không được bỏ trống Nhận Quảng Cáo");
+    }
+    else if (model.CreatedBy == '' || model.CreatedBy == '0') {
+        alert("Không được bỏ trống Created By");
+    }
+    else if (model.UpdatedBy == '' || model.UpdatedBy == '0') {
+        alert("Không được bỏ trống Updated By");
+    }
+    else {
+        $.ajax({
+            url: "/KhachHang/DoAdd",
+            type: "POST",
+            data: {
+                khachHangModel: model,
+            },
+            success: function (response) {
+                ReloadList();
+            },
+            error: function (response) {
+                console.log("error");
+            }
+        });
+    }
+
 }

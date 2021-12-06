@@ -1,19 +1,19 @@
-﻿@model Tuple<int, int,string>
+﻿@model Tuple<int, int, string>
 @{
     var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
-
 }
 <nav aria-label="Page navigation example" style="margin-top: 0;">
-    <p class="pull-left">Total records: @Model.Item1</p>
+    <p id="TotalRecords" class="pull-left">Total records: @Model.Item1</p>
     <ul class="pagination justify-content-end">
         <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1">Previous</a>
         </li>
+        
         @for (var i = 1; i <= totalPages; i++)
         {
             var active = "";
             if (i == 1) active = "active";
-            <li class="page-item @active"><a class="page-link" href="/@Model.Item3?pageIndex=@i&pageSize=@Model.Item2">@i</a></li>
+            <li class="page-item @active"><a @*id="bodyClick"*@ class="page-link" @*onclick="DoPaging(@i,@Model.Item2,@Model.Item3)"*@ href="@Model.Item3?pageIndex=@i&pageSize=@Model.Item2">@i</a></li>
         }
 
         <li class="page-item">
@@ -21,3 +21,5 @@
         </li>
     </ul>
 </nav>
+
+@*<script src="~/js/paging.js"></script>*@

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Common;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System.Diagnostics;
@@ -18,46 +20,31 @@ namespace StoreManagement.Controllers
             _logger = logger;
             this.customerService = customerService;
         }
-        //[Route("ChiTietDonHang")]
 
-        public IActionResult Index(int pg = 1)
-        {
-            var customers = customerService.GetAll();
-            const int pageSize = 5;
-            if (pg < 1)
-            {
-                pg = 1;
-            }
-            int recsCount = customers.Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-            return View(data);
-        }
-      
-        //[Route("ChiTietDonHang")]
-
-        //public IActionResult Details()
-        //{
-        //    var customers = customerService.GetAll();
-        //    return View(customers);
-        //}
-        //public IActionResult Delete(int id)
-        //{
-        //    customerService.Delete(id);
-        //    return RedirectToAction("");
-        //}
-
-        //[Route("Them-ct-dh")]
         public IActionResult Add(int id)
         {
             return PartialView("_AddPartial", customerService.GetById(id) ?? new ChiTietDHModel());
         }
         public IActionResult DoAdd(ChiTietDHModel chiTietDHModel)
         {
-            customerService.Add(chiTietDHModel);
-            return Redirect("List");
+            if (chiTietDHModel.Id == 0)
+            {
+                customerService.Add(chiTietDHModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
+            }
+            else
+            {
+                customerService.Edit(chiTietDHModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.UpdateSuccessed
+                });
+            }
         }
         public IActionResult Edit(int id)
         {
@@ -74,10 +61,10 @@ namespace StoreManagement.Controllers
         [Route("ChiTietDH")]
 
         //Hiển thị danh sách người dùng mặc định
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, int maDH)
         {
             if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<ChiTietDonHangParam>(1, 20, new ChiTietDonHangParam());
+            var searchModel = new SearchParam<ChiTietDonHangParam>(pageIndex, pageSize, new ChiTietDonHangParam(maDH));
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);

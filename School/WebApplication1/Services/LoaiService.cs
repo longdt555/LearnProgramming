@@ -18,6 +18,9 @@ namespace StoreManagement.Services
 
         public int Add(LoaiModel loaiModel)
         {
+            var today = DateTime.Now;
+            loaiModel.CreatedDate = today;
+            loaiModel.UpdatedDate = today;
             DBContext().Loais.Add(loaiModel);
             return DBContext().SaveChanges();
         }

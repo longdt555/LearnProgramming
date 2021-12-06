@@ -10,6 +10,9 @@
         </div>
         <div class="modal-body">
             <form id="myForm">
+                <div class="form-group" style="display:none">
+                    <input id="Id" value="@Model.Id" class="form-control"/>
+                </div>
                 <div class="form-group">
                     <label asp-for="MaDH" class="control-label">Mã Đơn Hàng</label>
                     <input id="MaDH" value="@Model.MaDH" class="form-control" longProp="maDH" />
@@ -29,14 +32,6 @@
                 <div class="form-group">
                     <label asp-for="CreatedBy" class="control-label"></label>
                     <input id="CreatedBy" asp-for="CreatedBy" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="CreatedDate" class="control-label"></label>
-                    <input id="CreatedDate" asp-for="CreatedDate" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="UpdatedDate" class="control-label"></label>
-                    <input id="UpdatedDate" asp-for="UpdatedDate" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label asp-for="UpdatedBy" class="control-label"></label>

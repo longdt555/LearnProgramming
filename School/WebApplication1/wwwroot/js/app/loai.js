@@ -77,30 +77,6 @@ function ShowAddModal(id) {
     });
 };
 
-function ShowEditModal(id) {
-    $.ajax({
-        url: "/Loai/Edit", // Url of backend (can be python, php, etc..)*/
-        type: "GET", // data type (can be get, post, put, delete)
-        data: { id: id },
-        success: function (response) { // request returns successed
-            $('#common-modal').html(response);
-
-            if (id == 0) {
-                $('#title').html('Thêm Loại');
-                $('#btn-save').html('Lưu Loại');
-            }
-            else {
-                $('#title').html('Lưu Loại');
-                $('#btn-save').html('Cập nhật');
-            }
-
-            $('#common-modal').modal('show');
-        },
-        error: function (response) { // // request returns failed
-            console.log("error");
-        }
-    });
-};
 
 /// reload lại danh sách tài khoản
 function ReloadList() {
@@ -121,10 +97,12 @@ function ReloadList() {
 };
 
 /// thực hiện lưu tài khoản đồng thời reload lại danh sách tài khoản
-function SubmitForm(id) {
-    //debugger;
+function SubmitForm() {
+    debugger;
     event.preventDefault();
+
     var model = {
+        Id: $('#Id').val(),
         TenLoai: $('#TenLoai').val(),
         Mota: $('#Mota').val(),
         MaLoaiCha: $('#MaLoaiCha').val(),
@@ -133,61 +111,36 @@ function SubmitForm(id) {
         UpdatedDate: $('#UpdatedDate').val(),
         UpdatedBy: $('#UpdatedBy').val()
     };
-    if (id == 0) {
+
+    if (model.TenLoai == '') {
+        alert("Không được bỏ trống Tên Loại");
+    }
+    else if (model.Mota == '') {
+        alert("Không được bỏ trống Mô Tả");
+    }
+    else if (model.MaLoaiCha == '' || model.MaLoaiCha == '0') {
+        alert("Không được bỏ trống Mã Loại Cha");
+    }
+    else if (model.CreatedBy == '' || model.CreatedBy == '0') {
+        alert("Không được bỏ trống Created By");
+    }
+    else if (model.UpdatedBy == '' || model.UpdatedBy == '0') {
+        alert("Không được bỏ trống Updated By");
+    }
+    else {
         $.ajax({
             url: "/Loai/DoAdd", // Url of backend (can be python, php, etc..)*/
             type: "POST", // data type (can be get, post, put, delete)
             data: {
                 loaiModel: model,
             },
-            success: function () { // request returns successed
-                window.location.reload();
+            success: function (response) { // request returns successed
+                ReloadList();
             },
-            error: function () { // // request returns failed
-                console.log("error");
-            }
-        });
-    }
-    else {
-        $.ajax({
-            url: "/Loai/DoEdit", // Url of backend (can be python, php, etc..)*/
-            type: "POST", // data type (can be get, post, put, delete)
-            data: {
-                loaiModel: model,
-            },
-            success: function () { // request returns successed
-                window.location.reload();
-            },
-            error: function () { // // request returns failed
+            error: function (response) { // // request returns failed
                 console.log("error");
             }
         });
     }
 
 };
-
-//function Submit() {
-//    event.preventDefault();
-//    var model = {
-//        TenLoai: $('#TenLoai').val(),
-//        Mota: $('#Mota').val(),
-//        MaLoaiCha: $('#MaLoaiCha').val(),
-//        CreatedBy: $('#CreatedBy').val(),
-//        CreatedDate: $('#CreatedDate').val(),
-//        UpdatedDate: $('#UpdatedDate').val(),
-//        UpdatedBy: $('#UpdatedBy').val()
-//    };
-//    $.ajax({
-//        url: "/Loai/DoEdit", // Url of backend (can be python, php, etc..)*/
-//        type: "POST", // data type (can be get, post, put, delete)
-//        data: {
-//            loaiModel: model,
-//        },
-//        success: function () { // request returns successed
-//            window.location.reload();
-//        },
-//        error: function () { // // request returns failed
-//            console.log("error");
-//        }
-//    });
-//}

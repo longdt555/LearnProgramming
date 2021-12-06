@@ -6,7 +6,8 @@ using StoreManagement.Common.Helpers;
 using StoreManagement.Data;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using StoreManagement.Context;
+using StoreManagement.Dtos.Respones;
+using StoreManagement.Common;
 
 namespace StoreManagement.Controllers
 {
@@ -87,25 +88,26 @@ namespace StoreManagement.Controllers
         }
         public IActionResult DoAdd(AccountModel accountModel)
         {
-            customerService.Add(accountModel);
-            return Redirect("List");
+            if (accountModel.Id == 0)
+            {
+                customerService.Add(accountModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
+            }
+            else
+            {
+                customerService.Edit(accountModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.UpdateSuccessed
+                });
+            }
         }
 
-        //public IActionResult DoAdd(AccountModel accountModel)
-        //{
-        //    //AccountModel model = new AccountModel();
-        //    //model.UserName = accountModel.UserName;
-        //    //model.Password = accountModel.Password;
-        //    //model.Role = accountModel.Role;
-        //    //model.CreatedBy = accountModel.CreatedBy;
-        //    //model.CreatedDate = accountModel.CreatedDate;
-        //    //model.UpdatedBy = accountModel.UpdatedBy;
-        //    //model.UpdatedDate = accountModel.UpdatedDate;
-
-        //    customerService.Add(accountModel);
-
-        //    return Json(accountModel);
-        //}
         public IActionResult Edit(int id)
         {
             var acc = customerService.GetById(id);
@@ -125,10 +127,10 @@ namespace StoreManagement.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Account")]
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, string name)
         {
             //if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<AccountParam>(1, 20, new AccountParam());
+            var searchModel = new SearchParam<AccountParam>(pageIndex, pageSize, new AccountParam(name));
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);

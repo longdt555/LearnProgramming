@@ -1,4 +1,6 @@
-﻿function searchReload(event) {
+﻿const { modifierPhases } = require("@popperjs/core");
+
+function searchReload(event) {
     event.preventDefault();
     var searchTxt = $('#search-HangHoa').val();
 
@@ -96,34 +98,61 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
-    debugger;
-    var hanghoamodel = {
+    //debugger;
+    var model = {
         TenHH: $('#TenHH').val(),
         Id: $('#IdHangHoa').val(),
-        //TenLoai: $('#TenLoai').val(),
-        //SoLuong: $('#SoLuong').val(),
-        //DonGia: $('#DonGia').val(),
-        //GiamGia: $('#GiamGia').val(),
-        //ChiTiet: $('#ChiTiet').val(),
-        //IdLoai: $('#IdLoai').val(),
-        //MaLoai: $('#MaLoai').val(),
+        TenLoai: $('#TenLoai').val(),
+        SoLuong: $('#SoLuong').val(),
+        DonGia: $('#DonGia').val(),
+        GiamGia: $('#GiamGia').val(),
+        ChiTiet: $('#ChiTiet').val(),
+        IdLoai: $('#IdLoai').val(),
+        MaLoai: $('#MaLoai').val(),
         //CreatedBy: $('#CreatedBy').val,
-        //CreatedDate: $('#CreatedDate').val(),
-        //UpdatedDate: $('#UpdatedDate').val(),
-        //UpdatedBy: $('#UpdatedBy').val()
+        //UpdatedBy: $('#UpdatedBy').val(),
+        CreatedDate: $('#CreatedDate').val(),
+        UpdatedDate: $('#UpdatedDate').val(),
     };
 
-    $.ajax({
-        url: "/HangHoa/DoAdd",
-        type: "POST",
-        data: {
-            hangHoaModel: hanghoamodel
-        },
-        success: function (response) {
-            ReloadList();
-        },
-        error: function (response) {
-            console.log("error");
-        }
-    });
+    if (model.TenHH == '') {
+        alert("Không được bỏ trống Tên Hàng Hóa");
+    }
+    else if (model.TenLoai == '') {
+        alert("Không được bỏ trống Tên Loại");
+    }
+    else if (model.SoLuong == '' || model.SoLuong == '0') {
+        alert("Không được bỏ trống Số Lượng");
+    }
+    else if (model.DonGia == '' || model.DonGia == '0') {
+        alert("Không được bỏ trống Đơn Giá");
+    }
+    else if (model.GiamGia == '') {
+        alert("Không được bỏ trống Giảm Giá");
+    }
+    else if (model.ChiTiet == '') {
+        alert("Không được bỏ trống Chi Tiết");
+    }
+    else if (model.IdLoai == '') {
+        alert("Không được bỏ trống Id Loại");
+    }
+    else if (model.MaLoai == '') {
+        alert("Không được bỏ trống Mã Loại");
+    }
+    else {
+        $.ajax({
+            url: "/HangHoa/DoAdd",
+            type: "POST",
+            data: {
+                hangHoaModel: model
+            },
+            success: function (response) {
+                ReloadList();
+            },
+            error: function (response) {
+                console.log("error");
+            }
+        });
+    }
+
 };
