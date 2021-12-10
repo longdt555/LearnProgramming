@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "ChiTietDonHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "ChiTietDH");
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, Model.CurrentPage, "ChiTietDH");
     var currentPage = Model.CurrentPage;
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
@@ -18,7 +18,7 @@
                     </form>
                     <div class="col-md-10">
                         <form style="width: 300px; padding-top: 11px; " class="pull-right">
-                            <div class="form-group form-inline"  style="float:right">
+                            <div class="form-group form-inline" style="float:right">
                                 <input placeholder="Nhập từ khóa" type="text" name="searchkey" id="search-chitietdonhang" onchange="search(event)" class="form-control form-inline" />
                                 <input type="submit" name="submit" value="Tìm Kiếm" class="from-control" onclick="search(event)" id="btn-search" />
                             </div>

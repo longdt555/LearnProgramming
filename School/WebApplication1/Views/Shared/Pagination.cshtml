@@ -1,4 +1,4 @@
-﻿@model Tuple<int, int, string>
+﻿@model Tuple<int, int, int, string>
 @{
     var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
 }
@@ -12,8 +12,8 @@
         @for (var i = 1; i <= totalPages; i++)
         {
             var active = "";
-            if (i == 1) active = "active";
-            <li class="page-item @active"><a @*id="bodyClick"*@ class="page-link" @*onclick="DoPaging(@i,@Model.Item2,@Model.Item3)"*@ href="@Model.Item3?pageIndex=@i&pageSize=@Model.Item2">@i</a></li>
+            if (i == Model.Item3) active = "active";
+            <li id="page" class="page-item @active @i"><a id="bodyClick" class="page-link @i" onclick="DoPaging(@i,@Model.Item2,@Model.Item3, '@Model.Item4')" href="#">@i</a></li>  
         }
 
         <li class="page-item">
@@ -22,4 +22,4 @@
     </ul>
 </nav>
 
-@*<script src="~/js/paging.js"></script>*@
+<script src="~/js/paging.js"></script>

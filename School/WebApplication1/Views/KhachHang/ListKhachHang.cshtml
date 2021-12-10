@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "KhachHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "KhachHang");
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, Model.CurrentPage,"KhachHang");
     var currentPage = Model.CurrentPage;
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
