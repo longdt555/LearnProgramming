@@ -1,164 +1,61 @@
 ﻿function DoPaging(pageIndex, pageSize, currentPage, menuName) {
-    debugger;
-    if (menuName == 'Loai') {
-        var searchTxt = $('#search-loai').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-        //var cPage = currentPage;
-        //var paging = $('#i').val();
+    // make color
+    removeClass(".page-item", "active");
 
-        $.ajax({
-            url: "/Loai/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                //currentPage: cPage,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#loai-list').html(response);
+    addClass(`.page-item-${pageIndex}`, "active");
 
-                $("li").removeClass("active");
+    //  common variables
+    var pIndex = pageIndex;
+    var pSize = pageSize;
+    var searchTxt;
+    var url = "";
+    var id = "";
 
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    if (menuName === "Loai") {
+        searchTxt = $("#search-loai").val();
+        url = "/Loai/Search";
+        id = "loai-list";
     }
-    else if (menuName == 'KhachHang') {
-        var searchTxt = $('#search-khachhang').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-
-        $.ajax({
-            url: "/KhachHang/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#khachhang-list').html(response);
-
-                //$("li").addClass("active");
-                $("li").removeClass("active");
-
-                //$(pageIndex).css({ "color": "#fff", "background-color": "#007bff", "border-color": "#007bff" });
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    else if (menuName == "KhachHang") {
+        searchTxt = $("#search-khachhang").val();
+        url = "/KhachHang/Search";
+        id = "khachhang-list";
     }
-    else if (menuName == 'HangHoa') {
-        var searchTxt = $('#search-hanghoa').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-
-        $.ajax({
-            url: "/HangHoa/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#hanghoa-list').html(response);
-
-                //$("li").addClass("active");
-                $("li").removeClass("active");
-
-                //$(pageIndex).css({ "color": "#fff", "background-color": "#007bff", "border-color": "#007bff" });
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    else if (menuName === "HangHoa") {
+        searchTxt = $("#search-hanghoa").val();
+        url = "/HangHoa/Search";
+        id = "hanghoa-list";
     }
-    else if (menuName == 'DonHang') {
-        var searchTxt = $('#search-donhang').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-
-        $.ajax({
-            url: "/DonHang/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#donhang-list').html(response);
-
-                //$("li").addClass("active");
-                $("li").removeClass("active");
-
-                //$(pageIndex).css({ "color": "#fff", "background-color": "#007bff", "border-color": "#007bff" });
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    else if (menuName == "DonHang") {
+        searchTxt = $("#search-donhang").val();
+        url = "/DonHang/Search";
+        id = "donhang-list";
     }
-    else if (menuName == 'ChiTietDH') {
-        var searchTxt = $('#search-chitietdonhang').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-
-        $.ajax({
-            url: "/ChiTietDH/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#chitietdonhang-list').html(response);
-
-                //$("li").addClass("active");
-                $("li").removeClass("active");
-
-                //$(pageIndex).css({ "color": "#fff", "background-color": "#007bff", "border-color": "#007bff" });
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    else if (menuName == "ChiTietDH") {
+        searchTxt = $("#search-chitietdonhang").val();
+        url = "/ChiTietDH/Search";
+        id = "chitietdonhang-list";
     }
-    else if (menuName == 'Account') {
-        var searchTxt = $('#search-Account').val();
-        var pIndex = pageIndex;
-        var pSize = pageSize;
-
-        $.ajax({
-            url: "/Account/Search", // Url of backend (can be python, php, etc..)*/
-            type: "GET", // data type (can be get, post, put, delete)
-            data: {
-                pageIndex: pIndex,
-                pageSize: pSize,
-                name: searchTxt,
-            }, // data in json format
-            success: function (response) { // request returns successed
-                $('#account-list').html(response);
-
-                //$("li").addClass("active");
-                $("li").removeClass("active");
-
-                //$(pageIndex).css({ "color": "#fff", "background-color": "#007bff", "border-color": "#007bff" });
-            },
-            error: function (response) { // // request returns failed
-                console.log("error");
-            }
-        });
+    else if (menuName == "Account") {
+        searchTxt = $("#search-Account").val();
+        url = "/Account/Search";
+        id = "account-list";
     }
 
+    $.ajax({
+        url: url, // Url of backend (can be python, php, etc..)*/
+        type: "GET", // data type (can be get, post, put, delete)
+        data: {
+            pageIndex: pIndex,
+            pageSize: pSize,
+            //currentPage: cPage,
+            name: searchTxt,
+        }, // data in json format
+        success: function (response) { // request returns successed
+            $(`#${id}`).html(response);
+        },
+        error: function (response) { // // request returns failed
+            console.log("error");
+        }
+    });
 }
-
-
-

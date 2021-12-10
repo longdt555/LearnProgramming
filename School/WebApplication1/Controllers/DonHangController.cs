@@ -97,6 +97,7 @@ namespace StoreManagement.Controllers
             return PartialView("~/Views/DonHang/_ListPartial.cshtml", customers.Data.ToList());
 
         }
+
         #endregion [18/11/2021] Hai
 
     }
