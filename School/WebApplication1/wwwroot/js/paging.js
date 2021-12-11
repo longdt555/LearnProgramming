@@ -1,8 +1,12 @@
 ﻿function DoPaging(pageIndex, pageSize, currentPage, menuName) {
     // make color
+    debugger;
     removeClass(".page-item", "active");
 
     addClass(`.page-item-${pageIndex}`, "active");
+
+   
+
 
     //  common variables
     var pIndex = pageIndex;
@@ -10,6 +14,23 @@
     var searchTxt;
     var url = "";
     var id = "";
+    //if (pageIndex > 1) {
+    //    $(".active-pre").css({ "display": "block"});
+
+    //}
+    //if (pageIndex == 1) {
+    //    $(".active-pre").css({ "display": "none" });
+
+    //}
+    //if (pageIndex == 7) {
+    //    $(".active-next").css({ "display": "none" });
+
+    //}
+    //if (pageIndex < 7) {
+    //    $(".active-next").css({ "display": "block" });
+
+    //}
+
 
     if (menuName === "Loai") {
         searchTxt = $("#search-loai").val();
@@ -59,3 +80,21 @@
         }
     });
 }
+
+//function element(pageSize ,pageIndex ) {
+
+//}
+
+
+
+//function Next() {
+//    debugger;
+//    removeClass(".page-item", "active-next");
+
+//}
+
+//function Pre() {
+//    debugger;
+//    removeClass(".page-item", "active-pre");
+
+//}
