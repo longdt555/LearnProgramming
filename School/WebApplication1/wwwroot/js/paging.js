@@ -1,36 +1,40 @@
-﻿function DoPaging(pageIndex, pageSize, currentPage, menuName) {
-    // make color
-    debugger;
-    removeClass(".page-item", "active");
-
-    addClass(`.page-item-${pageIndex}`, "active");
-
-   
-
-
+﻿function DoPaging(pageIndex, pageSize, menuName, totalPages, action) {
     //  common variables
-    var pIndex = pageIndex;
-    var pSize = pageSize;
     var searchTxt;
     var url = "";
     var id = "";
-    //if (pageIndex > 1) {
-    //    $(".active-pre").css({ "display": "block"});
 
-    //}
-    //if (pageIndex == 1) {
-    //    $(".active-pre").css({ "display": "none" });
+    // BEGIN: Xử lý pageIndex đối với trường hợp next - prev 
+    var currentPage = 0;
+    if (checkExistClass(".page-item", "active")) {
+        currentPage = parseInt(getAttrValue(".page-item.active", "index"));
+    }
 
-    //}
-    //if (pageIndex == 7) {
-    //    $(".active-next").css({ "display": "none" });
+    if (action === 1) {
+        pageIndex = currentPage - 1;
+    }
 
-    //}
-    //if (pageIndex < 7) {
-    //    $(".active-next").css({ "display": "block" });
+    if (action === 2) {
+        pageIndex = currentPage + 1;
+    }
 
-    //}
+    // END
 
+    // BEGIN: Thực hiện ẩn hiện nút: Prev + Next
+
+    if (pageIndex > 1) {
+        removeClass(".active-pre", "hide");
+    } else {
+        addClass(".active-pre", "hide");
+    }
+
+    if (pageIndex === totalPages) {
+        addClass(".active-next", "hide");
+    } else {
+        removeClass(".active-next", "hide");
+    }
+
+    //END
 
     if (menuName === "Loai") {
         searchTxt = $("#search-loai").val();
@@ -67,8 +71,8 @@
         url: url, // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
         data: {
-            pageIndex: pIndex,
-            pageSize: pSize,
+            pageIndex: pageIndex,
+            pageSize: pageSize,
             //currentPage: cPage,
             name: searchTxt,
         }, // data in json format
@@ -79,22 +83,12 @@
             console.log("error");
         }
     });
+
+
+    // BEGIN: Thực hiện bôi xanh trang hiện tại
+    removeClass(".page-item", "active");
+
+    addClass(`.page-item-${pageIndex}`, "active");
+
+    // END
 }
-
-//function element(pageSize ,pageIndex ) {
-
-//}
-
-
-
-//function Next() {
-//    debugger;
-//    removeClass(".page-item", "active-next");
-
-//}
-
-//function Pre() {
-//    debugger;
-//    removeClass(".page-item", "active-pre");
-
-//}
