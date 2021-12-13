@@ -6,11 +6,23 @@
 
 @model Tuple<int, int, string>
 @{
+    int a = 20;
+    int b = 50;
+    int c = 100;
+    @*@Model.Item2 = b;*@
     var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
 }
 <nav aria-label="Page navigation example" style="margin-top: 0;">
     <p id="TotalRecords" class="pull-left">Total records: @Model.Item1</p>
     <ul class="pagination justify-content-end">
+
+        <select name="number" id="number_id">
+
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+
+        </select>
 
         <li class="page-item active-pre hide">
             <a class="page-link " onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 1)" href="#" tabindex="-1">Previous</a>
@@ -23,10 +35,12 @@
             <li id="page" class="page-item @active page-item-@i" index="@i"><a id="bodyClick" class="page-link page-link-@i" onclick="DoPaging(@i, @Model.Item2, '@Model.Item3', @totalPages, 0)" href="#">@i</a></li>
         }
 
+
         <li class="page-item active-next">
             <a class="page-link" onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 2)" href="#">Next</a>
         </li>
     </ul>
+
 </nav>
 
 <script src="~/js/paging.js"></script>

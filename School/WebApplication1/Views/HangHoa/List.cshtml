@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="thead-content">
+                <table id="myTable" class="thead-content">
                     <thead class=" text-primary">
                         <tr>
                             <th class="w-5p">
@@ -57,12 +57,14 @@
         </div>
     </div>
 </div>
-<div style="margin: 0 auto">
-    @await Html.PartialAsync("Pagination", paging)
-</div>
 
-<script src="~/js/app/hanghoa.js"></script>
-<script>
+    <div style="margin: 0 auto">
+        @await Html.PartialAsync("Pagination", paging)
+    </div>
+
+    <script src="~/js/app/hanghoa.js"></script>
+    @*<script src="~/js/site.js"></script>*@
+    <script>
     var currentPage = @currentPage;
     var pageSize = @pageSize;
-</script>
+    </script>
