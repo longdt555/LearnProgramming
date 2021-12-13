@@ -1,4 +1,7 @@
-﻿function DoPaging(pageIndex, pageSize, menuName, totalPages, action) {
+﻿function DoPaging(pageIndex, pageSize, menuName, totalPages, action, isUpdatePageSize) {
+    // action: prev - next
+    // isUpdatePageSize: thay đổi số lượng phần tử theo select
+    
     //  common variables
     var searchTxt;
     var url = "";
@@ -10,12 +13,17 @@
         currentPage = parseInt(getAttrValue(".page-item.active", "index"));
     }
 
-    if (action === 1) {
-        pageIndex = currentPage - 1;
-    }
+    // BEGIN: Xử lý đối với trường hợp thay đổi số trang theo select
+    if (isUpdatePageSize) {
 
-    if (action === 2) {
-        pageIndex = currentPage + 1;
+    } else {
+        if (action === 1) {
+            pageIndex = currentPage - 1;
+        }
+
+        if (action === 2) {
+            pageIndex = currentPage + 1;
+        }
     }
 
     // END
