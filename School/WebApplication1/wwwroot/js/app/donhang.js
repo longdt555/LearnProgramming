@@ -98,6 +98,7 @@ function SubmitForm() {
     event.preventDefault();
 
     var model = {
+        Id: $('#Id').val(),
         PhiVanChuyen: $('#PhiVanChuyen').val(),
         ThanhTien: $('#ThanhTien').val(),
         TongTien: $('#TongTien').val(),
@@ -109,17 +110,41 @@ function SubmitForm() {
         UpdatedBy: $('#UpdatedBy').val()
     };
 
-    $.ajax({
-        url: "/DonHang/DoAdd",
-        type: "POST",
-        data: {
-            donHangModel: model,
-        },
-        success: function (response) {
-            $('#donhang-list').html(response);
-        },
-        error: function (response) {
-            console.log("error")
-        }
-    });
+    if (model.PhiVanChuyen == '' || model.PhiVanChuyen == '0') {
+        alert("Không được bỏ trống Phí Vận Chuyển");
+    }
+    else if (model.ThanhTien == '' || model.ThanhTien == '0') {
+        alert("Không được bỏ trống Thành Tiền");
+    }
+    else if (model.TongTien == '' || model.TongTien == '0') {
+        alert("Không được bỏ trống Tổng Tiền");
+    }
+    else if (model.TrangThaiDonHang == '') {
+        alert("Không được bỏ trống Trạng Thái Đơn Hàng");
+    }
+    else if (model.TrangThaiThanhToan == '') {
+        alert("Không được bỏ trống Trạng Thái Thanh Toán");
+    }
+    else if (model.CreatedBy == '' || model.CreatedBy == '0') {
+        alert("Không được bỏ trống Created By");
+    }
+    else if (model.UpdatedBy == '' || model.UpdatedBy == '0') {
+        alert("Không được bỏ trống Updated By");
+    }
+    else {
+        $.ajax({
+            url: "/DonHang/DoAdd",
+            type: "POST",
+            data: {
+                donHangModel: model,
+            },
+            success: function (response) {
+                ReloadList();
+            },
+            error: function (response) {
+                console.log("error")
+            }
+        });
+    }
+
 }

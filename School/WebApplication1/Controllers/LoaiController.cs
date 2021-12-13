@@ -4,6 +4,8 @@ using StoreManagement.IServices;
 using StoreManagement.Models;
 using System.Linq;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
+using StoreManagement.Common;
 
 namespace StoreManagement.Controllers
 {
@@ -28,19 +30,27 @@ namespace StoreManagement.Controllers
             if (loaiModel.Id == 0)
             {
                 _service.Add(loaiModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
             }
             else
             {
                 _service.Edit(loaiModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.UpdateSuccessed
+                });
             }
 
-            return Redirect("List");
         }
 
         public IActionResult Edit(int id)
         {
-            return PartialView("_EditPartial", _service.GetById(id) ?? new LoaiModel());
-
+            return PartialView("_AddPartial", _service.GetById(id) ?? new LoaiModel());
         }
 
         public IActionResult DoEdit(LoaiModel loaiModel)
@@ -54,11 +64,11 @@ namespace StoreManagement.Controllers
         #region Hai
 
         [Route("Loai")]
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, string name)
         {
             if (!isAuthenticated()) return Redirect("login");
 
-            var searchModel = new SearchParam<LoaiParam>(1, 20, new LoaiParam());
+            var searchModel = new SearchParam<LoaiParam>(pageIndex, pageSize, new LoaiParam(name));
             var customers = _service.GetAll(searchModel);
             return View(customers);
         }

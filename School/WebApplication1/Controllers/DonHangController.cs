@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StoreManagement.Common;
 using StoreManagement.Context;
 using StoreManagement.Dtos;
 using StoreManagement.Dtos.Params;
+using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
@@ -24,32 +26,30 @@ namespace StoreManagement.Controllers
             this.customerService = customerService;
         }
 
-
-        public IActionResult Index(int pg = 1)
-        {
-            var customers = customerService.GetAll();
-            const int pageSize = 5;
-            if (pg < 1)
-            {
-                pg = 1;
-            }
-            int recsCount = customers.Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var data = customers.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-            return View();
-        }
-
-     
         public IActionResult Add(int id)
         {
             return PartialView("_AddPartial", customerService.GetById(id) ?? new DonHangModel());
         }
         public IActionResult DoAdd(DonHangModel donHangModel)
         {
-            customerService.Add(donHangModel);
-            return Redirect("List");
+            if (donHangModel.Id == 0)
+            {
+                customerService.Add(donHangModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.SaveSuccessed
+                });
+            }
+            else
+            {
+                customerService.Edit(donHangModel);
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.UpdateSuccessed
+                });
+            }
         }
         public IActionResult Edit(int id)
         {
@@ -67,10 +67,10 @@ namespace StoreManagement.Controllers
         // Hiển thị danh sách người dùng mặc định
 
         [Route("DonHang")]
-        public IActionResult List()
+        public IActionResult List(int pageIndex, int pageSize, string TrangThaiDonHang)
         {
             if (!isAuthenticated()) return Redirect("login");
-            var searchModel = new SearchParam<DonHangParam>(1, 20, new DonHangParam());
+            var searchModel = new SearchParam<DonHangParam>(pageIndex, pageSize, new DonHangParam(TrangThaiDonHang));
 
             var customers = customerService.GetAll(searchModel);
             return View(customers);
@@ -86,7 +86,7 @@ namespace StoreManagement.Controllers
         }
 
         //Xoá bản ghi và lưu lại các thông tin đang tìm kiếm 
-        public IActionResult Delete(int pageIndex, int pageSize,string TrangThaiDonHang, int id)
+        public IActionResult Delete(int pageIndex, int pageSize, string TrangThaiDonHang, int id)
         {
             //delete record
             customerService.Delete(id);
@@ -97,6 +97,7 @@ namespace StoreManagement.Controllers
             return PartialView("~/Views/DonHang/_ListPartial.cshtml", customers.Data.ToList());
 
         }
+
         #endregion [18/11/2021] Hai
 
     }

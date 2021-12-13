@@ -1,15 +1,20 @@
-﻿@model Tuple<int, int,string>
-@{
-    var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
+﻿@*
+    Item1: TotalRecords
+    Item2: PageSize
+    Item3: MenuName
+*@
 
+@model Tuple<int, int, string>
+@{
+    int a = 20;
+    int b = 50;
+    int c = 100;
+    @*@Model.Item2 = b;*@
+    var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
 }
 <nav aria-label="Page navigation example" style="margin-top: 0;">
-    <p class="pull-left">Total records: @Model.Item1</p>
+    <p id="TotalRecords" class="pull-left">Total records: @Model.Item1</p>
     <ul class="pagination justify-content-end">
-<<<<<<< Updated upstream
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-=======
         <li>
             <select name="number" id="number_id" onchange="DoPaging(1, this.value, '@Model.Item3', @totalPages, 1)">
                 <option value="20">20</option>
@@ -20,17 +25,21 @@
 
         <li class="page-item active-pre hide">
             <a class="page-link " onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 1)" href="#" tabindex="-1">Previous</a>
->>>>>>> Stashed changes
         </li>
+
         @for (var i = 1; i <= totalPages; i++)
         {
             var active = "";
             if (i == 1) active = "active";
-            <li class="page-item @active"><a class="page-link" href="/@Model.Item3?pageIndex=@i&pageSize=@Model.Item2">@i</a></li>
+            <li id="page" class="page-item @active page-item-@i" index="@i"><a id="bodyClick" class="page-link page-link-@i" onclick="DoPaging(@i, @Model.Item2, '@Model.Item3', @totalPages, 0)" href="#">@i</a></li>
         }
 
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+
+        <li class="page-item active-next">
+            <a class="page-link" onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 2)" href="#">Next</a>
         </li>
     </ul>
+
 </nav>
+
+<script src="~/js/paging.js"></script>

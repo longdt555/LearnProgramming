@@ -59,7 +59,7 @@ function ShowAddModal(id) {
     $.ajax({
         url: "/Account/Add", // Url of backend (can be python, php, etc..)*/
         type: "GET", // data type (can be get, post, put, delete)
-        data: {id: id},
+        data: { id: id },
         success: function (response) { // request returns successed
             $('#common-modal').html(response);
 
@@ -104,6 +104,7 @@ function SubmitForm() {
     event.preventDefault();
 
     var model = {
+        Id: $('#Id').val(),
         UserName: $('#UserName').val(),
         Password: $('#Password').val(),
         Role: $('#Role').val(),
@@ -113,17 +114,34 @@ function SubmitForm() {
         UpdatedDate: $('#UpdatedDate').val(),
     };
 
-    $.ajax({
-        url: "/Account/DoAdd", // Url of backend (can be python, php, etc..)*/
-        type: "POST", // data type (can be get, post, put, delete)
-        data: {
-            accountModel: model,
-        },
-        success: function (response) { // request returns successed
-            $('#account-list').html(response);
-        },
-        error: function (response) { // // request returns failed
-            console.log("error");
-        }
-    });
+    if (model.UserName == '') {
+        alert("Không được bỏ trống Tên Tài Khoản");
+    }
+    else if (model.Password == '') {
+        alert("Không được bỏ trống Mật Khẩu");
+    }
+    else if (model.Role == '' || model.Role == '0') {
+        alert("Không được bỏ trống Phân Quyền");
+    }
+    else if (model.CreatedBy == '' || model.CreatedBy == '0') {
+        alert("Không được bỏ trống Created By");
+    }
+    else if (model.UpdatedBy == '' || model.UpdatedBy == '0') {
+        alert("Không được bỏ trống Updated By");
+    }
+    else {
+        $.ajax({
+            url: "/Account/DoAdd", // Url of backend (can be python, php, etc..)*/
+            type: "POST", // data type (can be get, post, put, delete)
+            data: {
+                accountModel: model,
+            },
+            success: function (response) { // request returns successed
+                ReloadList();
+            },
+            error: function (response) { // // request returns failed
+                console.log("error");
+            }
+        });
+    }
 }

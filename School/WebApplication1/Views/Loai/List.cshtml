@@ -3,12 +3,11 @@
 @{
     ViewData["Title"] = "Loai";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "Loai");
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, Model.CurrentPage, "Loai");
     var currentPage = Model.CurrentPage;
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
 }
-
 
 
 <div class="row">

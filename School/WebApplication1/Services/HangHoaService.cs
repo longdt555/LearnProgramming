@@ -17,6 +17,7 @@ namespace StoreManagement.Services
 
         public int Add(HangHoaModel hangHoaModel)
         {
+            hangHoaModel.CreatedDate = DateTime.Now;
             DBContext().HangHoas.Add(hangHoaModel);
             return DBContext().SaveChanges();
         }
@@ -42,7 +43,7 @@ namespace StoreManagement.Services
             data.DonGia = hangHoaModel.DonGia;
             data.GiamGia = hangHoaModel.GiamGia;
             data.ChiTiet = hangHoaModel.ChiTiet;
-
+            data.UpdatedDate = DateTime.Now;
             DBContext().HangHoas.Update(data);
             return DBContext().SaveChanges();
         }

@@ -16,6 +16,9 @@ namespace StoreManagement.Services
 
         public int Add(AccountModel accountModel)
         {
+            var today = DateTime.Now;
+            accountModel.CreatedDate = today;
+            accountModel.UpdatedDate = today;
             accountModel.Password = Security.Cryptography(accountModel.Password);
             DBContext().AccountModels.Add(accountModel);
             return DBContext().SaveChanges();
