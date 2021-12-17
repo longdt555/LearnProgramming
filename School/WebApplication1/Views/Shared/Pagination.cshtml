@@ -12,26 +12,27 @@
     <p id="TotalRecords" class="pull-left">Total records: @Model.Item1</p>
     <ul class="pagination justify-content-end">
         <li>
-            <select name="number" id="number_id" onchange="DoPaging(1, this.value, '@Model.Item3', @totalPages, 1, true)">
+            <select style="padding:8px 2px" name="number" id="number_id" onchange="DoPaging(1, this.value, '@Model.Item3', 1, true,@Model.Item1)">
                 <option value="20">20</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="400">400</option>
             </select>
         </li>
-
         <li class="page-item active-pre hide">
-            <a class="page-link " onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 1)" href="#" tabindex="-1">Previous</a>
+            <a class="page-link " onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 1, false,@Model.Item1)" href="#" tabindex="-1">Previous</a>
         </li>
 
         @for (var i = 1; i <= totalPages; i++)
         {
             var active = "";
             if (i == 1) active = "active";
-            <li id="page" class="page-item @active page-item-@i" index="@i"><a id="bodyClick" class="page-link page-link-@i" onclick="DoPaging(@i, @Model.Item2, '@Model.Item3', @totalPages, 0)" href="#">@i</a></li>
+            <li id="page" class="page-item @active page-item-@i" index="@i"><a id="bodyClick" class="page-link page-link-@i" onclick="DoPaging(@i, @Model.Item2, '@Model.Item3', @totalPages, 0, false,@Model.Item1)" href="#">@i</a></li>
         }
 
         <li class="page-item active-next">
-            <a class="page-link" onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 2)" href="#">Next</a>
+            <a class="page-link" onclick="DoPaging(0, @Model.Item2, '@Model.Item3', @totalPages, 2, false,@Model.Item1)" href="#">Next</a>
         </li>
     </ul>
 

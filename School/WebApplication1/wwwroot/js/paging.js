@@ -1,7 +1,10 @@
-﻿function DoPaging(pageIndex, pageSize, menuName, totalPages, action, isUpdatePageSize) {
+﻿function DoPaging(pageIndex, pageSize, menuName, totalPages, action, isUpdatePageSize, totalRecords) {
+    debugger;
     // action: prev - next
     // isUpdatePageSize: thay đổi số lượng phần tử theo select
-    
+    var newTotalPages = totalRecords % pageSize == 0 ? totalRecords / pageSize : totalRecords / pageSize + 1;
+    //var totalPages = Model.Item1 % Model.Item2 == 0 ? Model.Item1 / Model.Item2 : Model.Item1 / Model.Item2 + 1;
+
     //  common variables
     var searchTxt;
     var url = "";
@@ -27,6 +30,10 @@
     }
 
     // END
+    if (true) {
+
+    }
+
 
     // BEGIN: Thực hiện ẩn hiện nút: Prev + Next
 
@@ -36,7 +43,7 @@
         addClass(".active-pre", "hide");
     }
 
-    if (pageIndex === totalPages) {
+    if (pageIndex === newTotalPages) {
         addClass(".active-next", "hide");
     } else {
         removeClass(".active-next", "hide");
@@ -86,6 +93,7 @@
         }, // data in json format
         success: function (response) { // request returns successed
             $(`#${id}`).html(response);
+            return newTotalPages;
         },
         error: function (response) { // // request returns failed
             console.log("error");
@@ -97,6 +105,7 @@
     removeClass(".page-item", "active");
 
     addClass(`.page-item-${pageIndex}`, "active");
+
 
     // END
 }

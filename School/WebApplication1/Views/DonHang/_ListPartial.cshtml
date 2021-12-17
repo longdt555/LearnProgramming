@@ -1,38 +1,41 @@
 ﻿@model List<DonHangModel>
 
-    <table class="table tbl-contents">
-        <tbody>
-            @{
-                var count = 0;
-            }
-            @foreach (var item in Model.ToList())
-            {
-                count++;
-                <tr>
-                    <td class="w-3p">
-                        @count
-                    </td>
+<table id="myTableData" class="table tbl-contents">
+    <tbody>
+        @{
+            var count = 0;
+        }
+        @foreach (var item in Model.ToList())
+        {
+            count++;
+            <tr>
+                <td class="w-3p">
+                    @count
+                </td>
 
-                    <td class="w-10p">
-                        @item.PhiVanChuyen
-                    </td>
-                    <td class="w-5p">
-                        @item.TongTien
-                    </td>
-                    <td class="w-10p">
-                        @item.TrangThaiDonHang
-                    </td>
-                    <td class="w-10p">
-                        @item.TrangThaiThanhToan
-                    </td>
+                <td class="w-10p">
+                    @item.PhiVanChuyen
+                </td>
+                <td class="w-5p">
+                    @item.TongTien
+                </td>
+                <td class="w-10p">
+                    @item.TrangThaiDonHang
+                </td>
+                <td class="w-10p">
+                    @item.TrangThaiThanhToan
+                </td>
 
-                    <td class="w-5p">
-                        <a href="#" onclick="ShowAddModal(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
+                <td class="w-5p">
+                    <a href="#" onclick="ShowAddModal(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
 
-                        <a href="#" onclick="deleteRecord(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
+                    <a href="#" onclick="deleteRecord(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/FileSaver.js"></script>
+<script src="~/js/Export.js"></script>

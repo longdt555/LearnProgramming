@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Loai";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, Model.CurrentPage, "Loai");
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, "Loai");
     var currentPage = Model.CurrentPage;
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
@@ -21,6 +21,8 @@
                     </form>
 
                     <div class="col-md-10">
+                        <button style="margin-left:849px" type="button" onclick="fnExcelReport('myTableData','data')" class="btn btn-primary">Export Data</button>
+
                         <form name="timkiem" style="width: 300px; padding-top: 11px; " class="pull-right">
                             <div class="form-group form-inline" style="float:right">
                                 <input placeholder="Nhập từ khóa" type="text" name="searchkey" id="search-loai" onchange="search(event)" class="form-control form-inline" />
@@ -35,7 +37,7 @@
                 <table class="thead-content">
                     <thead class=" text-primary">
                         <tr>
-                            <th class="w-3p">
+                            <th class="w-5p">
                                 STT
                             </th>
                             <th class="w-10p">

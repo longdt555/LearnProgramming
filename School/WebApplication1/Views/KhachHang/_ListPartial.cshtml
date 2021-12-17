@@ -1,39 +1,42 @@
 ﻿@model List<KhachHangModel>
-    <table class="table tbl-contents">
-        <tbody>
-            @{
-                var count = 0;
-            }
-            @foreach (var item in Model.ToList())
-            {
-                count++;
-                <tr>
-                    <td class="w-5p">
-                        @count
-                    </td>
-                    <td class="w-20p">
-                        @item.HoTen
-                    </td>
-                    <td class="w-20p">
-                        @item.Email
-                    </td>
-                    <td class="w-15p">
-                        @item.CreatedDate
-                    </td>
-                    <td class="w-10p">
-                        @item.DangHoatDong
-                    </td>
-                    <td class="w-15p">
-                        @item.NhanQuangCao
-                    </td>
+<table id="myTableData" class="table tbl-contents">
+    <tbody>
+        @{
+            var count = 0;
+        }
+        @foreach (var item in Model.ToList())
+        {
+            count++;
+            <tr>
+                <td class="w-5p">
+                    @count
+                </td>
+                <td class="w-20p">
+                    @item.HoTen
+                </td>
+                <td class="w-20p">
+                    @item.Email
+                </td>
+                <td class="w-15p">
+                    @item.CreatedDate
+                </td>
+                <td class="w-10p">
+                    @item.DangHoatDong
+                </td>
+                <td class="w-15p">
+                    @item.NhanQuangCao
+                </td>
 
 
-                    <td class="w-6p">
-                        <a href="#" onclick="ShowAddModal(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
+                <td class="w-6p">
+                    <a href="#" onclick="ShowAddModal(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
 
-                        <a href="#" onclick="deleteRecord(@item.Id)" ><i class="nc-icon nc-simple-remove"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    <a href="#" onclick="deleteRecord(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/FileSaver.js"></script>
+<script src="~/js/Export.js"></script>

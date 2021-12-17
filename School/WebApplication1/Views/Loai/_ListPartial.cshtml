@@ -1,5 +1,5 @@
 ﻿@model List<LoaiModel>
-<table class="table tbl-contents">
+<table id="myTableData" class="table tbl-contents">
     <tbody>
         @{
             var count = 0;
@@ -17,17 +17,16 @@
                 <td class="w-20p">
                     @item.Mota
                 </td>
-                <td class="w-10p">
+                <td class="w-20p">
                     @item.MaLoaiCha
                 </td>
-                <td class="w-8p">
-                <td>
+                <td class="w-10p">
                     @item.CreatedDate
                 </td>
-                <td class="w-8p">
+                <td class="w-10p">
                     @item.UpdatedDate
                 </td>
-                <td class="w-15p">
+                <td class="w-10p">
                     <a href="#" onclick="ShowAddModal(@item.Id)"><i class="nc-icon nc-scissors"></i></a> |
 
                     <a href="#" onclick="deleteRecord(@item.Id)"><i class="nc-icon nc-simple-remove"></i></a>
@@ -38,3 +37,5 @@
     </tbody>
 </table>
 
+<script src="~/js/FileSaver.js"></script>
+<script src="~/js/Export.js"></script>

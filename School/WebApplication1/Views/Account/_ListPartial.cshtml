@@ -1,6 +1,6 @@
 ﻿@model List<AccountModel>
 
-<table class="table tbl-contents" >
+<table id="myTableData" class="table tbl-contents">
     <tbody>
         @{
             var count = 0;
@@ -36,3 +36,6 @@
         }
     </tbody>
 </table>
+
+<script src="~/js/FileSaver.js"></script>
+<script src="~/js/Export.js"></script>

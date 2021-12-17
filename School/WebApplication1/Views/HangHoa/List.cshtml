@@ -8,6 +8,7 @@
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
 }
+
 <div class="row">
     <div class="col-md-12">
         <div class="card" style="margin-bottom: 11px;">
@@ -16,7 +17,10 @@
                     <form class="update col-md-2">
                         <a href="#" class="btn btn-primary btn-round" onclick="ShowAddModal(0)">Thêm mới</a>
                     </form>
+
                     <div class="col-md-10">
+                        <button style="margin-left:849px" type="button" onclick="fnExcelReport('myTableData','data')" class="btn btn-primary">Export Data</button>
+
                         <form name="timkiem" style="width: 300px; padding-top: 11px; " class="pull-right">
                             <div class="form-group form-inline" style="float:right">
                                 <input placeholder="Nhập từ khóa" type="text" name="searchkey" id="search-HangHoa" onchange="search(event)" class="form-control form-inline" />
@@ -29,24 +33,24 @@
             <div class="card-body">
                 <table id="myTable" class="thead-content">
                     <thead class=" text-primary">
-                    <tr>
-                        <th class="w-5p">
-                            STT
-                        </th>
-                        <th class="w-15p">
-                            Tên Hàng Hóa
-                        </th>
-                        <th class="w-12p">
-                            Số Lượng
-                        </th>
-                        <th class="w-10p">
-                            Đơn Giá
-                        </th>
-                        <th class="w-10p">
-                            Chi Tiết
-                        </th>
-                        <th class="w-8p">Thao tác</th>
-                    </tr>
+                        <tr>
+                            <th class="w-5p">
+                                STT
+                            </th>
+                            <th class="w-15p">
+                                Tên Hàng Hóa
+                            </th>
+                            <th class="w-12p">
+                                Số Lượng
+                            </th>
+                            <th class="w-10p">
+                                Đơn Giá
+                            </th>
+                            <th class="w-10p">
+                                Chi Tiết
+                            </th>
+                            <th class="w-8p">Thao tác</th>
+                        </tr>
                 </table>
 
                 <div class="table-responsive" id="hanghoa-list">
@@ -63,7 +67,7 @@
 </div>
 
 <script src="~/js/app/hanghoa.js"></script>
-@*<script src="~/js/site.js"></script>*@
+
 <script>
     var currentPage = @currentPage;
     var pageSize = @pageSize;

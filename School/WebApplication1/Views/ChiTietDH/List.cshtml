@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "ChiTietDonHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize, Model.CurrentPage, "ChiTietDH");
+    var paging = Tuple.Create(Model.TotalRecords, Model.PageSize,"ChiTietDH");
     var currentPage = Model.CurrentPage;
     var pageSize = Model.PageSize;
     var data = Model.Data.ToList();
@@ -17,6 +17,8 @@
                         <a href="#" class="btn btn-primary btn-round" onclick="ShowAddModal(0)">Thêm mới</a>
                     </form>
                     <div class="col-md-10">
+                        <button style="margin-left:849px" type="button" onclick="fnExcelReport('myTableData','data')" class="btn btn-primary">Export Data</button>
+
                         <form style="width: 300px; padding-top: 11px; " class="pull-right">
                             <div class="form-group form-inline" style="float:right">
                                 <input placeholder="Nhập từ khóa" type="text" name="searchkey" id="search-chitietdonhang" onchange="search(event)" class="form-control form-inline" />
