@@ -1,6 +1,4 @@
-﻿const { modifierPhases } = require("@popperjs/core");
-
-function searchReload(event) {
+﻿function searchReload(event) {
     event.preventDefault();
     var searchTxt = $('#search-HangHoa').val();
 
@@ -98,7 +96,6 @@ function ReloadList() {
 
 function SubmitForm() {
     event.preventDefault();
-    //debugger;
     var model = {
         TenHH: $('#TenHH').val(),
         Id: $('#IdHangHoa').val(),

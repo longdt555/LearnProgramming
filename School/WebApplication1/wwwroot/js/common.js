@@ -19,3 +19,7 @@ getAttrValue = (parentClass, attrName) => {
 getSelectValue = id => {
     return $(id).value;
 };
+
+exportAction = url => {
+    window.open(url);
+};
