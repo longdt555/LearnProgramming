@@ -137,10 +137,27 @@ namespace StoreManagement.Controllers
                 using (var stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_don_hang.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_hang-hoa.xlsx");
                 }
             }
         }
+    }
+}
+#endregion
+//    [HttpPost]
+//    public JsonResult ImportTPDCExcel()
+//    {
+//        try
+//        {
+//            var file = HttpContext.Request.Form.Files[0];
+//            //var list = new List<ThanhPhanBaoCaoDiaChatViewModel>();
+//            using (var stream = new MemoryStream())
+//            {
+//                file.CopyTo(stream);
+//                using (var package = new ExcelPackage(stream))
+//                {
+//                    ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
+//                    int totalRows = workSheet.Dimension.Rows;
 
         [HttpPost]
         public JsonResult Import(IFormFile formData)

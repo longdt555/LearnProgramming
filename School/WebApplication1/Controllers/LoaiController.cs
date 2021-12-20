@@ -6,6 +6,9 @@ using System.Linq;
 using StoreManagement.Dtos.Params;
 using StoreManagement.Dtos.Respones;
 using StoreManagement.Common;
+using System.Data;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace StoreManagement.Controllers
 {
@@ -94,8 +97,51 @@ namespace StoreManagement.Controllers
         }
 
         #endregion Hai
+
+        ///<summary>
+        /// CloseXML: Thao tác excel
+        /// </summary>
+        [HttpGet]
+        public FileResult Export()
+        {
+            var dbTable = new DataTable("Danh sách loại");
+
+            dbTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("Số thứ tự"),
+                new DataColumn("Tên loại"),
+                new DataColumn("Mô tả"),
+                new DataColumn("Mã loại cha")
+            });
+
+            var response = _service.GetAll(new SearchParam<LoaiParam>(1, int.MaxValue, new LoaiParam()));
+
+            if (response.Data.Any())
+            {
+                var count = 0;
+                foreach (var item in response.Data)
+                {
+                    dbTable.Rows.Add(count, item.TenLoai, item.Mota, item.MaLoaiCha);
+                    count++;
+                }
+            }
+            
+            using(var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dbTable);
+                using(var stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_loai.xlsx");
+                }
+            }
+        }
+
+
     }
 }
+
+
 
 
 // code thừa -> bỏ : dối, source control (git)

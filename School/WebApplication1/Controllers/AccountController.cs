@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using StoreManagement.Dtos.Respones;
 using StoreManagement.Common;
+using System.Data;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace StoreManagement.Controllers
 {
@@ -171,5 +174,46 @@ namespace StoreManagement.Controllers
         }
 
         #endregion [16/11/2021]
+
+        ///<summary>
+        /// CloseXML : Thao tác excel
+        /// </summary>
+        [HttpGet]
+        public FileResult Export()
+        {
+            var dbTable = new DataTable("Danh sách tài khoản");
+
+            dbTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("Số thứ tự"),
+                new DataColumn("User Name"),
+                new DataColumn("Created by"),
+                new DataColumn("Updated by"),
+                new DataColumn("Created date"),
+                new DataColumn("Updated date")
+            });
+
+            var response = customerService.GetAll(new SearchParam<AccountParam>(1, int.MaxValue, new AccountParam()));
+
+            if (response.Data.Any())
+            {
+                var count = 0;
+                foreach (var item in response.Data)
+                {
+                    dbTable.Rows.Add(count, item.UserName, item.CreatedBy, item.UpdatedBy, item.CreatedDate, item.UpdatedDate);
+                    count++;
+                }
+            }
+
+            using (var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dbTable);
+                using (var stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_tai_khoan.xlsx");
+                }
+            }
+        }
     }
 }
