@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreManagement.Common;
 using StoreManagement.Dtos.Params;
 using StoreManagement.Dtos.Respones;
 using StoreManagement.IServices;
 using StoreManagement.Models;
+using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace StoreManagement.Controllers
@@ -91,5 +94,45 @@ namespace StoreManagement.Controllers
             return PartialView("_ListPartial", customers.Data.ToList());
         }
         #endregion [18/11/2021] Hải
+
+        ///<summary>
+        /// CloseXML: Thao tác excel
+        /// </summary>
+        [HttpGet]
+        public FileResult Export()
+        {
+            var dbTable = new DataTable("Danh sách chi tiết đơn hàng");
+
+            dbTable.Columns.AddRange(new DataColumn[]{
+                new DataColumn("Số thứ tự"),
+                new DataColumn("Ngày lập"),
+                new DataColumn("Ngày sửa"),
+                new DataColumn("Mã đơn hàng"),
+                new DataColumn("Đơn giá"),
+                new DataColumn("Số lượng")
+            });
+
+            var response = customerService.GetAll(new SearchParam<ChiTietDonHangParam>(1, int.MaxValue, new ChiTietDonHangParam()));
+
+            if (response.Data.Any())
+            {
+                var count = 0;
+                foreach (var item in response.Data)
+                {
+                    dbTable.Rows.Add(count, item.CreatedDate, item.UpdatedDate, item.MaDH, item.DonGia, item.SoLuong);
+                    count++;
+                }
+            }
+
+            using(var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dbTable);
+                using(var stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_chi_tiet_don_hang.xlsx");
+                }
+            }
+        }
     }
 }

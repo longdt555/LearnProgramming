@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreManagement.Common;
 using StoreManagement.Context;
@@ -8,6 +9,8 @@ using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -103,5 +106,44 @@ namespace StoreManagement.Controllers
         }
 
         #endregion [18/11/2021]
+
+        ///<summary>
+        /// CloseXML: Thao tác excel
+        /// </summary>
+        [HttpGet]
+        public FileResult Export()
+        {
+            var dbTable = new DataTable("Danh sách khách hàng");
+
+            dbTable.Columns.AddRange(new DataColumn[] {
+                new DataColumn("Số thứ tự"),
+                new DataColumn("Họ tên"),
+                new DataColumn("Email"),
+                new DataColumn("Đang hoạt động"),
+                new DataColumn("Nhận quảng cáo")
+            });
+
+            var response = customerService.GetAll(new SearchParam<KhachHangParam>(1, int.MaxValue, new KhachHangParam()));
+
+            if (response.Data.Any())
+            {
+                var count = 0;
+                foreach (var item in response.Data)
+                {
+                    dbTable.Rows.Add(count, item.HoTen, item.Email, item.DangHoatDong, item.NhanQuangCao);
+                    count++;
+                }
+            }
+
+            using(var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dbTable);
+                using(var stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_khach_hang.xlsx");
+                }
+            }
+        }
     }
 }

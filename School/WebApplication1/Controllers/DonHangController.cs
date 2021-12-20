@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreManagement.Common;
 using StoreManagement.Context;
@@ -9,7 +10,9 @@ using StoreManagement.IServices;
 using StoreManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -99,6 +102,45 @@ namespace StoreManagement.Controllers
         }
 
         #endregion [18/11/2021] Hai
+
+        ///<summary>
+        /// CloseXML: Thao tác excel
+        /// </summary>
+        [HttpGet]
+        public FileResult Export()
+        {
+            var dbTable = new DataTable("Danh sách đơn hàng");
+
+            dbTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("Số thứ tự"),
+                new DataColumn("Phí vận chuyển"),
+                new DataColumn("Tổng tiền"),
+                new DataColumn("Trạng thái đơn hàng"),
+                new DataColumn("Trạng thái thanh toán")
+            });
+
+            var response = customerService.GetAll(new SearchParam<DonHangParam>(1, int.MaxValue, new DonHangParam()));
+
+            if (response.Data.Any())
+            {
+                var count = 0;
+                foreach (var item in response.Data)
+                {
+                    dbTable.Rows.Add(count, item.PhiVanChuyen, item.TongTien, item.TrangThaiDonHang, item.TrangThaiThanhToan);
+                }
+            }
+
+            using(var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dbTable);
+                using(var stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh_sach_don_hang.xlsx");
+                }
+            }
+        }
 
     }
 }
