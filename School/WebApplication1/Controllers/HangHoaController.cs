@@ -143,12 +143,16 @@ namespace StoreManagement.Controllers
         }
 
         #endregion
+
         [HttpPost]
         public JsonResult Import()
         {
             try
             {
                 var formFile = Request.Form.Files[0];
+
+                #region [Validate]
+
                 if (formFile == null || formFile.Length <= 0)
                 {
                     return Json(new JsonResDto
@@ -166,6 +170,9 @@ namespace StoreManagement.Controllers
                         Message = JMessage.ImportFailed
                     });
                 }
+
+                #endregion [Validate]
+
                 var data = new List<HangHoaModel>();
                 using (var stream = new MemoryStream())
                 {
@@ -179,7 +186,10 @@ namespace StoreManagement.Controllers
                         {
                             var model = new HangHoaModel()
                             {
-                                Id = customerService.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1]))?.Id ?? 0,
+                                Id = ConvertHelper.ConvertToInt(workSheet.Cells[i, 1].Value) == 0
+                                    ? 0
+                                    : customerService.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1].Value))
+                                        ?.Id ?? 0,
                                 TenHH = workSheet.Cells[i, 2].Value.ToString()
                             };
                             data.Add(model);
@@ -193,7 +203,11 @@ namespace StoreManagement.Controllers
                     Message = JMessage.ImportSuccessfully
                 });
 
-                return Json(new JsonResDto
+                // gọi service save many
+                //
+                //
+
+                 return Json(new JsonResDto
                 {
                     Success = true,
                     Message = JMessage.ImportSuccessfully

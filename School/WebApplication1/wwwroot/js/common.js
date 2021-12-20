@@ -24,9 +24,9 @@ exportAction = url => {
     window.open(url);
 };
 
-importAction = (event, idDom, url) => {
+importAction = (event, url) => {
     event.preventDefault();
-    var formData = new FormData($(idDom)[0]);
+    var formData = new FormData();
     formData.append("file", $("input[type=file]")[0].files[0]);
     $.ajax({
         type: "POST",
