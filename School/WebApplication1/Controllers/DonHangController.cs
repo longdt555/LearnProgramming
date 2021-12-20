@@ -38,7 +38,7 @@ namespace StoreManagement.Controllers
                 return Json(new JsonResDto
                 {
                     Success = true,
-                    Message = JMessage.SaveSuccessed
+                    Message = JMessage.SaveSuccessfully
                 });
             }
             else
@@ -47,7 +47,7 @@ namespace StoreManagement.Controllers
                 return Json(new JsonResDto
                 {
                     Success = true,
-                    Message = JMessage.UpdateSuccessed
+                    Message = JMessage.UpdateSuccessfully
                 });
             }
         }

@@ -23,3 +23,27 @@ getSelectValue = id => {
 exportAction = url => {
     window.open(url);
 };
+
+
+importAction = (event, idDom, url) => {
+    event.preventDefault();
+    debugger;
+    var input = document.getElementById(idDom);
+    var file = input.files[0];
+
+    var formData = new FormData();
+    formData.append("file", file);
+
+    $.ajax({
+        url: url,
+        data: formData,
+        contentType: false,
+        processData: false,
+        type: "post",
+        success: function (response) {
+            if (response.status) {
+            } else {
+            }
+        }
+    });
+};

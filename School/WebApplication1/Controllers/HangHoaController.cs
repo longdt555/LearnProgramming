@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,11 @@ using StoreManagement.Models;
 using System.Linq;
 using StoreManagement.Common;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
+using StoreManagement.Common.Helpers;
+using StoreManagement.Data;
 
 namespace StoreManagement.Controllers
 {
@@ -36,7 +42,7 @@ namespace StoreManagement.Controllers
                 return Json(new JsonResDto
                 {
                     Success = true,
-                    Message = JMessage.SaveSuccessed
+                    Message = JMessage.SaveSuccessfully
                 });
             }
             else
@@ -45,7 +51,7 @@ namespace StoreManagement.Controllers
                 return Json(new JsonResDto
                 {
                     Success = true,
-                    Message = JMessage.UpdateSuccessed
+                    Message = JMessage.UpdateSuccessfully
                 });
             }
         }
@@ -137,60 +143,50 @@ namespace StoreManagement.Controllers
         }
 
         [HttpPost]
-        public JsonResult ImportTPDCExcel()
+        public JsonResult Import(IFormFile formData)
         {
             try
             {
-                var file = HttpContext.Request.Form.Files[0];
-                //var list = new List<ThanhPhanBaoCaoDiaChatViewModel>();
+                var data = new List<HangHoaModel>();
                 using (var stream = new MemoryStream())
                 {
-                    file.CopyTo(stream);
+                    formData.CopyTo(stream);
                     using (var package = new ExcelPackage(stream))
                     {
-                        ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
-                        int totalRows = workSheet.Dimension.Rows;
+                        var workSheet = package.Workbook.Worksheets.First();
+                        var totalRows = workSheet.Dimension.Rows;
 
-                        //for (int i = 2; i <= totalRows; i++)
-                        //{
-                        //    var model = new ThanhPhanBaoCaoDiaChatViewModel
-                        //    {
-                        //        ID_KHLT = _BaoCaoDiaChatService.GetByKHLT(ConvertData(DataType.String, workSheet.Cells[i, 9]))?.Id ?? 0,
-                        //        CreatedDate = DateTime.Now,
-                        //        UpdatedDate = DateTime.Now,
-                        //        CreatedBy = LoggedOnUser.UserName,
-                        //        UpdatedBy = LoggedOnUser.UserName,
-                        //        MaTP = ConvertData(DataType.StringNotNull, workSheet.Cells[i, 1]),
-                        //        NhomBaoCao = ConvertData(DataType.String, workSheet.Cells[i, 2]),
-                        //        ThanhPhanBaoCao = ConvertData(DataType.String, workSheet.Cells[i, 3]),
-                        //        SoLuongTrang = ConvertData(DataType.Int, workSheet.Cells[i, 4]),
-                        //        SoLuongAnh = ConvertData(DataType.Int, workSheet.Cells[i, 5]),
-                        //        SoLuongBanVe = ConvertData(DataType.Int, workSheet.Cells[i, 6]),
-                        //        LoaiThanhPhan = ConvertData(DataType.String, workSheet.Cells[i, 7]),
-                        //        File = ConvertData(DataType.String, workSheet.Cells[i, 8]),
-                        //    };
-                        //    list.Add(model);
-                        //    if (WebHelpers.isNullExcelRow(workSheet, i + 1, 8))
-                        //    {
-                        //        break;
-                        //    }
-                        //}
+                        for (var i = 2; i <= totalRows; i++)
+                        {
+                            var model = new HangHoaModel()
+                            {
+                                Id = customerService.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1]))?.Id ?? 0,
+                                TenHH = workSheet.Cells[i, 2].ToString()
+                            };
+                            data.Add(model);
+                        }
                     }
-
                 }
-                if (!list.Any()) return Json(new { status = true });
-                _thanQuangService.Import(0, list);
-                return Json(new { status = true });
-            }
-            catch (ImportException e)
-            {
-                _logger.Error($"Error when import: {e.Message} at {e.StackTrace}");
-                return Json(new { status = false, message = $"Import không thành công - Sai định dạng dữ liệu tại cell {e.Message}" });
+
+                if (!data.Any()) return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.ImportSuccessfully
+                });
+
+                return Json(new JsonResDto
+                {
+                    Success = true,
+                    Message = JMessage.ImportSuccessfully
+                });
             }
             catch (Exception e)
             {
-                _logger.Error($"Error when import: {e.Message} at {e.StackTrace}");
-                return Json(new { status = false, message = "Import không thành công." });
+                return Json(new JsonResDto
+                {
+                    Success = false,
+                    Message = JMessage.ImportFailed
+                });
             }
         }
         #endregion 18/11/2021 Hai

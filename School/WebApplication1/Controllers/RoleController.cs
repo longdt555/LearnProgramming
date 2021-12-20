@@ -21,7 +21,7 @@ namespace StoreManagement.Controllers
                 return Json(new JsonResDto
                 {
                     Success = false,
-                    Message = NameRequied
+                    Message = NameRequired
                 });
             }
 
