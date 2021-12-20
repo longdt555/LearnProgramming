@@ -141,33 +141,35 @@ namespace StoreManagement.Controllers
                 }
             }
         }
-    }
-}
-#endregion
-//    [HttpPost]
-//    public JsonResult ImportTPDCExcel()
-//    {
-//        try
-//        {
-//            var file = HttpContext.Request.Form.Files[0];
-//            //var list = new List<ThanhPhanBaoCaoDiaChatViewModel>();
-//            using (var stream = new MemoryStream())
-//            {
-//                file.CopyTo(stream);
-//                using (var package = new ExcelPackage(stream))
-//                {
-//                    ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
-//                    int totalRows = workSheet.Dimension.Rows;
 
+        #endregion
         [HttpPost]
-        public JsonResult Import(IFormFile formData)
+        public JsonResult Import()
         {
             try
             {
+                var formFile = Request.Form.Files[0];
+                if (formFile == null || formFile.Length <= 0)
+                {
+                    return Json(new JsonResDto
+                    {
+                        Success = false,
+                        Message = JMessage.ImportFailed
+                    });
+                }
+
+                if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+                {
+                    return Json(new JsonResDto
+                    {
+                        Success = false,
+                        Message = JMessage.ImportFailed
+                    });
+                }
                 var data = new List<HangHoaModel>();
                 using (var stream = new MemoryStream())
                 {
-                    formData.CopyTo(stream);
+                    formFile.CopyToAsync(stream);
                     using (var package = new ExcelPackage(stream))
                     {
                         var workSheet = package.Workbook.Worksheets.First();
@@ -178,7 +180,7 @@ namespace StoreManagement.Controllers
                             var model = new HangHoaModel()
                             {
                                 Id = customerService.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1]))?.Id ?? 0,
-                                TenHH = workSheet.Cells[i, 2].ToString()
+                                TenHH = workSheet.Cells[i, 2].Value.ToString()
                             };
                             data.Add(model);
                         }
@@ -206,6 +208,5 @@ namespace StoreManagement.Controllers
                 });
             }
         }
-        #endregion 18/11/2021 Hai
     }
 }
