@@ -35,7 +35,7 @@ importAction = (event, url) => {
         contentType: false,
         processData: false,
         success: function (data) {
-
+            alert(data.Message);
         }
     });
 };

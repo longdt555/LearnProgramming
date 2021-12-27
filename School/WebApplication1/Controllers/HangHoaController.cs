@@ -22,23 +22,23 @@ namespace StoreManagement.Controllers
     public class HangHoaController : BaseController
     {
         private readonly ILogger<HangHoaController> _logger;
-        private readonly IHangHoaService customerService;
+        private readonly IHangHoaService _service;
 
-        public HangHoaController(ILogger<HangHoaController> logger, IHangHoaService customerService)
+        public HangHoaController(ILogger<HangHoaController> logger, IHangHoaService service)
         {
             _logger = logger;
-            this.customerService = customerService;
+            _service = service;
         }
 
         public IActionResult Add(int id)
         {
-            return PartialView("_AddPartial", customerService.GetById(id) ?? new HangHoaModel());
+            return PartialView("_AddPartial", _service.GetById(id) ?? new HangHoaModel());
         }
         public IActionResult DoAdd(HangHoaModel hangHoaModel)
         {
             if (hangHoaModel.Id == 0)
             {
-                customerService.Add(hangHoaModel);
+                _service.Add(hangHoaModel);
                 return Json(new JsonResDto
                 {
                     Success = true,
@@ -47,7 +47,7 @@ namespace StoreManagement.Controllers
             }
             else
             {
-                customerService.Edit(hangHoaModel);
+                _service.Edit(hangHoaModel);
                 return Json(new JsonResDto
                 {
                     Success = true,
@@ -58,12 +58,12 @@ namespace StoreManagement.Controllers
 
         public IActionResult Edit(int id)
         {
-            var hangHoa = customerService.GetById(id);
+            var hangHoa = _service.GetById(id);
             return View(hangHoa);
         }
         public IActionResult DoEdit(HangHoaModel hangHoaModel)
         {
-            customerService.Edit(hangHoaModel);
+            _service.Edit(hangHoaModel);
             return RedirectToAction("");
         }
 
@@ -76,7 +76,7 @@ namespace StoreManagement.Controllers
             if (!isAuthenticated()) return Redirect("login");
             var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
 
-            var customers = customerService.GetAll(searchModel);
+            var customers = _service.GetAll(searchModel);
             return View(customers);
         }
 
@@ -85,7 +85,7 @@ namespace StoreManagement.Controllers
         {
             var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
 
-            var customers = customerService.GetAll(searchModel);
+            var customers = _service.GetAll(searchModel);
             return PartialView("~/Views/HangHoa/_ListPartial.cshtml", customers.Data.ToList());
         }
 
@@ -93,12 +93,12 @@ namespace StoreManagement.Controllers
         public IActionResult Delete(int pageIndex, int pageSize, string name, int id)
         {
             //delete record
-            customerService.Delete(id);
+            _service.Delete(id);
 
             //Sau khi xóa xong thực hiện tìm kiếm lại 
             var searchModel = new SearchParam<HangHoaParam>(pageIndex, pageSize, new HangHoaParam(name));
 
-            var customers = customerService.GetAll(searchModel);
+            var customers = _service.GetAll(searchModel);
             return PartialView("~/Views/HangHoa/_ListPartial.cshtml", customers.Data.ToList());
         }
 
@@ -119,7 +119,7 @@ namespace StoreManagement.Controllers
                                             new DataColumn("Chi tiết hàng hóa")
                                         });
 
-            var response = customerService.GetAll(new SearchParam<HangHoaParam>(1, int.MaxValue, new HangHoaParam()));
+            var response = _service.GetAll(new SearchParam<HangHoaParam>(1, int.MaxValue, new HangHoaParam()));
 
             if (response.Data.Any())
             {
@@ -149,7 +149,7 @@ namespace StoreManagement.Controllers
         {
             try
             {
-                var formFile = Request.Form.Files[0];
+                var formFile = Request.Form.Files[0]; // lấy file trong request của người dùng
 
                 #region [Validate]
 
@@ -174,6 +174,7 @@ namespace StoreManagement.Controllers
                 #endregion [Validate]
 
                 var data = new List<HangHoaModel>();
+
                 using (var stream = new MemoryStream())
                 {
                     formFile.CopyToAsync(stream);
@@ -188,13 +189,13 @@ namespace StoreManagement.Controllers
                             {
                                 Id = ConvertHelper.ConvertToInt(workSheet.Cells[i, 1].Value) == 0
                                     ? 0
-                                    : customerService.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1].Value))
+                                    : _service.GetById(ConvertHelper.ConvertToInt(workSheet.Cells[i, 1].Value))
                                         ?.Id ?? 0,
                                 TenHH = workSheet.Cells[i, 2].Value.ToString()
                             };
                             data.Add(model);
-                        }      
-                    }   
+                        }
+                    }
                 }
 
                 if (!data.Any()) return Json(new JsonResDto
@@ -204,14 +205,21 @@ namespace StoreManagement.Controllers
                 });
 
                 //// gọi service save many
-                ////
-                ////
 
-                return Json(new JsonResDto
-                {
-                    Success = true,
-                    Message = JMessage.ImportSuccessfully
-                });
+                var res = _service.SaveMany(data);
+
+                if (res < 0)
+                    return Json(new JsonResDto
+                    {
+                        Success = false,
+                        Message = JMessage.ImportFailed
+                    });
+                else
+                    return Json(new JsonResDto
+                    {
+                        Success = true,
+                        Message = JMessage.ImportSuccessfully
+                    });
             }
 
             catch (Exception e)
@@ -222,7 +230,7 @@ namespace StoreManagement.Controllers
                     Message = JMessage.ImportFailed
                 });
             }
-            
+
         }
 
         private JsonResult Json()

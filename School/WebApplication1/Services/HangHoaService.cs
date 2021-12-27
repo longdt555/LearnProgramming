@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreManagement.Common.Helpers;
 
 namespace StoreManagement.Services
 {
@@ -21,6 +22,42 @@ namespace StoreManagement.Services
             DBContext().HangHoas.Add(hangHoaModel);
             return DBContext().SaveChanges();
         }
+
+        public int SaveMany(List<HangHoaModel> lstHangHoa)
+        {
+            try
+            {
+                var lstAddNew = lstHangHoa.Where(x => x.Id == 0).ToList();
+                var lstUpdate = lstHangHoa.Where(x => x.Id != 0).ToList();
+
+                if (lstAddNew.Any())  // case 1: ID == 0 => add new
+                {
+                    DBContext().HangHoas.AddRange(lstAddNew);
+                }
+
+                if (!lstUpdate.Any())
+                    return DBContext().SaveChanges();
+                // case 2: ID != 0 => updated
+
+                var hangHoas = DBContext().HangHoas;
+
+                foreach (var item in lstUpdate)
+                {
+                    var hangHoa = hangHoas.FirstOrDefault(x => x.Id == item.Id && !x.IsDeleted);
+                    if (hangHoa.IsNull()) continue;
+
+                    hangHoa.TenHH = item.TenHH;
+
+                    DBContext().HangHoas.Update(hangHoa);
+                }
+                return DBContext().SaveChanges();
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
         public void Delete(int id)
         {
             var data = (from hh in DBContext().HangHoas where hh.Id == id select hh).FirstOrDefault(); // Lấy ra đối tượng cần được xóa
@@ -126,6 +163,6 @@ namespace StoreManagement.Services
 
         }
 
-       
+
     }
 }

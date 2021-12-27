@@ -15,8 +15,7 @@ namespace StoreManagement.IServices
 
         List<HangHoaModel> GetAll();
         SearchResult<HangHoaModel> GetAll(SearchParam<HangHoaParam> model);
-
-
+        int SaveMany(List<HangHoaModel> lstHangHoa);
         void Delete(int id);
         int Add(HangHoaModel hangHoaModel);
         HangHoaModel GetById(int id);
