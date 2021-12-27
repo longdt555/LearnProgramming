@@ -123,7 +123,7 @@ namespace StoreManagement.Controllers
 
             if (response.Data.Any())
             {
-                var count = 0;
+                var count = 1;
                 foreach (var item in response.Data)
                 {
                     dbTable.Rows.Add(count, item.TenHH, item.SoLuong, item.DonGia, item.ChiTiet);
@@ -193,8 +193,8 @@ namespace StoreManagement.Controllers
                                 TenHH = workSheet.Cells[i, 2].Value.ToString()
                             };
                             data.Add(model);
-                        }
-                    }
+                        }      
+                    }   
                 }
 
                 if (!data.Any()) return Json(new JsonResDto
@@ -203,16 +203,17 @@ namespace StoreManagement.Controllers
                     Message = JMessage.ImportSuccessfully
                 });
 
-                // gọi service save many
-                //
-                //
+                //// gọi service save many
+                ////
+                ////
 
-                 return Json(new JsonResDto
+                return Json(new JsonResDto
                 {
                     Success = true,
                     Message = JMessage.ImportSuccessfully
                 });
             }
+
             catch (Exception e)
             {
                 return Json(new JsonResDto
@@ -221,6 +222,12 @@ namespace StoreManagement.Controllers
                     Message = JMessage.ImportFailed
                 });
             }
+            
+        }
+
+        private JsonResult Json()
+        {
+            throw new NotImplementedException();
         }
     }
 }

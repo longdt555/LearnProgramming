@@ -124,7 +124,7 @@ namespace StoreManagement.Controllers
 
             if (response.Data.Any())
             {
-                var count = 0;
+                var count = 1;
                 foreach (var item in response.Data)
                 {
                     dbTable.Rows.Add(count, item.PhiVanChuyen, item.TongTien, item.TrangThaiDonHang, item.TrangThaiThanhToan);

@@ -116,7 +116,7 @@ namespace StoreManagement.Controllers
 
             if (response.Data.Any())
             {
-                var count = 0;
+                var count = 1;
                 foreach (var item in response.Data)
                 {
                     dbTable.Rows.Add(count, item.CreatedDate, item.UpdatedDate, item.MaDH, item.DonGia, item.SoLuong);

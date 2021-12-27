@@ -23,5 +23,7 @@ namespace StoreManagement.IServices
 
         int Edit(HangHoaModel hangHoaModel);
 
+        //int Imp(HangHoaModel hangHoaModel);
+
     }
 }
